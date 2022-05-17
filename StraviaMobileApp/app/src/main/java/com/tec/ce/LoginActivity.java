@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         userEditText = findViewById(R.id.userEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
 
-        registerTextView = findViewById(R.id.registerTextView);
-        registerTextView.setOnClickListener(view -> register());
+        //registerTextView = findViewById(R.id.registerTextView);
+        //registerTextView.setOnClickListener(view -> register());
 
         /*dbRequest = new DBRequest(LoginActivity.this);
         DBSync dbSync = new DBSync();
@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     login();
                 }*/
                 else if(userEditText.getText ().toString().equals ("") ||  passwordEditText.getText().toString().equals ("")) {
-                    Toast.makeText(LoginActivity.this, "Debe ingresar ambos datos", Toast.LENGTH_SHORT).show();
+                    login();
+                    //Toast.makeText(LoginActivity.this, "Debe ingresar ambos datos", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(LoginActivity.this, "Fallo de inicio de sesión, verifique los datos", Toast.LENGTH_SHORT).show();
                 }

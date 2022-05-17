@@ -13,4 +13,6 @@
     <string name="hike">Hiking</string>
     <string name="kayak">Kayaking</string>
     <string name="walk">Walking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

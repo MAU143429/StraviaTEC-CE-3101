@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Train"
+          android:icon="@drawable/ic_baseline_run_circle_24"
+          android:id="@+id/train"
+          android:visible="true"/>
+    <item android:title="Find"
+          android:icon="@drawable/ic_baseline_search_24"
+          android:id="@+id/find"
+        android:visible="true"/>
+    <item android:title="Saved"
+          android:icon="@drawable/ic_baseline_stars_24"
+          android:id="@+id/saved"
+        android:visible="true"/>
+    <item android:title="Profile"
+          android:icon="@drawable/ic_round_account_circle_24"
+          android:id="@+id/profile"
+        android:visible="true"/>
+</menu>
