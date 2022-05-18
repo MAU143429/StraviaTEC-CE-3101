@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +61,46 @@ public class TrainingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_training, container, false);
+        ImageButton runButton = v.findViewById(R.id.imageButtonRun);
+        runButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Run button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+        ImageButton cyclingButton = v.findViewById(R.id.imageButtonCycling);
+        cyclingButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Cycling button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+        ImageButton kayakingButton = v.findViewById(R.id.imageButtonKayaking);
+        kayakingButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Kayaking button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+        ImageButton swimmingButton = v.findViewById(R.id.imageButtonSwimming);
+        swimmingButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Swimming button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+        ImageButton hikingButton = v.findViewById(R.id.imageButtonHiking);
+        hikingButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Hiking button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+        ImageButton walkingButton = v.findViewById(R.id.imageButtonWalking);
+        walkingButton.setOnClickListener(view -> {
+            Toast.makeText(getContext(), "Walking button clicked", Toast.LENGTH_SHORT).show();
+            // Go to next activity
+        });
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_training, container, false);
+        return v;
     }
 }

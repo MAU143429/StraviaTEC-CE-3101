@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/imageButtonRun"
                 android:layout_width="match_parent"
                 android:layout_height="93dp"
                 android:layout_weight="1"
@@ -79,7 +79,7 @@
                 android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/imageButtonCycling"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_weight="1"
@@ -96,7 +96,7 @@
                 android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/imageButtonKayaking"
                 android:layout_width="match_parent"
                 android:layout_height="98dp"
                 android:backgroundTint="?android:attr/panelBackground"
@@ -118,7 +118,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/imageButtonSwimming"
                 android:layout_width="match_parent"
                 android:layout_height="93dp"
                 android:layout_weight="1"
@@ -135,7 +135,7 @@
                 android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/imageButtonHiking"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:layout_weight="1"
@@ -152,7 +152,7 @@
                 android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/imageButtonWalking"
                 android:layout_width="match_parent"
                 android:layout_height="73dp"
                 android:layout_weight="1"
