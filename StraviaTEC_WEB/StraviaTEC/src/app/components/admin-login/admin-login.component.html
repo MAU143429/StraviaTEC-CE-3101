@@ -1,0 +1,10 @@
+<body>
+    <div class="square">
+      <section class="format">
+        <h2>SIGN IN</h2> 
+        <input type="email" id="email" [(ngModel)]= "newLogin.username" [ngModelOptions]="{standalone: true}" placeholder="Enter your username!" >
+        <input type="password" id="pass" [(ngModel)]="newLogin.password" [ngModelOptions]="{standalone: true}"  placeholder="Enter your password!">
+        <a><button type="submit" (click)="addNewLogin(newLogin)">Sign In</button></a>
+      </section>
+    </div>
+  </body>
