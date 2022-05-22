@@ -1,0 +1,17 @@
+.my-navbar {
+    border: 0;
+    border-radius: 0;
+    background-color: white;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+.profile-pic img{
+  border-radius: 15px;
+  
+}
+
+.searchbar input{
+  border-radius: 10px;
+}
+
