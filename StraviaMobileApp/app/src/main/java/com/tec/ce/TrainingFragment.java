@@ -1,5 +1,6 @@
 package com.tec.ce;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -64,6 +65,7 @@ public class TrainingFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_training, container, false);
         ImageButton runButton = v.findViewById(R.id.imageButtonRun);
         runButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Run button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });
@@ -102,5 +104,10 @@ public class TrainingFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return v;
+    }
+    public void displayMap() {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), MapsActivity.class);
+        this.startActivity(intent);
     }
 }
