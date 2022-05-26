@@ -57,6 +57,7 @@ import { GroupComponent } from './components/group/group.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBFKjVcAp2IaLbppDBHF9aIliBBW7wH13Y'
     }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

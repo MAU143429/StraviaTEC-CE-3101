@@ -23,11 +23,7 @@
     "@angular/router": "~13.3.0",
     "@material/form-field": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^12.1.1",
-<<<<<<< Updated upstream
     "@popperjs/core": "^2.11.5",
-=======
-    "mapbox": "^1.0.0-beta10",
->>>>>>> Stashed changes
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

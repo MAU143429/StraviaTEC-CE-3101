@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
     "name":"Ariana",
     "last_name": "Solano Rodriguez",
     "birthdate":"12-06-1998",
-    "nationality":"Canadian",
+    "nationality":"Canadian", 
     "age":"24",
     "followers": "243",
     "following":"87",
@@ -28,11 +28,8 @@ export class ProfileComponent implements OnInit {
     "date":"24-05-2022",
     "duration":"54:00",
     "distance": "54 Km",
-    "gpx":"src\assets\gpx\1.gpx",
+    "gpx":"src/assets/gpx/1.gpx",
   },]
-
-  latitude = 51.678418;
-  longitude = 7.809007;
 
   constructor() { }
 
