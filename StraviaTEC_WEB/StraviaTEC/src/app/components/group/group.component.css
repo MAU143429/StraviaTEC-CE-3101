@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  background: linear-gradient(135deg, white, #9054dd , white);
+  background-size: cover;
+  height: auto;
+  min-height: 100%;
+} 
+
+.racezone{
+  width: 90%;
+  height: 90%;
+  margin-left: 5%;
+  border-radius: 5px;
+  z-index: -10;
+  justify-content: center;
+  align-items: center;
+}
+
+.section1{
+  width: 80%;
+  height: 38%;
+  margin-left: 8%;
+
+}
+
+.section2{
+  width: 80%;
+  height: 38%;
+  margin-left: 8%;
+  
+}
+
+.maintitle{
+  color: black;
+  margin-bottom: 1%;
+  margin-left: 1%;
+  text-align: center;
+}
+
+
+.races{
+  color: black;
+  text-align: center;
+
+
+}
+
+.mytable{
+  color: black; 
+}
