@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     "date":"24-05-2022",
     "duration":"54:00",
     "distance": "54 Km",
-    "gpx":"src/assets/gpx/1.gpx",
+    "gpx":"src/assets/gpx/1.gpx", 
   },]
 
   constructor() { }
