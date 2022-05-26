@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.1.0",
     "@angular/animations": "~13.3.0",
     "@angular/cdk": "^13.3.7",
     "@angular/common": "~13.3.0",
@@ -22,7 +23,11 @@
     "@angular/router": "~13.3.0",
     "@material/form-field": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^12.1.1",
+<<<<<<< Updated upstream
     "@popperjs/core": "^2.11.5",
+=======
+    "mapbox": "^1.0.0-beta10",
+>>>>>>> Stashed changes
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -31,6 +36,7 @@
     "@angular-devkit/build-angular": "~13.3.2",
     "@angular/cli": "~13.3.2",
     "@angular/compiler-cli": "~13.3.0",
+    "@types/googlemaps": "^3.43.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~4.0.0",
