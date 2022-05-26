@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AgmCoreModule } from '@agm/core';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,9 +21,10 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AnavbarComponent } from './components/anavbar/anavbar.component';
 import { TrainingComponent } from './components/training/training.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
-import { CareersComponent } from './components/careers/careers.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
+import { RacesComponent } from './components/races/races.component';
+import { GroupComponent } from './components/group/group.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,10 @@ import { SearchComponent } from './components/search/search.component';
     AnavbarComponent,
     TrainingComponent,
     ChallengesComponent,
-    CareersComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    RacesComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,9 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBFKjVcAp2IaLbppDBHF9aIliBBW7wH13Y'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

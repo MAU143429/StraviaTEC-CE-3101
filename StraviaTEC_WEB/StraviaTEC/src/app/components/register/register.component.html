@@ -8,8 +8,8 @@
    </head>
 <!---Componentes que conforman la seccion de registro--->
 <body> 
-  <div class="container">
-    <div class="title">Registro</div>
+  <div class="container"> 
+    <div class="title">Register</div>
     <div class="content">
       <!---Formulario donde se reciben los inputs del usuario--->
       <form>
@@ -24,11 +24,11 @@
           </div>
           <div class="input-box">
             <span class="details">Nationality<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text"  placeholder=" Ingrese su segundo apellido" required>
+            <input type="text"  placeholder="Enter your nationality" required>
           </div>
           <div class="input-box">
             <span class="details">BirthDate <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="number" placeholder="Select your birthdate" required>
+            <input type="date" placeholder="Select your birthdate" required>
           </div>
           <div class="input-box">
             <span class="details">Username <span style="color: rgb(245, 59, 59);">*</span></span>
@@ -43,14 +43,14 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">Profile Picture</span>
-            <input type="number" placeholder="Ingrese su carné" >
+            <input type="text" placeholder="Enter an image url" >
           </div>
         </div>
         
 
 
         <div class="button">
-          <input type="submit" value="Registrarse"  routerLink="/user-login">
+          <input type="submit" value="Sign Up!"  routerLink="/user-login">
         </div>
       </form>
     </div>

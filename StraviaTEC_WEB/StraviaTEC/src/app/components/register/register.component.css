@@ -4,9 +4,11 @@ body{
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background: linear-gradient(135deg, white, #9054dd , white);
+  /**
   background: linear-gradient(135deg, #c97b4e, #d66320 , #b92d2d);
-
-
+  */
+  
 }
 .container{
   max-width: 700px;
