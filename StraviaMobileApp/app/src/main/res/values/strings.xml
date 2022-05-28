@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Stravia Mobile App</string>
+    <string name="app_name">Welcome to StraviaTEC</string>
+    <string name="username">Username</string>
+    <string name="question">Don\'t have an account?</string>
+    <string name="signup">Sign up</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="welcome">Welcome!</string>
+    <string name="which">Which activity do you want to train today?</string>
+    <string name="run">Running</string>
+    <string name="Swim">Swimming</string>
+    <string name="Cycling">Cycling</string>
+    <string name="hike">Hiking</string>
+    <string name="kayak">Kayaking</string>
+    <string name="walk">Walking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
