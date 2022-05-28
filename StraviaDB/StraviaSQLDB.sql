@@ -19,7 +19,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Activity](
-	[no_activity] [int] NOT NULL,
+	[no_activity] [int] NOT NULL IDENTITY(1,1),
 	[sport] [varchar](20) NULL,
 	[no_race] [int] NULL,
 	[no_chalenge] [int] NULL,
@@ -59,7 +59,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Challenge](
-	[no_challenge] [int] NOT NULL,
+	[no_challenge] [int] NOT NULL IDENTITY(1,1),
 	[c_name] [varchar](20) NULL,
 	[final_date] [datetime] NULL,
  CONSTRAINT [PK_Challenge] PRIMARY KEY CLUSTERED 
@@ -90,7 +90,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Group](
-	[no_group] [int] NOT NULL,
+	[no_group] [int] NOT NULL IDENTITY(1,1),
 	[g_name] [varchar](20) NULL,
 	[o_username] [varchar](20) NULL,
  CONSTRAINT [PK_Group] PRIMARY KEY CLUSTERED 
@@ -108,7 +108,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Inscription](
-	[no_inscription] [int] NOT NULL,
+	[no_inscription] [int] NOT NULL IDENTITY(1,1),
 	[no_race] [int] NOT NULL,
 	[u_username] [varchar](20) NOT NULL,
 	[voucher] [text] NULL,
@@ -171,7 +171,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Race](
-	[no_race] [int] NOT NULL,
+	[no_race] [int] NOT NULL IDENTITY(1,1),
 	[category] [varchar](20) NULL,
 	[r_name] [varchar](20) NULL,
 	[price] [int] NULL,
@@ -190,7 +190,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Result](
-	[no_result] [int] NOT NULL,
+	[no_result] [int] NOT NULL IDENTITY(1,1),
 	[no_activity] [int] NULL,
 	[u_username] [varchar](20) NULL,
 	[duration] [timestamp] NULL,
