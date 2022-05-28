@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---Referencia al archivo css que contiene el estilo--->
+    <link rel="stylesheet" href="register.component.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<!---Componentes que conforman la seccion de registro--->
+<body> 
+  <div class="container"> 
+    <div class="title">Register</div>
+    <div class="content">
+      <!---Formulario donde se reciben los inputs del usuario--->
+      <form>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text"  placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Last Name <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text"   placeholder="Enter your last name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Nationality<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text"  placeholder="Enter your nationality" required>
+          </div>
+          <div class="input-box">
+            <span class="details">BirthDate <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="date" placeholder="Select your birthdate" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username <span style="color: rgb(245, 59, 59);">*</span></span>
+            <input type="email"  placeholder="Create your username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="password"  placeholder="Create your password" required>
+          </div>
+    
+        </div>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Profile Picture</span>
+            <input type="text" placeholder="Enter an image url" >
+          </div>
+        </div>
+        
+
+
+        <div class="button">
+          <input type="submit" value="Sign Up!"  routerLink="/user-login">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

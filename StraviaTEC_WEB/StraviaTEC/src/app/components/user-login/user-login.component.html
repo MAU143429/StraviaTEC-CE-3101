@@ -1,0 +1,11 @@
+<body>
+    <div class="square">
+      <section class="format">
+        <h2>SIGN IN</h2> 
+        <input type="email" id="email" [(ngModel)]= "newLogin.username" [ngModelOptions]="{standalone: true}" placeholder="Enter your username!" >
+        <input type="password" id="pass" [(ngModel)]="newLogin.password" [ngModelOptions]="{standalone: true}"  placeholder="Enter your password!">
+        <a><button type="submit" (click)="addNewLogin(newLogin)" routerLink="/dashboard">Sign In</button></a>
+        <p><span style="color: white;"> Don't have an account yet? Register </span> <span> <a routerLink="/register" style="color: aqua;">here!</a></span></p>
+      </section>
+    </div>
+  </body>

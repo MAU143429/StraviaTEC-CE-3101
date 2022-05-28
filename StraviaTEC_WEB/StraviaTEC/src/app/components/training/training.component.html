@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---Referencia al archivo css que contiene el estilo--->
+    <link rel="stylesheet" href="training.component.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<!---Componentes que conforman la seccion de registro--->
+<app-unavbar></app-unavbar>
+<body> 
+  <div class="container"> 
+    <div class="title">Report an Activity</div>
+    <div class="content">
+      <!---Formulario donde se reciben los inputs del usuario--->
+      <form>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Date <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="date"  placeholder="Enter the activity date!" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Time<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="time"   placeholder="Enter the activity time!" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Duration (minutes)<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="number"  placeholder="Enter the duration of the activity" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" placeholder="Select your activity type" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
+            <input type="number"  placeholder="Enter the distance" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="file" placeholder="Upload .gpx file here!" required>
+          </div>
+    
+        </div>
+        <div class="button">
+          <input type="submit" value="Upload"  routerLink="/profile">
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
