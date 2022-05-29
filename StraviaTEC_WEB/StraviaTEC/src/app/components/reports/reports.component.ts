@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
+  races:any[]| undefined;
+  challenges: any[]| undefined;
+
+
   constructor() { }
 
   ngOnInit(): void {

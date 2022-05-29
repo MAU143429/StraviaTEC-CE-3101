@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inscriptions.component.css']
 })
 export class InscriptionsComponent implements OnInit {
+  races:any[]| undefined;
+  challenges: any[]| undefined;
+
 
   constructor() { }
 

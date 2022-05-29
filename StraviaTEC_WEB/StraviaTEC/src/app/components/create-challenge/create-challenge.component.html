@@ -7,9 +7,60 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    </head>
-<body>
-  <app-anavbar></app-anavbar>
-</body>
+   <app-anavbar></app-anavbar>
+   <body>
+    <div class="container">
+      <div class="title">Create a Challenge</div>
+      <div class="content">
+        <form>
+          <div class="user-details">
+
+            <div class="input-box">
+              <span class="details">Name<span style="color: rgb(245, 59, 59);">*</span> </span>
+              <input type="text"  placeholder="Enter the challenge name" required>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Final Date <span style="color: rgb(245, 59, 59);">*</span> </span>
+              <input type="date"  placeholder="Enter the final date!" required>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
+              <input type="text" placeholder="Select the race privacity" required>
+            </div>
+
+          </div>
+
+          <div class="title">Add activities to the challenge</div>
+
+          <div class="user-details">
+
+            <div class="input-box">
+              <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
+              <input type="text" placeholder="Select your activity type" required>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
+              <input type="number"  placeholder="Enter the distance" required>
+            </div>
+
+
+
+            <div class="input-box">
+              <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
+              <input type="file" placeholder="Upload .gpx file here!" required>
+            </div>
+          </div>
+
+          <div class="button">
+            <input type="submit" value="Create Challenge"  routerLink="/profile">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 
 </html>
 

@@ -9,6 +9,47 @@
    </head>
 <body>
   <app-anavbar></app-anavbar>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <h3 class="maintitle">Search Races</h3>
+
+    <div class="races">
+      <input style="text-align:center ;" type="text" placeholder="Enter a race name!">
+      <img style="margin-left:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
+    </div>
+
+
+    <div class="section2">
+      <div class="races">
+        <div class="row">
+          <h5 style="text-align: left;">Results</h5>
+          <table class="table table-bordered mt-4 mytable">
+            <tr class="table-primary mytable">
+              <th>Race Name</th>
+              <th>Race Number</th>
+              <th>Type of Activity</th>
+              <th>Date</th>
+              <th>Price</th>
+              <th>Route</th>
+              <th>Details</th>
+            </tr>
+          <tr *ngFor="let data of races">
+            <th>{{data.r_name}}</th>
+              <td>{{data.no_race}}</td>
+              <td>{{data.type}}</td>
+              <td>{{data.a_date}}</td>
+              <td>{{data.price}}</td>
+              <td>{{data.route}}</td>
+              <td><button>View Reports!</button></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
 </body>
 
 </html>
