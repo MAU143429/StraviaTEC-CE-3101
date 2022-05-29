@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tec.ce.db.DBHelper;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         logo = findViewById(R.id.logo);
-        /*logo.setOnClickListener(view -> {
+        logo.setOnClickListener(view -> {
             DBHelper dataBase = new DBHelper(LoginActivity.this);
             SQLiteDatabase db = dataBase.getWritableDatabase();
             if (db != null) {
@@ -71,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(LoginActivity.this, "Error al crear base de datos", Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
     }
 
     public void register() {
