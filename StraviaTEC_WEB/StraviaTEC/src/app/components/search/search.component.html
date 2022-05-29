@@ -5,10 +5,38 @@
     <!---Referencia al archivo css que contiene el estilo--->
     <link rel="stylesheet" href="search.component.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
+
    </head>
-<body>
-  <app-unavbar></app-unavbar>
-</body>
+   <body>
+    <app-unavbar></app-unavbar>
+
+    <div class="resultszone">
+      <br>
+      <br>
+
+
+      <div class="section1">
+        <h2 class="maintitle"> <br>Results of: {{searchName}} </h2>
+        <br>
+        <div class="subsection1">
+          <div class="results">
+            <table class="table table-bordered mt-4 mytable">
+              <tr *ngFor="let data of results">
+                   <th> <img src="{{data.image}}" width="145" alt=""></th>
+                   <td> {{data.name}} {{data.last_name}} <br>
+                        Activities: {{data.activities}}<br>
+                        Followers: {{data.followers}}
+                   </td>
+                   <td> <button class="fbtn">Follow</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
 
 </html>
+

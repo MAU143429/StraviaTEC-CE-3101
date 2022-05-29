@@ -1,7 +1,7 @@
 <header class="header">
     <nav class="navbar navbar-expand-lg navbar-light my-navbar ">
         <div class="container-fluid">
-        <a class="navbar-brand fontform" href="#" routerLink= "/dashboard"> 
+        <a class="navbar-brand fontform" href="#" routerLink= "/dashboard">
             <img src= "https://media.discordapp.net/attachments/880202330178469899/977612033119887430/logo.png" width="150" alt="" class="d-inline-block align-middle mr-2"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                     Groups
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a style="color:white;" class="nav-link active fontform" aria-current="page">
                     ________________________________________________________
@@ -43,21 +43,21 @@
 
             <li class="nav-item searchbar">
                 <a class="nav-link active fontform" aria-current="page">
-                    <input type="text" placeholder="Search...">  
+                    <input type="text" placeholder="Search..." [(ngModel)]="username">
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link active fontform" aria-current="page" href="#" routerLink="/search">
-                    <img type="button" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
+                <a class="nav-link active fontform" aria-current="page">
+                    <img type="button" (click)="newUserSearch()" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
                 </a>
             </li>
 
             <li class="nav-item profile-pic">
-                <a class="nav-link active fontform" aria-current="page" href="#" routerLink="/profile">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" width="35" alt="" class="d-inline-block align-middle mr-2"></a>
+                <a class="nav-link active fontform" aria-current="page"  >
+                    <img  routerLink="/profile" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" width="35" alt="" class="d-inline-block align-middle mr-2"></a>
             </li>
-    
+
             </ul>
         </div>
         </div>
