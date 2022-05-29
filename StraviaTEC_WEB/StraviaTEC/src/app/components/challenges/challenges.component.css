@@ -10,9 +10,9 @@ body{
   background-size: cover;
   height: auto;
   min-height: 100%;
-} 
+}
 
-.racezone{
+.challengezone{
   width: 90%;
   height: 90%;
   margin-left: 5%;
@@ -33,7 +33,7 @@ body{
   width: 80%;
   height: 38%;
   margin-left: 8%;
-  
+
 }
 
 .maintitle{
@@ -52,5 +52,5 @@ body{
 }
 
 .mytable{
-  color: black; 
+  color: black;
 }
