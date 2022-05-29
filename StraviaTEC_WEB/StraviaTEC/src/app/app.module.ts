@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { AgmCoreModule } from '@agm/core';
+import {MatTableModule } from '@angular/material/table'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { RacesComponent } from './components/races/races.component';
 import { GroupComponent } from './components/group/group.component';
+import { CreateRaceComponent } from './components/create-race/create-race.component';
+import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
+import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
+import { CreateGroupsComponent } from './components/create-groups/create-groups.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +47,12 @@ import { GroupComponent } from './components/group/group.component';
     ProfileComponent,
     SearchComponent,
     RacesComponent,
-    GroupComponent
+    GroupComponent,
+    CreateRaceComponent,
+    InscriptionsComponent,
+    CreateChallengeComponent,
+    CreateGroupsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,10 +65,11 @@ import { GroupComponent } from './components/group/group.component';
     HttpClientModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatTableModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBFKjVcAp2IaLbppDBHF9aIliBBW7wH13Y'
     }),
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CredentialsService {
 
-  url = 'AGREGAR UNA URL'
+  url = 'https://straviaapi.azurewebsites.net'
 
   constructor(private httpclient:HttpClient) { }
 
@@ -20,7 +20,7 @@ export class CredentialsService {
     addRegister(register:any):Observable<any>{
     return this.httpclient.post(this.url+'/Usuario/Add', register)                                                                            // AGREGAR EL ENDPOINT CORRECTAMENTE
   }
-  
+
   /**
    * Este metodo nos permite enviar las credenciales del usuario para que sean verificadas
    * y se permita el inicio de sesion.
@@ -30,7 +30,7 @@ export class CredentialsService {
   getLoginUser(login:any):Observable<LoginInterface[]>{
     return this.httpclient.get<LoginInterface[]>(this.url+'/Usuario/'+ login.username + "/" + login.password)                                 // AGREGAR EL ENDPOINT CORRECTAMENTE
   }
-  
+
 
     /**
    * Este metodo nos permite enviar las credenciales del administrador para que sean verificadas
@@ -41,5 +41,5 @@ export class CredentialsService {
      getLoginAdmin(login:any):Observable<LoginInterface[]>{
       return this.httpclient.get<LoginInterface[]>(this.url+'/Trabajador/'+ login.username + "/" + login.password)                             // AGREGAR EL ENDPOINT CORRECTAMENTE
     }
-    
+
 }

@@ -5,11 +5,11 @@
     <!---Referencia al archivo css que contiene el estilo--->
     <link rel="stylesheet" href="group.component.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
+
    </head>
-   <body>  
+   <body>
     <app-unavbar></app-unavbar>
-    <div class="challengezone"> 
+    <div class="challengezone">
       <br>
       <br>
       <br>
@@ -22,36 +22,28 @@
             <table class="table table-bordered mt-4 mytable">
               <tr class="table-primary mytable">
                 <th>Group Name</th>
-                <th>Challenge Number</th>
-                <th>Activities</th>
-                <th>Activities Completed</th>
-                <th>Avg Completed</th>
-                <th>Final Date</th>
-                <th>Details</th> 
+                <th>Admin Name</th>
+                <th>Actions</th>
               </tr>
             <tr *ngFor="let data of mychallenges">
               <th>{{data.c_name}}</th>
-                <td>{{data.no_challenge}}</td>
-                <td>{{data.activities}}</td>
-                <td>{{data.completed}}</td>
-                <td>{{data.avg}}</td>
-                <td>{{data.final_date}}</td>
-                <td><button>View Challenge!</button></td>
+              <td>{{data.no_challenge}}</td>
+              <td><button>Leave Group!</button></td>
             </tr>
             </table>
           </div>
-        </div> 
+        </div>
       </div>
       <br>
-  
+
       <h3 class="maintitle">Search Groups</h3>
-  
+
       <div class="races">
         <img style="margin-right:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/4252/4252311.png" width="30    " alt="" >
-        <input style="text-align:center ;" type="text" placeholder="Enter a group name!"> 
+        <input style="text-align:center ;" type="text" placeholder="Enter a group name!">
         <img style="margin-left:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
       </div>
-  
+
 
       <div class="section2">
         <div class="challenges">
@@ -59,29 +51,25 @@
             <h5 style="text-align: left;">Results</h5>
             <table class="table table-bordered mt-4 mytable">
               <tr class="table-primary mytable">
-                <th>Challenge Name</th>
-                <th>Challenge Number</th>
-                <th>Activities</th>
-                <th>Final Date</th>
-                <th>Details</th> 
+                  <th>Group Name</th>
+                  <th>Admin Name</th>
+                  <th>Actions</th>
               </tr>
-            <tr *ngFor="let data of challenges">
-              <th>{{data.c_name}}</th>
+              <tr *ngFor="let data of mychallenges">
+                <th>{{data.c_name}}</th>
                 <td>{{data.no_challenge}}</td>
-                <td>{{data.activities}}</td>
-                <td>{{data.final_date}}</td>
                 <td><button>Join!</button></td>
             </tr>
             </table>
           </div>
-        </div> 
+        </div>
       </div>
       <br>
       <br>
-          
+
     </div>
-  
-  
+
+
   </body>
 
 </html>
