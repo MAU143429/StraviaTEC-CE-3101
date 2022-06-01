@@ -31,5 +31,25 @@ namespace StraviaAPI.Data
 
             return result ?? throw new Exception("Not found!!");
         }
+
+        public async void CreateUser(String username, String category, String name, String last_name, String birthdate, String nationality, String password, String image)
+        {
+            String queryString = "INSERT INTO dbo.User(u_username, category, name, last_name, birthdate, nationality, u_password, image) VALUES (@user, @cat, @name, @lname, @bd, @nat, @password, @img);";
+            String? result = null;
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            command.Parameters.AddWithValue("@user", username);
+            command.Parameters.AddWithValue("@cat", category);
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@lname", last_name);
+            command.Parameters.AddWithValue("@bd", birthdate);
+            command.Parameters.AddWithValue("@nat", nationality);
+            command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@img", image);
+
+            await _Connection.OpenAsync();
+            command.ExecuteNonQuery();
+            await _Connection.CloseAsync();
+        }
     }
 }
