@@ -25,6 +25,6 @@ namespace StraviaAPI.Controllers
         // POST <UserController>/Add
         [HttpPost("Add")]
         public void Post([FromBody] User value) 
-            => _SqlDb.CreateUser(value.username, value.category, value.name, value.last_name, value.birthdate, value.nationality, value.password, value.image);
+            => _SqlDb.CreateUser(value);
     }
 }
