@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using StraviaAPI.Loaders;
+using StraviaAPI.Models;
+using System.Data.SqlClient;
 
 namespace StraviaAPI.Data
 {
@@ -32,23 +34,21 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async void CreateUser(String username, String category, String name, String last_name, String birthdate, String nationality, String password, String image)
+        public async Task CreateUser(User value)
         {
-            String queryString = "INSERT INTO dbo.User(u_username, category, name, last_name, birthdate, nationality, u_password, image) VALUES (@user, @cat, @name, @lname, @bd, @nat, @password, @img);";
-            String? result = null;
-
-            SqlCommand command = new SqlCommand(queryString, _Connection);
-            command.Parameters.AddWithValue("@user", username);
-            command.Parameters.AddWithValue("@cat", category);
-            command.Parameters.AddWithValue("@name", name);
-            command.Parameters.AddWithValue("@lname", last_name);
-            command.Parameters.AddWithValue("@bd", birthdate);
-            command.Parameters.AddWithValue("@nat", nationality);
-            command.Parameters.AddWithValue("@password", password);
-            command.Parameters.AddWithValue("@img", image);
+            SqlCommand command = new SqlCommand(value.ToPostQuery(), _Connection);
 
             await _Connection.OpenAsync();
-            command.ExecuteNonQuery();
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
             await _Connection.CloseAsync();
         }
     }
