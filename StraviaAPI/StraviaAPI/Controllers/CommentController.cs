@@ -19,7 +19,7 @@ namespace StraviaAPI.Controllers
 
         // GET: <CommentController>
         [HttpGet]
-        public async Task<List<Comment>> Get() 
+        public async Task<IEnumerable<Comment>> Get() 
             => await _Database.GetComments();
 
         // GET <CommentController>/5
