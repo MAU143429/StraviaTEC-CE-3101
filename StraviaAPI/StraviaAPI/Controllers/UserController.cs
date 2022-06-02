@@ -27,10 +27,10 @@ namespace StraviaAPI.Controllers
         public Task<IEnumerable<User>> Get(String username)
             => _SqlDb.GetUser(username);
 
-        // GET: <UserController>/{id}
-        [HttpGet("{username}/{password}")]
-        public Task<IEnumerable<User>> Login(String username, String password)
-            => _SqlDb.Login(username, password);
+        // POST: <UserController>/{username}/{password}
+        [HttpPost("login")]
+        public Task<User> Login(Login login)
+            => _SqlDb.Login(login.Username, login.Password);
 
         // POST <UserController>
         [HttpPost]
