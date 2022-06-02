@@ -18,17 +18,17 @@ namespace StraviaAPI.Controllers
         }
 
         // GET: <UserController>
-        [HttpGet("Get")]
-        public Task<List<User>> Get() 
+        [HttpGet]
+        public Task<IEnumerable<User>> Get() 
             => _SqlDb.GetUsers();
 
         // GET: <UserController>/{id}
-        [HttpGet("Get/{username}")]
-        public Task<User> Get(String username)
+        [HttpGet("{username}")]
+        public Task<IEnumerable<User>> Get(String username)
             => _SqlDb.GetUser(username);
 
         // POST <UserController>
-        [HttpPost("Add")]
+        [HttpPost]
         public void Post(User value) 
             => _SqlDb.CreateUser(value);
     }
