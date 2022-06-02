@@ -14,7 +14,7 @@ namespace StraviaAPI.Data
             _Connection = new SqlConnection(CONNECTION_STRING);
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
             String queryString = "SELECT * FROM [dbo].[User];";
 
