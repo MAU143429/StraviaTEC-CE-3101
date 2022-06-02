@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
+    options.AddDefaultPolicy
+    (
         builder => builder
             .AllowAnyMethod()
             .AllowAnyHeader()
@@ -15,13 +16,12 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<SQLDB>();
 builder.Services.AddScoped<Mongo>();
-
-
 
 var app = builder.Build();
 

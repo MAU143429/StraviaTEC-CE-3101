@@ -2,14 +2,14 @@
 {
     public class User
     {
-        public String name { get; set; }
-        public String last_name { get; set; }
-        public String nationality { get; set; }
-        public String birthdate { get; set; }
-        public String category { get; set; }
-        public String username { get; set; }
-        public String password { get; set; }
-        public String image { get; set; }
+        public String Name { get; set; }
+        public String Lastname { get; set; }
+        public String Nationality { get; set; }
+        public String Birthdate { get; set; }
+        public String Category { get; set; }
+        public String Username { get; set; }
+        public String Password { get; set; }
+        public String Image { get; set; }
 
         public User()
         {
@@ -17,14 +17,14 @@
 
         public User(string name, string last_name, string nationality, string birthdate, string category, string username, string password, string image)
         {
-            this.name = name;
-            this.last_name = last_name;
-            this.nationality = nationality;
-            this.birthdate = birthdate;
-            this.category = category;
-            this.username = username;
-            this.password = password;
-            this.image = image;
+            this.Name = name;
+            this.Lastname = last_name;
+            this.Nationality = nationality;
+            this.Birthdate = birthdate;
+            this.Category = category;
+            this.Username = username;
+            this.Password = password;
+            this.Image = image;
         }
     }
 }

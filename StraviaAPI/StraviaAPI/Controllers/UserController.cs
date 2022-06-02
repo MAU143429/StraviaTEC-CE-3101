@@ -30,7 +30,7 @@ namespace StraviaAPI.Controllers
         // POST: <UserController>/{username}/{password}
         [HttpPost("login")]
         public Task<User> Login(Login login)
-            => _SqlDb.Login(login.Username, login.Password);
+            => _SqlDb.LoginUser(login.Username, login.Password);
 
         // POST <UserController>
         [HttpPost]
