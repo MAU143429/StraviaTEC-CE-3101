@@ -14,11 +14,11 @@ namespace StraviaAPI.Data
             _Connection = new SqlConnection(CONNECTION_STRING);
         }
 
-        public async Task<String> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            String queryString = "SELECT * FROM dbo.Persons;";
+            String queryString = "SELECT * FROM [dbo].[User];";
 
-            String? result = null;
+            List<User> result = new List<User>();
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -26,7 +26,34 @@ namespace StraviaAPI.Data
             {
                 while (reader.Read())
                 {
-                    result = String.Format("{0}, {1}", reader[0], reader[1]);
+                    result.Add(reader.ToUser());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<User> GetUser(String username)
+        {
+            String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}';";
+
+            User? result = null;
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        result = reader.ToUser();
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+                    }
                 }
             }
             await _Connection.CloseAsync();

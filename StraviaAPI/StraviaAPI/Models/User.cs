@@ -11,6 +11,10 @@
         public String password { get; set; }
         public String image { get; set; }
 
+        public User()
+        {
+        }
+
         public User(string name, string last_name, string nationality, string birthdate, string category, string username, string password, string image)
         {
             this.name = name;

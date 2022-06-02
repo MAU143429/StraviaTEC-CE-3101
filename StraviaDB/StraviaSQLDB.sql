@@ -150,15 +150,28 @@ CREATE TABLE [dbo].[Participation](
 ) ON [PRIMARY]
 GO
 
-/****** Object:  Table [dbo].[Permission]    Script Date: 28/5/2022 15:46:55 ******/
+/****** Object:  Table [dbo].[PermissionC]    Script Date: 28/5/2022 15:46:55 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[Permission](
+CREATE TABLE [dbo].[PermissionC](
 	[no_challenge] [int] NOT NULL,
+	[no_group] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PermissionR]    Script Date: 28/5/2022 15:46:55 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PermissionR](
+	[no_race] [int] NOT NULL,
 	[no_group] [int] NOT NULL
 ) ON [PRIMARY]
 GO
@@ -349,18 +362,32 @@ GO
 ALTER TABLE [dbo].[Participation] CHECK CONSTRAINT [FK_Participation_User]
 GO
 
-ALTER TABLE [dbo].[Permission]  WITH CHECK ADD  CONSTRAINT [FK_Permission_Challenge] FOREIGN KEY([no_challenge])
+ALTER TABLE [dbo].[PermissionC]  WITH CHECK ADD  CONSTRAINT [FK_PermissionC_Challenge] FOREIGN KEY([no_challenge])
 REFERENCES [dbo].[Challenge] ([no_challenge])
 GO
 
-ALTER TABLE [dbo].[Permission] CHECK CONSTRAINT [FK_Permission_Challenge]
+ALTER TABLE [dbo].[PermissionC] CHECK CONSTRAINT [FK_PermissionC_Challenge]
 GO
 
-ALTER TABLE [dbo].[Permission]  WITH CHECK ADD  CONSTRAINT [FK_Permission_Group] FOREIGN KEY([no_group])
+ALTER TABLE [dbo].[PermissionC]  WITH CHECK ADD  CONSTRAINT [FK_PermissionC_Group] FOREIGN KEY([no_group])
 REFERENCES [dbo].[Group] ([no_group])
 GO
 
-ALTER TABLE [dbo].[Permission] CHECK CONSTRAINT [FK_Permission_Group]
+ALTER TABLE [dbo].[PermissionC] CHECK CONSTRAINT [FK_PermissionC_Group]
+GO
+
+ALTER TABLE [dbo].[PermissionR]  WITH CHECK ADD  CONSTRAINT [FK_PermissionR_Race] FOREIGN KEY([no_race])
+REFERENCES [dbo].[Race] ([no_race])
+GO
+
+ALTER TABLE [dbo].[PermissionR] CHECK CONSTRAINT [FK_PermissionR_Race]
+GO
+
+ALTER TABLE [dbo].[PermissionR]  WITH CHECK ADD  CONSTRAINT [FK_PermissionR_Group] FOREIGN KEY([no_group])
+REFERENCES [dbo].[Group] ([no_group])
+GO
+
+ALTER TABLE [dbo].[PermissionR] CHECK CONSTRAINT [FK_PermissionR_Group]
 GO
 
 ALTER TABLE [dbo].[Race]  WITH CHECK ADD  CONSTRAINT [FK_Race_Category] FOREIGN KEY([category])
