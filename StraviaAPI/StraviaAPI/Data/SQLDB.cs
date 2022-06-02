@@ -61,7 +61,7 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task<User> Login(String username, String password)
+        public async Task<User> LoginUser(String username, String password)
         {
             String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}' AND u_password = '{password}';";
 
@@ -76,6 +76,60 @@ namespace StraviaAPI.Data
                     try
                     {
                         result = reader.ToUser();
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+                    }
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Organizer>> GetOrganizer(String username)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Organizer] WHERE o_username = '{username}';";
+
+            List<Organizer>? result = new List<Organizer>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        result.Add(reader.ToOrganizer());
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+                    }
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<Organizer> LoginOrganizer(String username, String password)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Organizer] WHERE o_username = '{username}' AND o_password = '{password}';";
+
+            Organizer? result = null;
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        result = reader.ToOrganizer();
                     }
                     catch (Exception e)
                     {
