@@ -61,11 +61,11 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task<IEnumerable<User>> Login (String username, String password)
+        public async Task<User> Login(String username, String password)
         {
             String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}' AND u_password = '{password}';";
 
-            List<User>? result = new List<User>();
+            User? result = null;
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -75,7 +75,7 @@ namespace StraviaAPI.Data
                 {
                     try
                     {
-                        result.Add(reader.ToUser());
+                        result = reader.ToUser();
                     }
                     catch (Exception e)
                     {
