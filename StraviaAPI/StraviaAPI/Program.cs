@@ -20,11 +20,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(x => x
-            .AllowAnyOrigin()
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder => builder
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials());
+            .AllowAnyOrigin()
+            .AllowCredentials()
+    );
+});
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
