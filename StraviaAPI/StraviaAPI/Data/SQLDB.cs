@@ -36,6 +36,8 @@ namespace StraviaAPI.Data
             }
             await _Connection.CloseAsync();
 
+            if (result.Count.Equals(0)) result = null;
+
             return result ?? throw new Exception("Not found!!");
         }
 
@@ -68,6 +70,8 @@ namespace StraviaAPI.Data
                 }
             }
             await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
@@ -135,6 +139,8 @@ namespace StraviaAPI.Data
                 }
             }
             await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
@@ -239,6 +245,8 @@ namespace StraviaAPI.Data
 
             await _Connection.CloseAsync();
 
+            if (result.Count.Equals(0)) result = null;
+
             return result ?? throw new Exception("Not found!!");
         }
 
@@ -267,6 +275,8 @@ namespace StraviaAPI.Data
 
             await _Connection.CloseAsync();
 
+            if (result.Count.Equals(0)) result = null;
+
             return result ?? throw new Exception("Not found!!");
         }
 
@@ -294,6 +304,8 @@ namespace StraviaAPI.Data
             }
             await _Connection.CloseAsync();
 
+            if (result.Count.Equals(0)) result = null;
+
             return result ?? throw new Exception("Not found!!");
         }
 
@@ -316,6 +328,8 @@ namespace StraviaAPI.Data
             }
 
             await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
@@ -343,6 +357,191 @@ namespace StraviaAPI.Data
                 }
             }
             await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Race>> GetAllRaces()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Race];";
+
+            List<Race> result = new List<Race>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRace());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Race>> GetRacesOrganizer(String username)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Race] WHERE o_username = '{username}';";
+
+            List<Race> result = new List<Race>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRace());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Race>> GetRacesUser(String username)
+        {
+            String queryString = 
+                $"SELECT [no_inscription], [dbo].[Inscription].[no_race], [dbo].[Inscription].[u_username], [dbo].[Inscription].[voucher], [dbo].[Inscription].[is_accepted] " +
+                $"FROM [dbo].[Race] JOIN [dbo].[Inscription]" +
+                $"ON [dbo].[Race].[no_race] = [dbo].[Inscription].[no_race]" +
+                $"WHERE [u_username] = '{username}';";
+
+            List<Race> result = new List<Race>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRace());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Challenge>> GetAllChallenges()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Challenge];";
+
+            List<Challenge> result = new List<Challenge>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToChallenge());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Challenge>> GetChallengesOrganizer(String username)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Challenge] WHERE [o_username] = '{username}';";
+
+            List<Challenge> result = new List<Challenge>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToChallenge());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Challenge>> GetChallengesUser(String username)
+        {
+            String queryString = 
+                $"SELECT * FROM [dbo].[Challenge]" +
+                $"JOIN [dbo].[Participation] ON [dbo].[Challenge].[no_challenge] = [dbo].[Participation].[no_challenge]" +
+                $"WHERE [u_username] = '{username}';";
+
+            List<Challenge> result = new List<Challenge>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToChallenge());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Group>> GetAllGroups()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Group];";
+
+            List<Group> result = new List<Group>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToGroup());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Group>> GetGroup(String name)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Group] WHERE [g_name] = '{name}';";
+
+            List<Group> result = new List<Group>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToGroup());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
