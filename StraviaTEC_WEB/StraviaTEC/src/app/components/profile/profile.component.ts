@@ -101,7 +101,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     };
 
     var vectorSource = new VectorSource({
-      url: '../../assets/gpx/route9.gpx',
+      url: '../../assets/gpx/route.gpx',
       format: new GPX(),
     });
 

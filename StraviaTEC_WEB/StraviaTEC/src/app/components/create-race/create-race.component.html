@@ -68,8 +68,8 @@
           </div>
 
           <div class="input-box">
-            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" >ADD</button></span>
-            <input type="text" [formControl]="categoriesControl" matInput2 [matAutocomplete]="autoModel" placeholder="Add categories here!" required>
+            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="addCategory(categoryoption)" >ADD</button></span>
+            <input type="text" [(ngModel)]= "categoryoption" [formControl]="categoriesControl" matInput2 [matAutocomplete]="autoModel" placeholder="Add categories here!" required>
             <mat-autocomplete #autoModel="matAutocomplete">
               <mat-option class="options"
                   *ngFor="let option of filteredOptions2 | async"
@@ -98,7 +98,7 @@
           </div>
 
           <div class="input-box">
-            <table mat-table [dataSource]="dataSource2" class="mat-elevation-z2">
+            <table id="c-table" mat-table [dataSource]="dataSource2" class="mat-elevation-z2">
 
               <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef> No. </th>

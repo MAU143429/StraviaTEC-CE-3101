@@ -4,6 +4,7 @@ import { startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'r
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import { ActivityService } from 'src/app/service/activity.service';
+import { InternalServicesService } from 'src/app/service/internal-services.service';
 
 export interface Categories{
   position: number;
@@ -26,19 +27,19 @@ export interface Sponsors{
 })
 export class CreateRaceComponent implements OnInit {
 
-
   displayedColumns: string[] = ['position', 'b_account'];
   displayedColumns2: string[] = ['position', 'category'];
   displayedColumns3: string[] = ['position', 'sponsor'];
 
-
   dataSource: Accounts[] = [];
   dataSource2: Categories[] = [];
+  tempSource2: Categories[] = [];
   dataSource3: Sponsors[] = [];
 
-  t_sponsors: Number = 1;
-  t_categories: Number = 1;
-  t_accounts: Number = 1;
+  t_sponsors: number = 1;
+  t_categories: number = 1;
+  t_accounts: number = 1;
+
 
   activityControl = new FormControl();
   categoriesControl = new FormControl();
@@ -46,8 +47,11 @@ export class CreateRaceComponent implements OnInit {
   filteredOptions: any;
   filteredOptions2: any;
   filteredOptions3: any;
+  activityoption: any;
+  categoryoption: any;
+  sponsoroption: any;
 
-  constructor(private modalService: NgbModal, private service: ActivityService, private router: Router) {
+  constructor(private modalService: NgbModal, private service: ActivityService,private internal: InternalServicesService, private router: Router) {
     this.filteredOptions = this.activityControl.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
@@ -78,13 +82,14 @@ export class CreateRaceComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
   }
+
 
   addCategory(newCategory:any) {
-
-    this.dataSource2.push({position: this.t_categories.valueOf(), category: newCategory})
-    this.t_categories =+ 1;
+    this.tempSource2.push({position: this.t_categories, category: newCategory});
   }
+
 
 
 
