@@ -87,7 +87,7 @@ export class CreateRaceComponent implements OnInit {
 
 
   addCategory(newCategory:any) {
-    this.tempSource2.push({position: this.t_categories, category: newCategory});
+    this.dataSource2.push({position: this.t_categories, category: newCategory});
   }
 
 
