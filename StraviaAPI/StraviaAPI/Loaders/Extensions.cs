@@ -60,7 +60,27 @@ namespace StraviaAPI.Loaders
         {
             return new Sport
             {
-                sport = reader[0].ToString(),
+                Name = reader[0].ToString(),
+            };
+        }
+
+        public static Category ToCategory(this SqlDataReader reader)
+        {
+            return new Category
+            {
+                Name = reader[0].ToString(),
+                Description = reader[1].ToString(),
+            };
+        }
+
+        public static Sponsor ToSponsor(this SqlDataReader reader)
+        {
+            return new Sponsor
+            {
+                Tradename = reader[0].ToString(),
+                Phone = int.Parse(reader[1].ToString()),
+                Ceo = reader[2].ToString(),
+                Logo = reader[3].ToString(),
             };
         }
     }

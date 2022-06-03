@@ -1,7 +1,8 @@
 ﻿namespace StraviaAPI.Models
 {
-    public class Sport
+    public class Category
     {
         public String Name { get; set; }
+        public String Description { get; set; }
     }
 }
