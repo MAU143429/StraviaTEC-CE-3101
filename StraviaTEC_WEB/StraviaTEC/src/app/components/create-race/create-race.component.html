@@ -31,7 +31,14 @@
 
           <div class="input-box">
             <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" placeholder="Select your activity type" required>
+            <input type="text" [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option class="options"
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option.name">
+                {{option.name}}
+             </mat-option>
+            </mat-autocomplete>
           </div>
           <div class="input-box">
             <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
@@ -39,14 +46,16 @@
           </div>
 
           <div class="input-box">
+            <span class="details">Altitude <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="number" placeholder="Enter the activity altitude" required>
+          </div>
+
+          <div class="input-box">
             <span class="details">Price<span style="color: rgb(245, 59, 59);">*</span> </span>
             <input type="text" placeholder="Enter the inscription price" required>
           </div>
 
-          <div class="input-box">
-            <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" placeholder="Select your activity type" required>
-          </div>
+
 
           <div class="input-box">
             <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
@@ -59,8 +68,15 @@
           </div>
 
           <div class="input-box">
-            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
-            <input type="text" placeholder="Add categories here!" required>
+            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" >ADD</button></span>
+            <input type="text" [formControl]="categoriesControl" matInput2 [matAutocomplete]="autoModel" placeholder="Add categories here!" required>
+            <mat-autocomplete #autoModel="matAutocomplete">
+              <mat-option class="options"
+                  *ngFor="let option of filteredOptions2 | async"
+                  [value]="option.name">
+                {{option.name}}
+             </mat-option>
+            </mat-autocomplete>
           </div>
 
           <div class="input-box">
@@ -71,7 +87,14 @@
 
           <div class="input-box">
             <span class="details">Sponsors<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
-            <input type="text" placeholder="Add sponsors here!" required>
+            <input type="text" [formControl]="sponsorsControl" matInput2 [matAutocomplete]="autoModel2" placeholder="Add sponsors here!" required>
+            <mat-autocomplete #autoModel2="matAutocomplete">
+              <mat-option class="options"
+                  *ngFor="let option of filteredOptions3 | async"
+                  [value]="option.tradename">
+                {{option.tradename}}
+             </mat-option>
+            </mat-autocomplete>
           </div>
 
           <div class="input-box">
