@@ -40,6 +40,7 @@ body{
 .profile-pic {
   border-radius: 50%;
   border-color: black;
+  margin-left: 4%;
 
 }
 
@@ -63,11 +64,6 @@ body{
 }
 
 /** Cards de publicaciones */
-
-child {
-  display: block;
-  margin-bottom: 30px;
-}
 
 .cards{
   background-color: white;
