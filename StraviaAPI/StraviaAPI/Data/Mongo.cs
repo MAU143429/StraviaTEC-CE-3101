@@ -17,7 +17,7 @@ namespace StraviaAPI.Data
         }
 
         // List
-        public async Task<List<Comment>> GetComments()
+        public async Task<IEnumerable<Comment>> GetComments()
         {
             var result = await _Database.GetCollection<Comment>("Comments").FindAsync(_ => true);
             return result.ToList();
