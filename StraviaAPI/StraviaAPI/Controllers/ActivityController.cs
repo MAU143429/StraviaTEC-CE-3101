@@ -24,7 +24,7 @@ namespace StraviaAPI.Controllers
 
         // POST: <ActivityController>/test
         [HttpPost("test")]
-        public Test Test(Test activity)
+        public IEnumerable<Test> Test(IEnumerable<Test> activity)
         {
             return activity;
         }
