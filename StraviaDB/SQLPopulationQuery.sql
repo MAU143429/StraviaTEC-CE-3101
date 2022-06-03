@@ -57,22 +57,22 @@ INSERT INTO [dbo].[Category]
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Correr');
+           ('Running');
 
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Nadar');
+           ('Swimming');
 
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Ciclismo');
+           ('Cycling');
 
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Senderismo');
+           ('Hiking');
 
 INSERT INTO [dbo].[Sport]
            ([sport])
@@ -82,7 +82,7 @@ INSERT INTO [dbo].[Sport]
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Caminata');
+           ('Walking');
 
 -- INSERT FOR SPONSOR ITEMS --
 
