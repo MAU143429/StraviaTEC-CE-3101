@@ -1,8 +1,8 @@
 ﻿namespace StraviaAPI.Models
 {
-    public class Test
+    public class Reply
     {
         public int Position { get; set; }
-        public String Category { get; set; }
+        public String Data { get; set; }
     }
 }
