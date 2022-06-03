@@ -1,58 +1,86 @@
 USE [StraviaDB]
 GO
 
+-- INSERT FOR CATEGORY ITEMS --
+
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Junior'
-           ,'menor de 15 años')
-GO
+           ,'menor de 15 aï¿½os');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Sub-23'
-           ,'de 15 a 23 años')
-GO
+           ,'de 15 a 23 aï¿½os');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Open'
-           ,'de 24 a 30 años')
-GO
+           ,'de 24 a 30 aï¿½os');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Elite'
-           ,'cualquiera que quiera inscribirse')
-GO
+           ,'cualquiera que quiera inscribirse');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Master A'
-           ,'de 30 a 40 años')
-GO
+           ,'de 30 a 40 aï¿½os');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Master B'
-           ,'de 41 a 50 años')
-GO
+           ,'de 41 a 50 aï¿½os');
 
 INSERT INTO [dbo].[Category]
            ([category]
            ,[description])
      VALUES
            ('Master C'
-           ,'más de 51 años')
+           ,'mï¿½s de 51 aï¿½os');
+
+-- INSERT FOR SPORT ITEMS --
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Correr');
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Nadar');
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Ciclismo');
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Senderismo');
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Kayak');
+
+INSERT INTO [dbo].[Sport]
+           ([sport])
+     VALUES
+           ('Caminata');
 GO

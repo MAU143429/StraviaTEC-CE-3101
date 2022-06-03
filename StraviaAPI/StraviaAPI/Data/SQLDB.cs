@@ -14,6 +14,11 @@ namespace StraviaAPI.Data
             _Connection = new SqlConnection(CONNECTION_STRING);
         }
 
+        /// <summary>
+        /// Obtain a list of objects User
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<User>> GetUsers()
         {
             String queryString = "SELECT * FROM [dbo].[User];";
@@ -34,6 +39,12 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        /// <summary>
+        /// Obtain an object User by its username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<User>> GetUser(String username)
         {
             String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}';";
@@ -61,11 +72,18 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task<User> LoginUser(String username, String password)
+        /// <summary>
+        /// Obtain an object User by its username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<UserLog> LoginUser(String username, String password)
         {
             String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}' AND u_password = '{password}';";
 
-            User? result = null;
+            UserLog? result = null;
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -75,7 +93,7 @@ namespace StraviaAPI.Data
                 {
                     try
                     {
-                        result = reader.ToUser();
+                        result = reader.ToLog();
                     }
                     catch (Exception e)
                     {
@@ -88,6 +106,12 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        /// <summary>
+        /// Obtain an object Organizer by its username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<Organizer>> GetOrganizer(String username)
         {
             String queryString = $"SELECT * FROM [dbo].[Organizer] WHERE o_username = '{username}';";
@@ -115,11 +139,18 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task<Organizer> LoginOrganizer(String username, String password)
+        /// <summary>
+        /// Obtain an object Organizer by its username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<UserLog> LoginOrganizer(String username, String password)
         {
             String queryString = $"SELECT * FROM [dbo].[Organizer] WHERE o_username = '{username}' AND o_password = '{password}';";
 
-            Organizer? result = null;
+            UserLog? result = null;
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -129,7 +160,7 @@ namespace StraviaAPI.Data
                 {
                     try
                     {
-                        result = reader.ToOrganizer();
+                        result = reader.ToLog();
                     }
                     catch (Exception e)
                     {
@@ -142,7 +173,30 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        /// <summary>
+        /// Creates an object User in the Database
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public async Task CreateUser(User value)
+        {
+            SqlCommand command = new SqlCommand(value.ToPostQuery(), _Connection);
+
+            await _Connection.OpenAsync();
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            await _Connection.CloseAsync();
+        }
+
+        public async Task CreateActivityUser(ActivityUser value)
         {
             SqlCommand command = new SqlCommand(value.ToPostQuery(), _Connection);
 
