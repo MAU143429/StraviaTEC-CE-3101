@@ -5,10 +5,28 @@
     <!---Referencia al archivo css que contiene el estilo--->
     <link rel="stylesheet" href="user-dashboard.component.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
-   </head>
-<body>
-  <app-unavbar></app-unavbar>
-</body>
 
+   </head>
+   <body>
+    <app-unavbar></app-unavbar>
+    <div class="profilezone" *ngFor="let data of profiledata">
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="section1">
+        <br>
+        <img src="{{data.image}}" width="125" alt="">
+
+        <span class="information1">Activities:  </span>
+        <span class="information1"> {{data.activities}} </span>
+        <h5 class="information1"> {{data.name}} {{data.last_name}} </h5>
+        <br>
+      </div>
+      <br>
+      <div class="section2">
+        <h3 class="information"> Friends Activities: </h3>
+      </div>
+    </div>
+  </body>
 </html>

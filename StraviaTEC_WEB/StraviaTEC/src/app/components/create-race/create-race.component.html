@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---Referencia al archivo css que contiene el estilo--->
+    <link rel="stylesheet" href="create-race.component.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   </head>
+   <app-anavbar></app-anavbar>
+<body>
+  <div class="container">
+    <div class="title">Create a Race</div>
+    <div class="content">
+      <form>
+        <div class="user-details">
+
+          <div class="input-box">
+            <span class="details">Name<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text"  placeholder="Enter the race name" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Date <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="date"  placeholder="Enter the activity date!" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Time<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="time"   placeholder="Enter the activity time!" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" placeholder="Select your activity type" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
+            <input type="number"  placeholder="Enter the distance" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Price<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" placeholder="Enter the inscription price" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" placeholder="Select your activity type" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" placeholder="Select the race privacity" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="file" placeholder="Upload .gpx file here!" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
+            <input type="text" placeholder="Add categories here!" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Bank Accounts<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
+            <input type="text" placeholder="Add bank accounts here!" required>
+
+          </div>
+
+          <div class="input-box">
+            <span class="details">Sponsors<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
+            <input type="text" placeholder="Add sponsors here!" required>
+          </div>
+
+          <div class="input-box">
+            <table mat-table [dataSource]="dataSource2" class="mat-elevation-z2">
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef> Categories </th>
+                <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+            </table>
+          </div>
+
+          <div class="input-box">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="b_account">
+                <th mat-header-cell *matHeaderCellDef> Bank Account </th>
+                <td mat-cell *matCellDef="let element"> {{element.b_account}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+
+          <div class="input-box">
+            <table mat-table [dataSource]="dataSource3" class="mat-elevation-z2">
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="sponsor">
+                <th mat-header-cell *matHeaderCellDef> Sponsors </th>
+                <td mat-cell *matCellDef="let element"> {{element.sponsor}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+            </table>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Create Race"  routerLink="/profile">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

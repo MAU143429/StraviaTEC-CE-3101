@@ -1,3 +1,134 @@
-body{
-    background-color: #F7F6FB;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
 }
+body{
+  background: linear-gradient(135deg, white, #9054dd , white);
+  background-size: cover;
+  height: auto;
+  min-height: 100%;
+}
+
+.resultszone{
+  width: 90%;
+  height: 100%;
+  margin-left: 5%;
+  border-radius: 5px;
+  z-index: -10;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.section1{
+  width: 95%;
+  height: auto;
+  min-height: 100%;
+  margin-left: 2%;
+  background-color: white
+
+}
+
+.section1 img {
+  border-radius: 50%;
+  border-color: black;
+}
+
+.maintitle{
+  color: black;
+  margin-top: 3%;
+  margin-left: 2.5%;
+  text-align: left;
+}
+
+.subsection1{
+  width: 80%;
+  height: auto;
+  margin-left: 9.5%;
+  border-color: black;
+  border-width: 800;
+  background-color: #ebdcff;
+}
+
+.results{
+  color: black;
+
+}
+
+.fbtn{
+  color: white;
+  background-color: #9054dd;
+  font-weight: 800;
+  font-size: 19;
+  border-radius: 5px;
+
+
+}
+.fbtn:link,
+.fbtn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    position: absolute;
+}
+
+.fbtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fbtn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fbtn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+.fbtn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.fbtn-white::after {
+    background-color: #fff;
+}
+
+.fbtn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.fbtn-animated {
+    animation: moveInBottom 5s ease-out;
+    animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+

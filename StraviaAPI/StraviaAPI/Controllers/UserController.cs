@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StraviaAPI.Data;
+using StraviaAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,32 +19,22 @@ namespace StraviaAPI.Controllers
 
         // GET: <UserController>
         [HttpGet]
-        public Task<String> Get() 
+        public Task<IEnumerable<User>> Get() 
             => _SqlDb.GetUsers();
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public String Get(int id)
-        {
-            return "value";
-        }
+        // GET: <UserController>/{username}
+        [HttpGet("{username}")]
+        public Task<IEnumerable<User>> Get(String username)
+            => _SqlDb.GetUser(username);
 
-        // POST api/<UserController>
+        // POST: <UserController>/{username}/{password}
+        [HttpPost("login")]
+        public Task<UserLog> Login(Login login)
+            => _SqlDb.LoginUser(login.Username, login.Password);
+
+        // POST <UserController>
         [HttpPost]
-        public void Post([FromBody] String value)
-        {
-        }
-
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] String value)
-        {
-        }
-
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        public void Post(User value) 
+            => _SqlDb.CreateUser(value);
     }
 }
