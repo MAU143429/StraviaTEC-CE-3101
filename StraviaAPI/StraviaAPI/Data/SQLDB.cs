@@ -241,5 +241,110 @@ namespace StraviaAPI.Data
 
             return result ?? throw new Exception("Not found!!");
         }
+
+        /// <summary>
+        /// Obtain a list of objects Category
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Category];";
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            List<Category> result = new List<Category>();
+
+            await _Connection.OpenAsync();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToCategory());
+                }
+            }
+
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Sport>> GetSport(String sport)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Sport] WHERE sport = '{sport}';";
+
+            List<Sport>? result = new List<Sport>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        result.Add(reader.ToSport());
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+                    }
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Sponsor>> GetSponsors()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Sponsor];";
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            List<Sponsor> result = new List<Sponsor>();
+
+            await _Connection.OpenAsync();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToSponsor());
+                }
+            }
+
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<Sponsor>> GetSponsor(String tradename)
+        {
+            String queryString = $"SELECT * FROM [dbo].[Sponsor] WHERE tradename = '{tradename}';";
+
+            List<Sponsor>? result = new List<Sponsor>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        result.Add(reader.ToSponsor());
+                    }
+                    catch (Exception e)
+                    {
+                        result = null;
+                    }
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
     }
 }
