@@ -55,5 +55,13 @@ namespace StraviaAPI.Loaders
                 Username = reader[0].ToString(),
             };
         }
+
+        public static Sport ToSport(this SqlDataReader reader)
+        {
+            return new Sport
+            {
+                sport = reader[0].ToString(),
+            };
+        }
     }
 }
