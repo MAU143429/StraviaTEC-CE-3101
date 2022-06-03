@@ -83,5 +83,37 @@ namespace StraviaAPI.Loaders
                 Logo = reader[3].ToString(),
             };
         }
+
+        public static Race ToRace(this SqlDataReader reader)
+        {
+            return new Race
+            {
+                NoRace = int.Parse(reader[0].ToString()),
+                Ousername = reader[1].ToString(),
+                Rname = reader[2].ToString(),
+                Price = int.Parse(reader[3].ToString()),
+            };
+        }
+        
+        public static Challenge ToChallenge(this SqlDataReader reader)
+        {
+            return new Challenge
+            {
+                NoChallenge = int.Parse(reader[0].ToString()),
+                Ousername = reader[1].ToString(),
+                Cname = reader[2].ToString(),
+                FinalDate = reader[3].ToString(),
+            };
+        }
+        
+        public static Group ToGroup(this SqlDataReader reader)
+        {
+            return new Group
+            {
+                NoGroup = int.Parse(reader[0].ToString()),
+                Ousername = reader[1].ToString(),
+                Gname = reader[2].ToString(),
+            };
+        }
     }
 }
