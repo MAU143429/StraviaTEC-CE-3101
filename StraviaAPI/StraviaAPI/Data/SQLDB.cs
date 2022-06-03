@@ -213,5 +213,33 @@ namespace StraviaAPI.Data
 
             await _Connection.CloseAsync();
         }
+
+        /// <summary>
+        /// Obtain a list of objects Sport
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<IEnumerable<Sport>> GetSports()
+        {
+            String queryString = $"SELECT * FROM [dbo].[Sport];";
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            List<Sport> result = new List<Sport>();
+
+            await _Connection.OpenAsync();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToSport());
+                }
+            }
+
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
     }
 }
