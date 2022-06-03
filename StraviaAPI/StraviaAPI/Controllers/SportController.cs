@@ -21,10 +21,5 @@ namespace StraviaAPI.Controllers
         [HttpGet]
         public Task<IEnumerable<Sport>> Get() 
             => _SqlDb.GetSports();
-
-        // GET: <SportController>/{sport}
-        [HttpGet]
-        public Task<IEnumerable<Sport>> Get(String sport)
-            => _SqlDb.GetSport(sport);
     }
 }

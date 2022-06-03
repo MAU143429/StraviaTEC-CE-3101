@@ -221,32 +221,9 @@ namespace StraviaAPI.Data
         /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<Sport>> GetSports()
         {
-            String query = $"SELECT * FROM [dbo].[Sport];";
+            String queryString = $"SELECT * FROM [dbo].[Sport];";
 
-            SqlCommand command = new SqlCommand(query, _Connection);
-
-            List<Sport> result = new List<Sport>();
-
-            await _Connection.OpenAsync();
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    result.Add(reader.ToSport());
-                }
-            }
-
-            await _Connection.CloseAsync();
-
-            return result ?? throw new Exception("Not found!!");
-        }
-
-        public async Task<IEnumerable<Sport>> GetSport(String sport)
-        {
-            String query = $"SELECT * FROM [dbo].[Sport] WHERE sport = '{sport}';";
-
-            SqlCommand command = new SqlCommand(query, _Connection);
+            SqlCommand command = new SqlCommand(queryString, _Connection);
 
             List<Sport> result = new List<Sport>();
 
