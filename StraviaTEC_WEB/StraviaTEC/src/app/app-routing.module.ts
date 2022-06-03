@@ -13,7 +13,6 @@ import { RacesComponent } from './components/races/races.component';
 import { GroupComponent } from './components/group/group.component';
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
 import { CreateRaceComponent } from './components/create-race/create-race.component';
-import { CreateGroupsComponent } from './components/create-groups/create-groups.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
 
@@ -32,7 +31,6 @@ const routes: Routes = [
   {path: 'groups', component: GroupComponent},
   {path: 'create-race', component: CreateRaceComponent},
   {path: 'create-challenge', component: CreateChallengeComponent},
-  {path: 'create-group', component: CreateGroupsComponent},
   {path: 'inscriptions', component: InscriptionsComponent},
   {path: 'reports', component: ReportsComponent},
 
