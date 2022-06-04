@@ -17,7 +17,7 @@ namespace StraviaAPI.Loaders
             if (activity.NoChallenge.Equals(0))
             {
                 query = $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [route], [distance], [height], [a_date], [u_username])" +
-                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, '{activity.Route}', {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
+                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, 'Route', {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
                         $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
                         $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration});";
             }
@@ -99,9 +99,9 @@ namespace StraviaAPI.Loaders
         {
             return new Challenge
             {
-                NoChallenge = int.Parse(reader[0].ToString()),
-                Ousername = reader[1].ToString(),
                 Cname = reader[2].ToString(),
+                NoChallenge = int.Parse(reader[0].ToString()),
+                Activities = int.Parse(reader[1].ToString()),
                 FinalDate = reader[3].ToString(),
             };
         }
