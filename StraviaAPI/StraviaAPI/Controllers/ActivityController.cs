@@ -20,11 +20,38 @@ namespace StraviaAPI.Controllers
         // POST: <ActivityController>/user
         [HttpPost("user")]
         public Task CreateActivity(ActivityUser activity)
-            => _SqlDb.CreateActivityUser(activity);
+        {
+            _SqlDb.CreateActivityUser(activity);
+            int NoAct = _SqlDb.GetNoActivityUser(activity);
+
+            String fileName = "";
+            String filePath = "";
+            fileName = Path.GetFileName(activity.Route.FileName);
+            filePath = Path.Combine("Rcs\\Routes", NoAct.ToString(), fileName);
+            Directory.CreateDirectory("Rcs\\Routes\\" + NoAct.ToString());
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                activity.Route.CopyToAsync(fileStream);
+            }
+
+            return _SqlDb.UpdateActivity(new ActivityDB
+            {
+                NoActivity = NoAct,
+                Sport = activity.Type,
+                NoRace = null,
+                NoChallenge = null,
+                Ousername = null,
+                Route = filePath,
+                Distance = activity.Distance,
+                Height = activity.Altitude,
+                Date = activity.Date,
+                Uusername = activity.Username
+            });
+        }
 
         // POST: <ActivityController>/reply
         [HttpPost("reply")]
-        public IEnumerable<Reply> Reply(IEnumerable<Reply> reply) 
+        public IEnumerable<Reply> Reply(IEnumerable<Reply> reply)
             => reply;
     }
 }
