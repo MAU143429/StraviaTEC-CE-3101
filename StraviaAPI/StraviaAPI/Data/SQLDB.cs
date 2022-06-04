@@ -202,9 +202,9 @@ namespace StraviaAPI.Data
             await _Connection.CloseAsync();
         }
 
-        public async Task CreateActivityUser(ActivityUser value)
+        public async Task CreateActivityUser(ActivityUser activity)
         {
-            SqlCommand command = new SqlCommand(value.ToPostQuery(), _Connection);
+            SqlCommand command = new SqlCommand(activity.ToPostQuery(), _Connection);
 
             await _Connection.OpenAsync();
 
@@ -219,6 +219,67 @@ namespace StraviaAPI.Data
 
             await _Connection.CloseAsync();
         }
+
+        public int GetNoActivityUser(ActivityUser activity)
+        {
+            String query = $"SELECT [no_challenge] FROM [dbo].[Activity] JOIN [dbo].[Result] ON [dbo].[Activity].[no_activity] = [dbo].[Result].[no_activity] WHERE [dbo].[Activity].[u_username] = '{activity.Username}' AND [sport] = '{activity.Type}' AND [duration] = '{activity.Duration}' AND [a_date] = '{activity.Date}';";
+
+            SqlCommand command = new SqlCommand(query, _Connection);
+
+            int? result = null;
+
+            _Connection.OpenAsync();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result = int.Parse(reader[0].ToString());
+                }
+            }
+
+            _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task UpdateActivity(ActivityDB activity)
+        {
+            String query = 
+                $"UPDATE [dbo].[Activity]" +
+                $"SET [sport] = '{activity.Sport}'" +
+                $"SET [no_race] = {activity.NoRace}" +
+                $"SET [no_challenge] = {activity.NoChallenge}" +
+                $"SET [o_username] = '{activity.Ousername}'" +
+                $"SET [route] = '{activity.Route}'" +
+                $"SET [distance] = {activity.Distance}" +
+                $"SET [height] = {activity.Height}" +
+                $"SET [a_date] = '{activity.Date}'" +
+                $"SET [u_username] = '{activity.Uusername}'" +
+                $"WHERE [no_activity] = {activity.NoActivity}";
+
+            SqlCommand command = new SqlCommand(query, _Connection);
+
+            await _Connection.OpenAsync();
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            await _Connection.CloseAsync();
+        }
+
+        /* 
+        public async Task<int> GetChallengeActivities(int NoChallenge)
+        {
+            String queryString = $"";
+        }
+        */
 
         /// <summary>
         /// Obtain a list of objects Sport
