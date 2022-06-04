@@ -435,7 +435,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Challenge>> GetAllChallenges()
         {
-            String queryString = $"SELECT * FROM [dbo].[Challenge];";
+            String queryString = $"";
 
             List<Challenge> result = new List<Challenge>();
 
