@@ -30,6 +30,7 @@ import { InscriptionsComponent } from './components/inscriptions/inscriptions.co
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { MapComponent } from './components/map/map.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MapComponent } from './components/map/map.component';
     InscriptionsComponent,
     CreateChallengeComponent,
     ReportsComponent,
-    MapComponent
+    MapComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

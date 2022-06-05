@@ -8,8 +8,8 @@ export class CreateRace {
   altitude: number = 0;
   price: number = 0;
   privacity: string = '';
-  route: string = '';
-  categories: Array<any> = [];
-  sponsors: Array<any> = [];
-  bank_accounts: Array<any> = [];
+  route: number = 0;
+  categories: string = '';
+  sponsors: string = '';
+  bank_accounts: string = '';
 }

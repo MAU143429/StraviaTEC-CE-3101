@@ -17,21 +17,21 @@
 
           <div class="input-box">
             <span class="details">Name<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [(ngModel)]= "newRace.name" placeholder="Enter the race name" required>
+            <input type="text" [(ngModel)]= "newRace.name" [ngModelOptions]="{standalone: true}" placeholder="Enter the race name" required>
           </div>
 
           <div class="input-box">
             <span class="details">Date <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="date" [(ngModel)]= "newRace.date"  placeholder="Enter the activity date!" required>
+            <input type="date" [(ngModel)]= "newRace.date" [ngModelOptions]="{standalone: true}"  placeholder="Enter the activity date!" required>
           </div>
           <div class="input-box">
             <span class="details">Time<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="time"  [(ngModel)]= "newRace.time"  placeholder="Enter the activity time!" required>
+            <input type="time"  [(ngModel)]= "newRace.time" [ngModelOptions]="{standalone: true}"  placeholder="Enter the activity time!" required>
           </div>
 
           <div class="input-box">
             <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [(ngModel)]= "newRace.type" [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
+            <input type="text" [(ngModel)]= "newRace.type"  [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option class="options"
                   *ngFor="let option of filteredOptions | async"
@@ -42,31 +42,31 @@
           </div>
           <div class="input-box">
             <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
-            <input type="number"  [(ngModel)]= "newRace.distance" placeholder="Enter the distance" required>
+            <input type="number"  [(ngModel)]= "newRace.distance" [ngModelOptions]="{standalone: true}" placeholder="Enter the distance" required>
           </div>
 
           <div class="input-box">
             <span class="details">Altitude <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="number" [(ngModel)]= "newRace.altitude" placeholder="Enter the activity altitude" required>
+            <input type="number" [(ngModel)]= "newRace.altitude" [ngModelOptions]="{standalone: true}" placeholder="Enter the activity altitude" required>
           </div>
 
           <div class="input-box">
             <span class="details">Price<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [(ngModel)]= "newRace.price"  placeholder="Enter the inscription price" required>
+            <input type="number" [(ngModel)]= "newRace.price" [ngModelOptions]="{standalone: true}"  placeholder="Enter the inscription price" required>
           </div>
 
           <div class="input-box">
             <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [(ngModel)]= "newRace.privacity"  placeholder="Select the race privacity" required>
+            <input type="text" [(ngModel)]= "newRace.privacity" [ngModelOptions]="{standalone: true}"  placeholder="Select the race privacity" required>
           </div>
 
           <div class="input-box">
             <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="file" [(ngModel)]= "newRace.route" placeholder="Upload .gpx file here!" required>
+            <input type="file" (change)="getFile($event)" placeholder="Upload .gpx file here!" required>
           </div>
 
           <div class="input-box">
-            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="getCategories() ; addCategory(categoryoption)" >ADD</button></span>
+            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="addCategory(categoryoption)" >ADD</button></span>
             <input type="text" [(ngModel)]= "categoryoption" [formControl]="categoriesControl" matInput2 [matAutocomplete]="autoModel" placeholder="Add categories here!" required>
             <mat-autocomplete #autoModel="matAutocomplete">
               <mat-option class="options"
@@ -149,7 +149,7 @@
           </div>
         </div>
         <div class="button">
-          <input type="submit" (click)="addNewRace(newRace)" value="Create Race"  routerLink="/profile">
+          <input type="submit" (click)="addNewRace(newRace)" value="Create Race"  routerLink="/inscriptions">
         </div>
       </form>
     </div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!---Referencia al archivo css que contiene el estilo--->
+    <link rel="stylesheet" href="admin-dashboard.component.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   </head>
+<body>
+  <app-anavbar></app-anavbar>
+  <br>
+    <br>
+    <br>
+    <br>
+    <h3 class="maintitle">Race Management</h3>
+    <div class="section2">
+      <div class="challenges">
+        <div class="row">
+          <table class="table table-bordered mt-4 mytable">
+            <tr class="table-primary mytable">
+              <th>Race Name</th>
+              <th>Race Number</th>
+              <th>Type of Activity</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Price</th>
+              <th>Route</th>
+            </tr>
+          <tr *ngFor="let data of races">
+            <th>{{data.name}}</th>
+              <td>{{data.norace}}</td>
+              <td>{{data.type}}</td>
+              <td>{{data.date}}</td>
+              <td>{{data.time}}</td>
+              <td>{{data.price}}</td>
+              <td><button>View Map!</button></td>
+
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="maintitle">Challenge Management</h3>
+      <div class="section1">
+        <div class="challenges">
+          <div class="row">
+            <table class="table table-bordered mt-4 mytable">
+              <tr class="table-primary mytable">
+                <th>Challenge Name</th>
+                <th>Challenge Number</th>
+                <th>Activities</th>
+                <th>Final Date</th>
+                <th>Details</th>
+              </tr>
+            <tr *ngFor="let data of challenges">
+              <th>{{data.name}}</th>
+                <td>{{data.nochallenge}}</td>
+                <td>{{data.activities}}</td>
+                <td>{{data.finaldate}}</td>
+                <td><button>View Challenge!</button></td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="maintitle">Groups Management</h3>
+      <div class="section1">
+        <div class="challenges">
+          <div class="row">
+            <table class="table table-bordered mt-4 mytable">
+              <tr class="table-primary mytable">
+                <th>Group Name</th>
+                <th>Group Number</th>
+                <th>Total Members</th>
+              </tr>
+            <tr *ngFor="let data of groups">
+                <th>{{data.name}}</th>
+                <td>{{data.nogroup}}</td>
+                <td>{{data.members}}</td>
+            </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
+
