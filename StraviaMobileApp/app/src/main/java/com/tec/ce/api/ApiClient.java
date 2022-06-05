@@ -1,5 +1,7 @@
 package com.tec.ce.api;
 
+import com.tec.ce.api.services.ChallengeService;
+import com.tec.ce.api.services.RaceService;
 import com.tec.ce.api.services.UserService;
 
 import okhttp3.OkHttpClient;
@@ -25,6 +27,16 @@ public class ApiClient {
     public static UserService getUserService(){
         UserService userService = getRetrofit().create(UserService.class);
         return userService;
+    }
+
+    public static RaceService getRaceService(){
+        RaceService raceService = getRetrofit().create(RaceService.class);
+        return raceService;
+    }
+
+    public static ChallengeService getChallengeService(){
+        ChallengeService challengeService = getRetrofit().create(ChallengeService.class);
+        return challengeService;
     }
 
 
