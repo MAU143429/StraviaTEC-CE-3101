@@ -590,7 +590,7 @@ namespace StraviaAPI.Data
                 Console.WriteLine(ex);
             }
 
-            await _Connection.OpenAsync();
+            await _Connection.CloseAsync();
         }
 
         public async Task<IActionResult> GetGpx(int id)
