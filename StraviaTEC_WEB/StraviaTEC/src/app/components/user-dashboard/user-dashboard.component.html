@@ -9,24 +9,67 @@
    </head>
    <body>
     <app-unavbar></app-unavbar>
-    <div class="profilezone" *ngFor="let data of profiledata">
+    <div class="dashboardzone">
       <br>
       <br>
       <br>
-      <br>
-      <div class="section1">
+      <div class="section1" *ngFor="let data of profiledata">
         <br>
-        <img src="{{data.image}}" width="125" alt="">
-
-        <span class="information1">Activities:  </span>
-        <span class="information1"> {{data.activities}} </span>
-        <h5 class="information1"> {{data.name}} {{data.last_name}} </h5>
-        <br>
+        <div class="row">
+          <div class="col-1">
+            <img class = "profile-pic" src={{data.image}} width="110" alt="">
+          </div>
+          <div class="col-8">
+            <br>
+            <span class="information">{{data.name}} {{data.last_name}}</span><br>
+            <span class="information">Activities : {{data.activities}}</span><br>
+          </div>
+        </div>
       </div>
       <br>
       <div class="section2">
-        <h3 class="information"> Friends Activities: </h3>
+        <h3  style="text-align:left;"> Friends Activities</h3>
+        <br>
+        <div class="cards " *ngFor="let data2 of activitydata">
+          <br>
+          <br>
+          <div class="card-info">
+            <div class="row">
+              <div class="col-1">
+                <img class = "profile-pic" src={{data2.image}} width="100" alt="">
+              </div>
+              <div class="col-8">
+                <br>
+                <span class="c-name">{{data2.name}} {{data2.last_name}}</span><br>
+                <span class="c-date">{{data2.date}} at {{data2.time}}</span>
+              </div>
+            </div>
+            <br>
+            <span class="c-activity" >Activity Type: {{data2.type}}</span> <br> <span class="c-activity"> Activity ID: #{{data2.no_activity}}</span><br>
+            <br>
+            <div class="row c-parameters">
+              <div class="col-sm">
+                <span class="c-info-title l-info"> Distance</span> <br>
+                <span class="c-info l-info"> {{data2.distance}} Km</span>
+              </div>
+              <div class="col-sm">
+                <span class="c-info-title">Elevation</span> <br>
+                <span class="c-info">{{data2.elevation}} Km </span>
+              </div>
+              <div class="col-sm">
+                <span class="c-info-title">Duration</span> <br>
+                <span class="c-info">{{data2.duration}} minutes </span>
+              </div>
+            </div>
+            <br>
+            <div id="map" class="map"></div>
+            <br>
+            <br>
+          </div>
+        </div>
       </div>
+      <br>
+      <br>
     </div>
   </body>
 </html>

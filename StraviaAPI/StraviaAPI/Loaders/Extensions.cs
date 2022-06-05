@@ -17,7 +17,7 @@ namespace StraviaAPI.Loaders
             if (activity.NoChallenge.Equals(0))
             {
                 query = $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [route], [distance], [height], [a_date], [u_username])" +
-                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, '{activity.Route}', {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
+                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, 'Route', {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
                         $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
                         $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration});";
             }
@@ -53,6 +53,66 @@ namespace StraviaAPI.Loaders
             return new UserLog
             {
                 Username = reader[0].ToString(),
+            };
+        }
+
+        public static Sport ToSport(this SqlDataReader reader)
+        {
+            return new Sport
+            {
+                Name = reader[0].ToString(),
+            };
+        }
+
+        public static Category ToCategory(this SqlDataReader reader)
+        {
+            return new Category
+            {
+                Name = reader[0].ToString(),
+                Description = reader[1].ToString(),
+            };
+        }
+
+        public static Sponsor ToSponsor(this SqlDataReader reader)
+        {
+            return new Sponsor
+            {
+                Tradename = reader[0].ToString(),
+                Phone = int.Parse(reader[1].ToString()),
+                Ceo = reader[2].ToString(),
+                Logo = reader[3].ToString(),
+            };
+        }
+
+        public static Race ToRace(this SqlDataReader reader)
+        {
+            return new Race
+            {
+                NoRace = int.Parse(reader[0].ToString()),
+                Ousername = reader[1].ToString(),
+                Rname = reader[2].ToString(),
+                Price = int.Parse(reader[3].ToString()),
+            };
+        }
+        
+        public static Challenge ToChallenge(this SqlDataReader reader)
+        {
+            return new Challenge
+            {
+                Cname = reader[2].ToString(),
+                NoChallenge = int.Parse(reader[0].ToString()),
+                Activities = int.Parse(reader[1].ToString()),
+                FinalDate = reader[3].ToString(),
+            };
+        }
+        
+        public static Group ToGroup(this SqlDataReader reader)
+        {
+            return new Group
+            {
+                NoGroup = int.Parse(reader[0].ToString()),
+                Ousername = reader[1].ToString(),
+                Gname = reader[2].ToString(),
             };
         }
     }

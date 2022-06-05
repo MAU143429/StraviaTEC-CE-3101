@@ -29,7 +29,6 @@ import { GroupComponent } from './components/group/group.component';
 import { CreateRaceComponent } from './components/create-race/create-race.component';
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
-import { CreateGroupsComponent } from './components/create-groups/create-groups.component';
 import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
@@ -51,7 +50,6 @@ import { ReportsComponent } from './components/reports/reports.component';
     CreateRaceComponent,
     InscriptionsComponent,
     CreateChallengeComponent,
-    CreateGroupsComponent,
     ReportsComponent
   ],
   imports: [

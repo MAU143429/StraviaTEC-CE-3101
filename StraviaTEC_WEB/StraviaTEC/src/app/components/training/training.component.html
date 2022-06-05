@@ -8,8 +8,8 @@
    </head>
 <!---Componentes que conforman la seccion de registro--->
 <app-unavbar></app-unavbar>
-<body> 
-  <div class="container"> 
+<body>
+  <div class="container">
     <div class="title">Report an Activity</div>
     <div class="content">
       <!---Formulario donde se reciben los inputs del usuario--->
@@ -17,32 +17,50 @@
         <div class="user-details">
           <div class="input-box">
             <span class="details">Date <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="date"  placeholder="Enter the activity date!" required>
+            <input type="date" [(ngModel)]= "newTraining.date" [ngModelOptions]="{standalone: true}" placeholder="Enter the activity date!" required>
           </div>
           <div class="input-box">
             <span class="details">Time<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="time"   placeholder="Enter the activity time!" required>
+            <input type="time" [(ngModel)]= "newTraining.time" [ngModelOptions]="{standalone: true}" placeholder="Enter the activity time!" required>
           </div>
           <div class="input-box">
             <span class="details">Duration (minutes)<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="number"  placeholder="Enter the duration of the activity" required>
+            <input type="number" [(ngModel)]= "newTraining.duration" [ngModelOptions]="{standalone: true}"  placeholder="Enter the duration of the activity" required>
           </div>
           <div class="input-box">
             <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" placeholder="Select your activity type" required>
+            <input type="text" [(ngModel)]= "newTraining.type" [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option class="options"
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option.name">
+                {{option.name}}
+             </mat-option>
+            </mat-autocomplete>
           </div>
           <div class="input-box">
             <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
-            <input type="number"  placeholder="Enter the distance" required>
+            <input type="number" [(ngModel)]= "newTraining.distance" [ngModelOptions]="{standalone: true}"  placeholder="Enter the distance" required>
           </div>
+
+          <div class="input-box">
+            <span class="details">Altitude (m.s.n.m)<span style="color: rgb(245, 59, 59);">*</span></span>
+            <input type="number" [(ngModel)]= "newTraining.altitude" [ngModelOptions]="{standalone: true}"  placeholder="Enter the altitude" required>
+          </div>
+
+          <div class="input-box">
+            <span class="details"> Challenge Activity? </span>
+            <input type="number" [(ngModel)]= "newTraining.no_challenge" [ngModelOptions]="{standalone: true}"  placeholder="Select the challenge">
+          </div>
+
           <div class="input-box">
             <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="file" placeholder="Upload .gpx file here!" required>
+            <input type="text" [(ngModel)]= "newTraining.route" [ngModelOptions]="{standalone: true}" placeholder="Upload .gpx file here!" required>
           </div>
-    
+
         </div>
         <div class="button">
-          <input type="submit" value="Upload"  routerLink="/profile">
+          <input type="submit"  value="Register" (click)="addNewTraining(newTraining)" routerLink="/profile">
         </div>
       </form>
     </div>

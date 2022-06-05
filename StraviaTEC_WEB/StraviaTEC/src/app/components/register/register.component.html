@@ -7,50 +7,49 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <!---Componentes que conforman la seccion de registro--->
-<body> 
-  <div class="container"> 
+<body>
+  <div class="container">
     <div class="title">Register</div>
     <div class="content">
       <!---Formulario donde se reciben los inputs del usuario--->
       <form>
         <div class="user-details">
           <div class="input-box">
-            <span class="details">Name <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text"  placeholder="Enter your name" required>
+            <span class="details" >Name <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text"  [(ngModel)]="newRegister.name" [ngModelOptions]="{standalone: true}" placeholder="Enter your name" required>
           </div>
           <div class="input-box">
             <span class="details">Last Name <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text"   placeholder="Enter your last name" required>
+            <input type="text" [(ngModel)]="newRegister.lastname" [ngModelOptions]="{standalone: true}"  placeholder="Enter your last name" required>
           </div>
           <div class="input-box">
-            <span class="details">Nationality<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text"  placeholder="Enter your nationality" required>
+            <span class="details"  >Nationality<span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="text" [(ngModel)]="newRegister.nationality" [ngModelOptions]="{standalone: true}"  placeholder="Enter your nationality" required>
           </div>
           <div class="input-box">
-            <span class="details">BirthDate <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="date" placeholder="Select your birthdate" required>
+            <span class="details" >BirthDate <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="date"  [(ngModel)]="newRegister.birthdate" [ngModelOptions]="{standalone: true}" placeholder="Select your birthdate" required>
           </div>
           <div class="input-box">
-            <span class="details">Username <span style="color: rgb(245, 59, 59);">*</span></span>
-            <input type="email"  placeholder="Create your username" required>
+            <span class="details"  >Username <span style="color: rgb(245, 59, 59);">*</span></span>
+            <input type="text" [(ngModel)]="newRegister.username" [ngModelOptions]="{standalone: true}" placeholder="Create your username" required>
           </div>
           <div class="input-box">
-            <span class="details">Password <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="password"  placeholder="Create your password" required>
+            <span class="details"  >Password <span style="color: rgb(245, 59, 59);">*</span> </span>
+            <input type="password" [(ngModel)]="newRegister.password" [ngModelOptions]="{standalone: true}"  placeholder="Create your password" required>
           </div>
-    
-        </div>
-        <div class="user-details">
           <div class="input-box">
+            <span class="details" >Category</span>
+            <input type="text"  [(ngModel)]="newRegister.category" [ngModelOptions]="{standalone: true}" placeholder="Select your category" >
+          </div>
+          <div class="input-box"  >
             <span class="details">Profile Picture</span>
-            <input type="text" placeholder="Enter an image url" >
+            <input type="text" [(ngModel)]="newRegister.image" [ngModelOptions]="{standalone: true}" placeholder="Enter an image url" >
           </div>
+
         </div>
-        
-
-
         <div class="button">
-          <input type="submit" value="Sign Up!"  routerLink="/user-login">
+          <input type="submit" value="Sign Up!" (click)="addNewRegister(newRegister)"  routerLink="/user-login">
         </div>
       </form>
     </div>
