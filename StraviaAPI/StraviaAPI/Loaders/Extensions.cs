@@ -13,15 +13,17 @@ namespace StraviaAPI.Loaders
 
         public static String ToPostQuery(this ActivityUser activity)
         {
-            String query = null;
+            String? queryString = null;
+
             if (activity.NoChallenge.Equals(0))
             {
-                query = $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [route], [distance], [height], [a_date], [u_username])" +
-                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, 'Route', {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
+                queryString = 
+                        $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
+                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}');" +
                         $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
-                        $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration});";
+                        $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration}, {activity.Route});";
             }
-            return query ?? throw new Exception("Not found!!");
+            return queryString ?? throw new Exception("Not found!!");
         }
 
         public static User ToUser (this SqlDataReader reader)
