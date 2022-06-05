@@ -90,10 +90,13 @@ namespace StraviaAPI.Loaders
         {
             return new Race
             {
-                NoRace = int.Parse(reader[0].ToString()),
-                Ousername = reader[1].ToString(),
-                Rname = reader[2].ToString(),
+                Name = reader[0].ToString(),
+                NoRace = int.Parse(reader[1].ToString()),
+                Type = reader[2].ToString(),
                 Price = int.Parse(reader[3].ToString()),
+                Date = reader[4].ToString().Split(" ").ToList()[0],
+                Time = reader[4].ToString().Split(" ").ToList()[1].Remove(5),
+                Route = int.Parse(reader[5].ToString())
             };
         }
         
@@ -117,5 +120,22 @@ namespace StraviaAPI.Loaders
                 Gname = reader[2].ToString(),
             };
         }
+
+        /*
+        public static List<ActivityReply> ToActivityReply(String data)
+        {
+            List<String> activities = data.Split("/").ToList();
+            for (int i = 0; i < activities.Count; i++)
+            {
+                if (activities[i] == "") activities.RemoveAt(i);
+                else
+                {
+                    List<String> atributes = activities[i].Split(";").ToList();
+
+
+                }
+            }
+
+        }*/
     }
 }
