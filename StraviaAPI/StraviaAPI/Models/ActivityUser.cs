@@ -9,7 +9,7 @@
         public String Type { get; set; }
         public int Distance { get; set; }
         public int Altitude { get; set; }
-        public IFormFile Route { get; set; }
+        public String Route { get; set; }
         public int NoChallenge { get; set; }
     }
 }
