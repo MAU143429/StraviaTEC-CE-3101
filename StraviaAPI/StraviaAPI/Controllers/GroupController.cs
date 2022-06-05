@@ -31,20 +31,9 @@ namespace StraviaAPI.Controllers
 
         // POST api/<GroupController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Task Create(GroupInput input)
         {
-        }
-
-        // PUT api/<GroupController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<GroupController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _SqlDb.CreateGroup(input);
         }
     }
 }
