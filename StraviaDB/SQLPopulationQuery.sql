@@ -77,7 +77,7 @@ INSERT INTO [dbo].[Sport]
 INSERT INTO [dbo].[Sport]
            ([sport])
      VALUES
-           ('Kayak');
+           ('Kayaking');
 
 INSERT INTO [dbo].[Sport]
            ([sport])
