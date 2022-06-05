@@ -1,6 +1,8 @@
-﻿using StraviaAPI.Loaders;
+﻿using Microsoft.AspNetCore.Mvc;
+using StraviaAPI.Loaders;
 using StraviaAPI.Models;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace StraviaAPI.Data
 {
@@ -204,6 +206,11 @@ namespace StraviaAPI.Data
 
         public async Task CreateActivityUser(ActivityUser activity)
         {
+            String queryString =
+                        $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
+                        $"VALUES ('{activity.Type}', NULL, NULL, NULL, {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}', {activity.Route});" +
+                        $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
+                        $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration}, {activity.Route});";
             SqlCommand command = new SqlCommand(activity.ToPostQuery(), _Connection);
 
             await _Connection.OpenAsync();
@@ -567,6 +574,62 @@ namespace StraviaAPI.Data
             if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IActionResult> GetGpx(int id)
+        {
+            String queryString = $"SELECT [data] FROM [dbo].[Gpx] WHERE [gpx_id] = {id};";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            Gpx? result = new Gpx();
+
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result = new Gpx
+                    {
+                        Id = id,
+                        Data = Encoding.ASCII.GetBytes(reader[0].ToString()),
+                    };
+                }
+            }
+            await _Connection.CloseAsync();
+
+            var file = new FileStreamResult(new MemoryStream(result.Data), "text/xml");
+
+            return file ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<int> CreateGpx(IFormFile data)
+        {
+            byte[] fileBytes;
+
+            using (var stream = new MemoryStream())
+            {
+                await data.CopyToAsync(stream);
+                fileBytes = stream.ToArray();
+            }
+
+            String queryString = $"INSERT INTO [dbo].[Gpx] ([data]) OUTPUT INSERTED.[gpx_id] VALUES ('{Encoding.Default.GetString(fileBytes)}');";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            int result = 0;
+
+            await _Connection.OpenAsync();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result = int.Parse(reader[0].ToString());
+                }
+            }
+
+            await _Connection.CloseAsync();
+
+            return result;
         }
     }
 }
