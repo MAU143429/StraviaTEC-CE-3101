@@ -109,8 +109,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     List<LatLng> points = track.getPoints();
                     points.add(myLocation);
                     track.setPoints(points);
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 20));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
                     trackPoints.add(location);
+                    if (!points.isEmpty() && points.size() > 1) {
+                        float test = getDistance(points.get(points.size()-2).latitude, points.get(points.size()-2).longitude,
+                                points.get(points.size()-1).latitude, points.get(points.size()-1).longitude);
+                        Toast.makeText(MapsActivity.this, String.valueOf(test), Toast.LENGTH_SHORT).show();
+                    }
                 } catch (SecurityException e) {
                     e.printStackTrace();
                 }
@@ -159,6 +164,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         map.setMyLocationEnabled(true);
+    }
+
+    public float getDistance(double startLat,double startLang,double endLat,double endLang) {
+
+        Location locStart = new Location("");
+        locStart.setLatitude(startLat);
+        locStart.setLongitude(startLang);
+
+        Location locEnd = new Location("");
+        locEnd.setLatitude(endLat);
+        locEnd.setLongitude(endLang);
+
+        return locStart.distanceTo(locEnd);
     }
 
     public void displayTraining() {
