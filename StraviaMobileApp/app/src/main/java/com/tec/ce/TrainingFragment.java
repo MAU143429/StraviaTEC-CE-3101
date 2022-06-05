@@ -2,15 +2,13 @@ package com.tec.ce;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,30 +70,35 @@ public class TrainingFragment extends Fragment {
 
         ImageButton cyclingButton = v.findViewById(R.id.imageButtonCycling);
         cyclingButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Cycling button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });
 
         ImageButton kayakingButton = v.findViewById(R.id.imageButtonKayaking);
         kayakingButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Kayaking button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });
 
         ImageButton swimmingButton = v.findViewById(R.id.imageButtonSwimming);
         swimmingButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Swimming button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });
 
         ImageButton hikingButton = v.findViewById(R.id.imageButtonHiking);
         hikingButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Hiking button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });
 
         ImageButton walkingButton = v.findViewById(R.id.imageButtonWalking);
         walkingButton.setOnClickListener(view -> {
+            displayMap();
             Toast.makeText(getContext(), "Walking button clicked", Toast.LENGTH_SHORT).show();
             // Go to next activity
         });

@@ -3,10 +3,22 @@ package com.tec.ce;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
+
+import com.tec.ce.api.ApiClient;
+import com.tec.ce.api.models.UserModel;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +70,35 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.fragment_training, container, false);
+
+        getAllUsers();
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return v;
+    }
+
+    public void getAllUsers(){
+
+        Call<List<UserModel>> userlist = ApiClient.getUserService().getAllUsers();
+
+        userlist.enqueue(new Callback<List<UserModel>>() {
+            @Override
+            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+
+                if(response.isSuccessful()){
+                    Log.e("Successful connection", response.body().toString());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+                Log.e("failure",t.getLocalizedMessage());
+
+            }
+        });
     }
 }
