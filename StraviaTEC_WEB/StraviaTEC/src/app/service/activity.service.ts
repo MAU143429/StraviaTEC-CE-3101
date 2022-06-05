@@ -4,7 +4,6 @@ import { Sport } from 'src/app/interface/sport';
 import { Category } from 'src/app/interface/category';
 import { Sponsor } from 'src/app/interface/sponsor';
 import { Observable } from 'rxjs';
-import { Byte } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
