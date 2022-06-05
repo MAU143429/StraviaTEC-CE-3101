@@ -243,44 +243,6 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task UpdateActivity(ActivityDB activity)
-        {
-            String query = 
-                $"UPDATE [dbo].[Activity]" +
-                $"SET [sport] = '{activity.Sport}'" +
-                $"SET [no_race] = {activity.NoRace}" +
-                $"SET [no_challenge] = {activity.NoChallenge}" +
-                $"SET [o_username] = '{activity.Ousername}'" +
-                $"SET [route] = '{activity.Route}'" +
-                $"SET [distance] = {activity.Distance}" +
-                $"SET [height] = {activity.Height}" +
-                $"SET [a_date] = '{activity.Date}'" +
-                $"SET [u_username] = '{activity.Uusername}'" +
-                $"WHERE [no_activity] = {activity.NoActivity}";
-
-            SqlCommand command = new SqlCommand(query, _Connection);
-
-            await _Connection.OpenAsync();
-
-            try
-            {
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-            await _Connection.CloseAsync();
-        }
-
-        /* 
-        public async Task<int> GetChallengeActivities(int NoChallenge)
-        {
-            String queryString = $"";
-        }
-        */
-
         /// <summary>
         /// Obtain a list of objects Sport
         /// </summary>
