@@ -26,5 +26,10 @@ namespace StraviaAPI.Controllers
         [HttpPost("reply")]
         public IEnumerable<Reply> Reply(IEnumerable<Reply> reply)
             => reply;
+
+        // POST: <ActivityController>/reply
+        [HttpPost("reply/challenge")]
+        public IEnumerable<ActivityReply> ReplyChallenge(IEnumerable<ActivityReply> reply)
+            => reply;
     }
 }
