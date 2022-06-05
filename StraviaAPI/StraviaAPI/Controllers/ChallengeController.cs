@@ -34,8 +34,27 @@ namespace StraviaAPI.Controllers
 
         // POST <ChallengeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Task Post(ChallengeInput input)
         {
+            List<ActivityOrganizer> activities = new List<ActivityOrganizer>();
+            List<String> stringActivities = input.Activities.Split("/").ToList();
+            for (int i = 0; i < stringActivities.Count; i++)
+            {
+                if (stringActivities[i] == "") stringActivities.RemoveAt(i);
+                else
+                {
+                    List<String> data = stringActivities[i].Split(";").ToList();
+                    ActivityOrganizer activity = new ActivityOrganizer
+                    {
+                        Type = data[0],
+                        Distance = int.Parse(data[1]),
+                        Altitude = int.Parse(data[2]),
+                    };
+                    activities.Add(activity);
+                }
+            }
+
+            return _SqlDb.CreateChallenge(input, activities);
         }
     }
 }

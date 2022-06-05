@@ -207,7 +207,7 @@ namespace StraviaAPI.Data
         public async Task CreateActivityUser(ActivityUser activity)
         {
             String queryString =
-                        $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
+                        $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [date], [u_username], [gpx_id])" +
                         $"VALUES ('{activity.Type}', NULL, NULL, NULL, {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}', {activity.Route});" +
                         $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
                         $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration});";
@@ -229,7 +229,7 @@ namespace StraviaAPI.Data
 
         public int GetNoActivityUser(ActivityUser activity)
         {
-            String query = $"SELECT [no_challenge] FROM [dbo].[Activity] JOIN [dbo].[Result] ON [dbo].[Activity].[no_activity] = [dbo].[Result].[no_activity] WHERE [dbo].[Activity].[u_username] = '{activity.Username}' AND [sport] = '{activity.Type}' AND [duration] = '{activity.Duration}' AND [a_date] = '{activity.Date}';";
+            String query = $"SELECT [no_challenge] FROM [dbo].[Activity] JOIN [dbo].[Result] ON [dbo].[Activity].[no_activity] = [dbo].[Result].[no_activity] WHERE [dbo].[Activity].[u_username] = '{activity.Username}' AND [sport] = '{activity.Type}' AND [duration] = '{activity.Duration}' AND [date] = '{activity.Date}';";
 
             SqlCommand command = new SqlCommand(query, _Connection);
 
@@ -419,7 +419,7 @@ namespace StraviaAPI.Data
             await _Connection.CloseAsync();
 
             String queryActivity =
-                    $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
+                    $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [date], [u_username], [gpx_id])" +
                     $"VALUES ('{input.Type}', {no_race}, NULL, '{input.Username}', {input.Distance}, {input.Altitude}, '{input.Date}', NULL, {input.Route});";
 
             SqlCommand command2 = new SqlCommand(queryActivity, _Connection);
@@ -516,7 +516,10 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Race>> GetRacesOrganizer(String username)
         {
-            String queryString = $"SELECT * FROM [dbo].[Race] WHERE o_username = '{username}';";
+            String queryString = 
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Race].[price], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
+                $"FROM [dbo].[Race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
+                $"WHERE [dbo].[Race].[o_username] = '{username}';";
 
             List<Race> result = new List<Race>();
 
@@ -562,9 +565,46 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        public async Task CreateChallenge(ChallengeInput input, List<ActivityOrganizer> activities)
+        {
+            int? no_challenge = null;
+            String queryChallenge =
+                $"INSERT INTO [dbo].[Challenge] ([o_username], [c_name], [final_date]) OUTPUT INSERTED.[no_challenge]" +
+                $"VALUES ('{input.Username}', '{input.Name}', '{input.FinalDate}')";
+
+            SqlCommand command = new SqlCommand(queryChallenge, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    no_challenge = int.Parse(reader[0].ToString());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            for (int i = 0; i < activities.Count; i++)
+            {
+                String queryActivity =
+                    $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [date], [u_username], [gpx_id])" +
+                    $"VALUES ('{activities[i].Type}', NULL, {no_challenge}, '{input.Username}', {activities[i].Distance}, {activities[i].Altitude}, NULL, NULL, NULL)";
+
+                SqlCommand commandTemp = new SqlCommand(queryActivity, _Connection);
+                await _Connection.OpenAsync();
+                try
+                {
+                    commandTemp.ExecuteNonQuery();
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                await _Connection.CloseAsync();
+            }
+        }
+
         public async Task<IEnumerable<Challenge>> GetAllChallenges()
         {
-            String queryString = $"";
+            String queryString = $"SELECT * FROM [dbo].[Challenge]";
 
             List<Challenge> result = new List<Challenge>();
 
