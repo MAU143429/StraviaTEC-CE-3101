@@ -393,6 +393,105 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        public async Task CreateRace(RaceInput input, List<String> categories, List<String> sponsors, List<String> bankAccounts)
+        {
+            int? no_race = null;
+            String queryRace =
+                    $"INSERT INTO [dbo].[Race] ([o_username], [r_name], [price]) OUTPUT INSERTED.[no_race]" +
+                    $"VALUES ('{input.Username}', '{input.Name}', {input.Price});";
+
+            SqlCommand command1 = new SqlCommand(queryRace, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command1.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    try
+                    {
+                        no_race = int.Parse(reader[0].ToString());
+                    }
+                    catch (Exception e)
+                    {
+                        no_race = null;
+                    }
+                }
+            }
+            await _Connection.CloseAsync();
+
+            String queryActivity =
+                    $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
+                    $"VALUES ('{input.Type}', {no_race}, NULL, '{input.Username}', {input.Distance}, {input.Altitude}, '{input.Date}', NULL, {input.Route});";
+
+            SqlCommand command2 = new SqlCommand(queryActivity, _Connection);
+            await _Connection.OpenAsync();
+            try
+            {
+                command2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            await _Connection.CloseAsync();
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                String queryTemp =
+                    $"INSERT INTO [dbo].[RaceC] ([no_race], [category])" +
+                    $"VALUES ({no_race}, '{categories[i]}')";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                try
+                {
+                    commandTemp.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                await _Connection.CloseAsync();
+            }
+
+            for (int i = 0; i < sponsors.Count; i++)
+            {
+                String queryTemp =
+                    $"INSERT INTO [dbo].[Sponsorship] ([tradename], [no_race])" +
+                    $"VALUES ('{sponsors[i]}', {no_race})";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                try
+                {
+                    commandTemp.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                await _Connection.CloseAsync();
+            }
+
+            for (int i = 0; i < sponsors.Count; i++)
+            {
+                String queryTemp =
+                    $"INSERT INTO [dbo].[Account] ([no_race], [bank_account])" +
+                    $"VALUES ({no_race}, '{bankAccounts[i]}')";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                try
+                {
+                    commandTemp.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                await _Connection.CloseAsync();
+            }
+        }
+
         public async Task<IEnumerable<Race>> GetAllRaces()
         {
             String queryString = $"SELECT * FROM [dbo].[Race];";
