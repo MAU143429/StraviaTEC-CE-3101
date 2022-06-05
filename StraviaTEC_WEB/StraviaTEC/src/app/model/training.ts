@@ -6,6 +6,6 @@ export class Training {
   type: string = ''
   distance:number= 0
   altitude:number= 0
-  route:string= ''
+  route:number = 0
   no_challenge:number = 0
 }

@@ -119,10 +119,13 @@ body{
   font-weight: 600;
   font-size: 25px;
 }
-.map {
+.map{
+  align-items: center;
+  justify-content: center;
   margin-left: 10%;
   width: 80%;
   height:400px;
+
 }
 
 

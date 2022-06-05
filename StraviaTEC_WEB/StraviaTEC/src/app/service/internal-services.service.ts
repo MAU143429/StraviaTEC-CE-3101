@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { distance } from 'ol/coordinate';
 
 
-export interface Categories{
+export interface Options{
   position: number;
-  category: string;
-}
-export interface Accounts{
-  position: number;
-  b_account: string;
+  data: string;
 }
 
-export interface Sponsors{
+export interface Activities{
   position: number;
-  sponsor: string;
+  type: string;
+  distance: string;
 }
-
 
 
 @Injectable({
@@ -23,22 +21,55 @@ export interface Sponsors{
 })
 export class InternalServicesService {
 
+  url = 'https://straviaapi.azurewebsites.net';
 
-  tempSource: Accounts[] = [];
-  tempSource2: Categories[] = [];
-  tempSource3: Sponsors[] = [];
+  tempSource: Options[] = [];
+  tempSource2: Options[] = [];
+  tempSource3: Options[] = [];
+  tempSource4: Activities[] = [];
 
-  t_sponsors: number = 1;
-  t_categories: number = 1;
-  t_accounts: number = 1;
+  t_sponsors: number = 0;
+  t_categories: number = 0;
+  t_accounts: number = 0;
+  t_activities: number = 0;
 
-  constructor() { }
+  constructor(private httpclient: HttpClient) { }
 
-   setCategories(newCategory:any){
-    this.tempSource2.push({position: this.t_categories, category: newCategory});
+  setCategories(newCategory:any): Observable<Options[]>{
+    this.t_categories = this.t_categories + 1;
+    this.tempSource2.push({position: this.t_categories, data: newCategory});
+    return this.httpclient.post<Options[]>(
+      `${this.url}/Activity/reply`,
+      this.tempSource2
+    );
+  }
+  setSponsors(newSponsor:any): Observable<Options[]>{
+    this.t_sponsors = this.t_sponsors + 1;
+    this.tempSource3.push({position: this.t_sponsors, data: newSponsor});
+    return this.httpclient.post<Options[]>(
+      `${this.url}/Activity/reply`,
+      this.tempSource3
+    );
   }
 
-  getCategories(){
-    return this.tempSource2
+  setAccounts(newAccount:any): Observable<Options[]>{
+    this.t_accounts = this.t_accounts + 1;
+    this.tempSource.push({position: this.t_accounts, data: newAccount});
+    return this.httpclient.post<Options[]>(
+      `${this.url}/Activity/reply`,
+      this.tempSource
+    );
   }
+
+  setActivities(newActivity:Activities): Observable<Activities[]>{
+    this.t_activities = this.t_activities + 1;
+    this.tempSource4.push({position: this.t_activities, type: newActivity.type, distance:newActivity.distance});
+    return this.httpclient.post<Activities[]>(
+      `${this.url}/Activity/reply2`,
+      this.tempSource4
+    );
+  }
+
+
+
 }

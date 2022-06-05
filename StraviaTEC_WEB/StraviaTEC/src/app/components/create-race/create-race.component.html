@@ -12,26 +12,26 @@
   <div class="container">
     <div class="title">Create a Race</div>
     <div class="content">
-      <form>
+      <form [formGroup]="userForm">
         <div class="user-details">
 
           <div class="input-box">
             <span class="details">Name<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text"  placeholder="Enter the race name" required>
+            <input type="text" [(ngModel)]= "newRace.name" placeholder="Enter the race name" required>
           </div>
 
           <div class="input-box">
             <span class="details">Date <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="date"  placeholder="Enter the activity date!" required>
+            <input type="date" [(ngModel)]= "newRace.date"  placeholder="Enter the activity date!" required>
           </div>
           <div class="input-box">
             <span class="details">Time<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="time"   placeholder="Enter the activity time!" required>
+            <input type="time"  [(ngModel)]= "newRace.time"  placeholder="Enter the activity time!" required>
           </div>
 
           <div class="input-box">
             <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
+            <input type="text" [(ngModel)]= "newRace.type" [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option class="options"
                   *ngFor="let option of filteredOptions | async"
@@ -42,33 +42,31 @@
           </div>
           <div class="input-box">
             <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
-            <input type="number"  placeholder="Enter the distance" required>
+            <input type="number"  [(ngModel)]= "newRace.distance" placeholder="Enter the distance" required>
           </div>
 
           <div class="input-box">
             <span class="details">Altitude <span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="number" placeholder="Enter the activity altitude" required>
+            <input type="number" [(ngModel)]= "newRace.altitude" placeholder="Enter the activity altitude" required>
           </div>
 
           <div class="input-box">
             <span class="details">Price<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" placeholder="Enter the inscription price" required>
+            <input type="text" [(ngModel)]= "newRace.price"  placeholder="Enter the inscription price" required>
           </div>
-
-
 
           <div class="input-box">
             <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" placeholder="Select the race privacity" required>
+            <input type="text" [(ngModel)]= "newRace.privacity"  placeholder="Select the race privacity" required>
           </div>
 
           <div class="input-box">
             <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="file" placeholder="Upload .gpx file here!" required>
+            <input type="file" [(ngModel)]= "newRace.route" placeholder="Upload .gpx file here!" required>
           </div>
 
           <div class="input-box">
-            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="addCategory(categoryoption)" >ADD</button></span>
+            <span class="details">Categories<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="getCategories() ; addCategory(categoryoption)" >ADD</button></span>
             <input type="text" [(ngModel)]= "categoryoption" [formControl]="categoriesControl" matInput2 [matAutocomplete]="autoModel" placeholder="Add categories here!" required>
             <mat-autocomplete #autoModel="matAutocomplete">
               <mat-option class="options"
@@ -80,14 +78,13 @@
           </div>
 
           <div class="input-box">
-            <span class="details">Bank Accounts<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
-            <input type="text" placeholder="Add bank accounts here!" required>
-
+            <span class="details">Bank Accounts<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="addAccount()" >ADD</button></span>
+            <input id="b_account" name="b_account" formControlName="b_account" type="text" [(ngModel)]= "accountoption"  placeholder="Add bank accounts here!" required>
           </div>
 
           <div class="input-box">
-            <span class="details">Sponsors<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn">ADD</button></span>
-            <input type="text" [formControl]="sponsorsControl" matInput2 [matAutocomplete]="autoModel2" placeholder="Add sponsors here!" required>
+            <span class="details">Sponsors<span style="color: rgb(245, 59, 59);">*</span><button class="addbtn" (click)="addSponsor(sponsoroption)" >ADD</button></span>
+            <input type="text" [(ngModel)]= "sponsoroption" [formControl]="sponsorsControl" matInput2 [matAutocomplete]="autoModel2" placeholder="Add sponsors here!" required>
             <mat-autocomplete #autoModel2="matAutocomplete">
               <mat-option class="options"
                   *ngFor="let option of filteredOptions3 | async"
@@ -105,13 +102,13 @@
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="category">
+              <ng-container matColumnDef="data">
                 <th mat-header-cell *matHeaderCellDef> Categories </th>
-                <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.data}} </td>
               </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
 
@@ -123,9 +120,9 @@
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="b_account">
+              <ng-container matColumnDef="data">
                 <th mat-header-cell *matHeaderCellDef> Bank Account </th>
-                <td mat-cell *matCellDef="let element"> {{element.b_account}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.data}} </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -141,18 +138,18 @@
                 <td mat-cell *matCellDef="let element"> {{element.position}} </td>
               </ng-container>
 
-              <ng-container matColumnDef="sponsor">
+              <ng-container matColumnDef="data">
                 <th mat-header-cell *matHeaderCellDef> Sponsors </th>
-                <td mat-cell *matCellDef="let element"> {{element.sponsor}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.data}} </td>
               </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Create Race"  routerLink="/profile">
+          <input type="submit" (click)="addNewRace(newRace)" value="Create Race"  routerLink="/profile">
         </div>
       </form>
     </div>
