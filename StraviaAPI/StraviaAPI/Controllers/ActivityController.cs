@@ -19,10 +19,8 @@ namespace StraviaAPI.Controllers
 
         // POST: <ActivityController>/user
         [HttpPost("user")]
-        public Task CreateActivity(ActivityUser activity)
-        {
-            return _SqlDb.CreateActivityUser(activity);
-        }
+        public Task CreateActivity(ActivityUser activity) 
+            => _SqlDb.CreateActivityUser(activity);
 
         // POST: <ActivityController>/reply
         [HttpPost("reply")]

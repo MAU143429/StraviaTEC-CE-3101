@@ -55,7 +55,7 @@
 
           <div class="input-box">
             <span class="details">Route<span style="color: rgb(245, 59, 59);">*</span> </span>
-            <input type="text" [(ngModel)]= "newTraining.route" [ngModelOptions]="{standalone: true}" placeholder="Upload .gpx file here!" required>
+            <input type="file"  (change)="getFile($event)" placeholder="Upload .gpx file here!" required>
           </div>
 
         </div>

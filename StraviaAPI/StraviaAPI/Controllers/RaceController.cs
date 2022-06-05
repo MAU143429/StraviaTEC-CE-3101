@@ -34,8 +34,25 @@ namespace StraviaAPI.Controllers
 
         // POST <RaceController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Task Post(RaceInput input)
         {
+            List<String> categories = input.Categories.Split("/").ToList();
+            for (int i = 0; i < categories.Count; i++)
+            {
+                if (categories[i] == "") categories.RemoveAt(i);
+            }
+            List<String> sponsors = input.Sponsors.Split("/").ToList();
+            for (int i = 0; i < sponsors.Count; i++)
+            {
+                if (sponsors[i] == "") sponsors.RemoveAt(i);
+            }
+            List<String> bankAcounts = input.Bank_Accounts.Split("/").ToList();
+            for (int i = 0; i < bankAcounts.Count; i++)
+            {
+                if (bankAcounts[i] == "") bankAcounts.RemoveAt(i);
+            }
+
+            return _SqlDb.CreateRace(input, categories, sponsors, bankAcounts);
         }
     }
 }
