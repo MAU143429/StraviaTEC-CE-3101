@@ -25,7 +25,7 @@ namespace StraviaAPI.Data
         {
             String queryString = "SELECT * FROM [dbo].[User];";
 
-            List<User> result = new List<User>();
+            List<User>? result = new List<User>();
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -210,7 +210,7 @@ namespace StraviaAPI.Data
                         $"INSERT INTO [dbo].[Activity] ([sport], [no_race], [no_challenge], [o_username], [distance], [height], [a_date], [u_username], [gpx_id])" +
                         $"VALUES ('{activity.Type}', NULL, NULL, NULL, {activity.Distance}, {activity.Altitude}, '{activity.Date}', '{activity.Username}', {activity.Route});" +
                         $"INSERT INTO [dbo].[Result] (no_activity, u_username, duration)" +
-                        $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration}, {activity.Route});";
+                        $"VALUES ((SELECT TOP (1) [no_activity] FROM [dbo].[Activity] ORDER BY [no_activity] DESC), '{activity.Username}', {activity.Duration});";
             SqlCommand command = new SqlCommand(activity.ToPostQuery(), _Connection);
 
             await _Connection.OpenAsync();
@@ -574,6 +574,23 @@ namespace StraviaAPI.Data
             if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task CreateGroup(GroupInput input)
+        {
+            String queryString = $"INSERT INTO [dbo].[Group] ([o_username], [g_name]) VALUES ('{input.Username}', '{input.Name}');";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+
+            try
+            {
+                command.ExecuteNonQuery();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            await _Connection.OpenAsync();
         }
 
         public async Task<IActionResult> GetGpx(int id)
