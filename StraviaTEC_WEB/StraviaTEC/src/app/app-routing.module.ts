@@ -15,32 +15,29 @@ import { CreateChallengeComponent } from './components/create-challenge/create-c
 import { CreateRaceComponent } from './components/create-race/create-race.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
-
-  {path: '', component: HomeComponent},
-  {path: 'user-login', component: UserLoginComponent},
-  {path: 'admin-login', component: AdminLoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'dashboard', component: UserDashboardComponent},
-  {path: 'challenges', component: ChallengesComponent},
-  {path: 'races', component: RacesComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'training', component: TrainingComponent},
-  {path: 'search', component: SearchComponent},
-  {path: 'groups', component: GroupComponent},
-  {path: 'create-race', component: CreateRaceComponent},
-  {path: 'create-challenge', component: CreateChallengeComponent},
-  {path: 'inscriptions', component: InscriptionsComponent},
-  {path: 'reports', component: ReportsComponent},
-
-
+  { path: '', component: HomeComponent },
+  { path: 'user-login', component: UserLoginComponent },
+  { path: 'admin-login', component: AdminLoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'dashboard', component: UserDashboardComponent },
+  { path: 'challenges', component: ChallengesComponent },
+  { path: 'races', component: RacesComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'training', component: TrainingComponent },
+  { path: 'search', component: SearchComponent },
+  { path: 'groups', component: GroupComponent },
+  { path: 'create-race', component: CreateRaceComponent },
+  { path: 'create-challenge', component: CreateChallengeComponent },
+  { path: 'inscriptions', component: InscriptionsComponent },
+  { path: 'reports', component: ReportsComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
-
-
+export class AppRoutingModule {}

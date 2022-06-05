@@ -12,33 +12,33 @@
     <div class="container">
       <div class="title">Create a Challenge</div>
       <div class="content">
-        <form>
+        <form [formGroup]="userForm">
           <div class="user-details">
 
             <div class="input-box">
               <span class="details">Name<span style="color: rgb(245, 59, 59);">*</span> </span>
-              <input type="text"  placeholder="Enter the challenge name" required>
+              <input type="text" [(ngModel)]= "newChallenge.name" [ngModelOptions]="{standalone: true}"  placeholder="Enter the challenge name" required>
             </div>
 
             <div class="input-box">
               <span class="details">Final Date <span style="color: rgb(245, 59, 59);">*</span> </span>
-              <input type="date"  placeholder="Enter the final date!" required>
+              <input type="date" [(ngModel)]= "newChallenge.finaldate" [ngModelOptions]="{standalone: true}"  placeholder="Enter the final date!" required>
             </div>
 
             <div class="input-box">
               <span class="details">Privacity<span style="color: rgb(245, 59, 59);">*</span> </span>
-              <input type="text" placeholder="Select the race privacity" required>
+              <input type="text" [(ngModel)]= "newChallenge.privacity" [ngModelOptions]="{standalone: true}"  placeholder="Select the race privacity" required>
             </div>
 
           </div>
 
-          <div class="title">Add activities to the challenge</div>
+          <div class="title">Add activities to the challenge <button class="addbtn" (click)="addActivity()"  >ADD</button></div>
 
           <div class="user-details">
 
             <div class="input-box">
               <span class="details">Activity Type <span style="color: rgb(245, 59, 59);">*</span> </span>
-              <input type="text"  [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
+              <input type="text"  id="type" name="type" formControlName="type"  [formControl]="activityControl" matInput2 [matAutocomplete]="auto" placeholder="Select your activity type" required>
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option class="options"
                     *ngFor="let option of filteredOptions | async"
@@ -50,12 +50,47 @@
 
             <div class="input-box">
               <span class="details">Distance (Km)<span style="color: rgb(245, 59, 59);">*</span></span>
-              <input type="number"  placeholder="Enter the distance" required>
+              <input type="number" id="distance" name="distance" formControlName="distance"  placeholder="Enter the distance" required>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Altitude (m)<span style="color: rgb(245, 59, 59);">*</span></span>
+              <input type="number" id="altitude" name="altitude" formControlName="altitude"   placeholder="Enter the altitude" required>
             </div>
           </div>
 
+
+          <div class="input-box">
+            <table id="c-table" mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Activity Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="distance">
+                <th mat-header-cell *matHeaderCellDef> Distance </th>
+                <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="altitude">
+                <th mat-header-cell *matHeaderCellDef> Altitude </th>
+                <td mat-cell *matCellDef="let element"> {{element.altitude}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+
+
           <div class="button">
-            <input type="submit" value="Create Challenge"  routerLink="/profile">
+            <input type="submit" value="Create Challenge"  (click)="addNewChallenge(newChallenge)">
           </div>
         </form>
       </div>
