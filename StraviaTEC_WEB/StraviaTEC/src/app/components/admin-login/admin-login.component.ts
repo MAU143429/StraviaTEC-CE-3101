@@ -31,16 +31,19 @@ export class AdminLoginComponent implements OnInit {
   /**
    * Metodo para consultar un nuevo inicio de sesion en web
    * @param newLogin Este parametro lleva las credenciales que se desean verificar
-   *  */ 
+   *  */
   addNewLogin(newLogin:Login){
-    this.service.getLoginAdmin(newLogin).subscribe(data => (this.status = data));
-    this.delay(500).then(()=>{
-      if (this.status[0].status){
-        this.router.navigate(['/homeuser']);
+    this.service.getLoginAdmin(newLogin).subscribe(
+      (data) => {
+        console.table(data)
+        if (data) {
+          localStorage.clear();
+          localStorage.setItem("current_username" ,data.username)
+          this.router.navigate(['/inscriptions']);
+        }
       }
-    });
+    );
   }
-
 }
 
 

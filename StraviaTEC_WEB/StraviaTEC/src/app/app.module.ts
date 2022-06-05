@@ -10,7 +10,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {AgmCoreModule } from '@agm/core';
 import {MatTableModule } from '@angular/material/table'
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,6 +29,7 @@ import { CreateRaceComponent } from './components/create-race/create-race.compon
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
 import { CreateChallengeComponent } from './components/create-challenge/create-challenge.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     CreateRaceComponent,
     InscriptionsComponent,
     CreateChallengeComponent,
-    ReportsComponent
+    ReportsComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
