@@ -869,5 +869,27 @@ namespace StraviaAPI.Data
 
             return result;
         }
+
+        public async Task<IEnumerable<Inscription>> GetOrganizerInscriptions(String username)
+        {
+            String queryString =
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Inscription].[no_inscription], [dbo].[Inscription].[u_username], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Inscription].[voucher]" +
+                $"FROM [dbo].[Inscription] JOIN [dbo].[Race] ON [dbo].[Inscription].[no_race] = [dbo].[Race].[no_race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
+                $"WHERE [dbo].[Race].[o_username] = '{username}';";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            List<Inscription> result = new List<Inscription>();
+
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToInscription());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result;
+        }
     }
 }
