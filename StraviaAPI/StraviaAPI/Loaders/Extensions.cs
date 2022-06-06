@@ -30,12 +30,12 @@ namespace StraviaAPI.Loaders
         {
             return new User
             {
-                Username = reader[0].ToString(),
-                Category = reader[1].ToString(),
-                Name = reader[2].ToString(),
-                Lastname = reader[3].ToString(),
-                Birthdate = reader[4].ToString(),
-                Nationality = reader[5].ToString(),
+                Name = reader[0].ToString(),
+                Lastname = reader[1].ToString(),
+                Nationality = reader[2].ToString(),
+                Birthdate = reader[3].ToString(),
+                Category = reader[4].ToString(),
+                Username = reader[5].ToString(),
                 Password = reader[6].ToString(),
                 Image = reader[7].ToString(),
             };
