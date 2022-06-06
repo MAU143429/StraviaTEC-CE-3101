@@ -1,6 +1,6 @@
 export interface AdminChallenge {
-  name: string;
-  nochallenge: number;
+  cname: string;
+  noChallenge: number;
   activities: number;
-  finaldate: string;
+  finalDate: string;
 }

@@ -1,9 +1,9 @@
 export interface Races {
-    r_name:string
-    no_race: number
-    type:string
-    a_date:string
-    price:boolean
-    route:string
-    bank_account:string
+  name: string;
+  norace: number;
+  type: string;
+  date: string;
+  price: boolean;
+  route: number;
+  bank_account: string;
 }

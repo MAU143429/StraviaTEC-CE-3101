@@ -37,24 +37,33 @@
             <tr class="table-primary mytable">
               <th>Race Name</th>
               <th>Race Number</th>
+              <th>Inscription Number</th>
+              <th>Inscription Owner</th>
               <th>Type of Activity</th>
               <th>Date</th>
               <th>Voucher</th>
               <th>Actions</th>
             </tr>
-          <tr *ngFor="let data of races">
-              <th>{{data.r_name}}</th>
-              <td>{{data.no_race}}</td>
+          <tr *ngFor="let data of inscriptions">
+              <th>{{data.raceName}}</th>
+              <td>{{data.noRace}}</td>
+              <td>{{data.noInscription}}</td>
+              <td>{{data.user}}</td>
               <td>{{data.type}}</td>
-              <td>{{data.a_date}}</td>
-              <td>{{data.voucher}}</td>
-              <td><button>Confirm registration!</button></td>
-
+              <td>{{data.date}}</td>
+              <td><button (click)="open(content, data.voucher)" >View Voucher!</button></td>
+              <td><button (click)="updateInscription(data.noInscription)">Confirm registration!</button></td>
           </tr>
           </table>
         </div>
       </div>
     </div>
 </body>
+
+<ng-template #content let-modal class="popup">
+  <div>
+    <img  class = "vouchersize" src="{{voucher}}">
+  </div>
+</ng-template>
 
 </html>

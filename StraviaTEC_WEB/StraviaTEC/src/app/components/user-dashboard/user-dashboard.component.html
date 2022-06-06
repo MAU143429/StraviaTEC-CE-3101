@@ -21,7 +21,7 @@
           </div>
           <div class="col-8">
             <br>
-            <span class="information">{{data.name}} {{data.last_name}}</span><br>
+            <span class="information">{{data.name}} {{data.lastname}}</span><br>
             <span class="information">Activities : {{data.activities}}</span><br>
           </div>
         </div>
@@ -40,12 +40,12 @@
               </div>
               <div class="col-8">
                 <br>
-                <span class="c-name">{{data2.name}} {{data2.last_name}}</span><br>
+                <span class="c-name">{{data2.name}} {{data2.lastname}}</span><br>
                 <span class="c-date">{{data2.date}} at {{data2.time}}</span>
               </div>
             </div>
             <br>
-            <span class="c-activity" >Activity Type: {{data2.type}}</span> <br> <span class="c-activity"> Activity ID: #{{data2.no_activity}}</span><br>
+            <span class="c-activity" >Activity Type: {{data2.type}}</span> <br> <span class="c-activity"> Activity ID: #{{data2.noactivity}}</span><br>
             <br>
             <div class="row c-parameters">
               <div class="col-sm">
@@ -53,8 +53,8 @@
                 <span class="c-info l-info"> {{data2.distance}} Km</span>
               </div>
               <div class="col-sm">
-                <span class="c-info-title">Elevation</span> <br>
-                <span class="c-info">{{data2.elevation}} Km </span>
+                <span class="c-info-title">Altitude</span> <br>
+                <span class="c-info">{{data2.altitude}} m </span>
               </div>
               <div class="col-sm">
                 <span class="c-info-title">Duration</span> <br>
@@ -62,7 +62,7 @@
               </div>
             </div>
             <br>
-            <div id="map" class="map"></div>
+            <button style="margin-left: 19% ;" class="map" (click)="open(content)" > </button>
             <br>
             <br>
           </div>
@@ -72,4 +72,15 @@
       <br>
     </div>
   </body>
+
+  <ng-template #content let-modal>
+    <div class="popup">
+      <div class="map">
+        <app-map [mapid]="17"></app-map>
+      </div>
+      <button class="close cbtn" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  </ng-template>
 </html>
+
+

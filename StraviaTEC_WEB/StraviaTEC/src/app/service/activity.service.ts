@@ -6,6 +6,14 @@ import { Sponsor } from 'src/app/interface/sponsor';
 import { AdminChallenge } from 'src/app/interface/admin-challenge';
 import { AdminGroups } from 'src/app/interface/admin-groups';
 import { AdminRace } from 'src/app/interface/admin-race';
+import { AdminInscriptions } from 'src/app/interface/admin-inscriptions';
+import { Activity } from 'src/app/interface/activity';
+import { Groups } from 'src/app/interface/groups';
+import { Races } from 'src/app/interface/races';
+import { Challenges } from 'src/app/interface/challenges';
+import { Mychallenges } from 'src/app/interface/mychallenges';
+import { Mygroups } from 'src/app/interface/mygroups';
+import { Inscription } from 'src/app/model/inscription';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -110,6 +118,16 @@ export class ActivityService {
     );
   }
 
+  /** GET DE LISTA DE CHALLENGES DEL Usuario
+   * Este metodo permite traer todos los retos que pertenecen al usuario
+   * @return la lista de los retos
+   */
+  getUserChallenges(): Observable<Mychallenges[]> {
+    return this.httpclient.get<Mychallenges[]>(
+      this.url + '/Challenge/user/' + localStorage.getItem('current_username')
+    );
+  }
+
   /** GET DE LISTA DE CARERRAS DEL ADMIN
    * Este metodo permite traer todas las carreras que pertenecen al administrador
    * @return la lista de las carreras
@@ -117,6 +135,16 @@ export class ActivityService {
   getAdminRaces(): Observable<AdminRace[]> {
     return this.httpclient.get<AdminRace[]>(
       this.url + '/Race/Organizer/' + localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE LISTA DE GRUPOS EN LOS QUE ESTA EL USUARIO
+   * Este metodo permite traer todas los grupos que pertenecen al usuario
+   * @return la lista de los grupos
+   */
+  getMyGroups(): Observable<[]> {
+    return this.httpclient.get<[]>(
+      this.url + '/Group/User/' + localStorage.getItem('current_username')
     );
   }
 
@@ -128,5 +156,73 @@ export class ActivityService {
     return this.httpclient.get<AdminGroups[]>(
       this.url + '/Group/Organizer/' + localStorage.getItem('current_username')
     );
+  }
+
+  /** GET DE LISTA DE INSCRIPCIONES PENDIENTES
+   * Este metodo permite traer todas las inscripciones pendientes de aceptacion
+   * @return la lista de las carreras
+   */
+  getAdminInscriptions(): Observable<AdminInscriptions[]> {
+    return this.httpclient.get<AdminInscriptions[]>(
+      this.url +
+        '/Inscription/Organizer/' +
+        localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE LAS ACTIVIDADES DE LOS AMIGOS
+   * Este metodo permite traer todas las actividades de los amigos del usuario
+   * @return la lista actividades
+   */
+  getFriendsActivities(): Observable<Activity[]> {
+    return this.httpclient.get<Activity[]>(
+      this.url + '/User/Friends' + localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE LAS ACTIVIDADES DEL USUARIO
+   * Este metodo permite traer todas las actividades del usuario
+   * @return la lista actividades
+   */
+  getMyActivities(): Observable<Activity[]> {
+    return this.httpclient.get<Activity[]>(
+      this.url + '/Activity/' + localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE TODAS LAS CARRERAS DE LA APP
+   * Este metodo permite traer todas las carreras de la app
+   * @return la lista de carreras
+   */
+  getAllRaces(): Observable<Races[]> {
+    return this.httpclient.get<Races[]>(this.url + '/Races/All');
+  }
+
+  /** GET DE TODOS LOS GRUPOS DE LA APP
+   * Este metodo permite traer todas los grupos de la app
+   * @return la lista de grupos
+   */
+  getAllGroups(): Observable<Groups[]> {
+    return this.httpclient.get<Groups[]>(this.url + '/Group/All');
+  }
+
+  /** GET DE TODOS LOS RETOS DE LA APP
+   * Este metodo permite traer todos los retos de la app
+   * @return la lista de retos
+   */
+  getAllChallenges(): Observable<Challenges[]> {
+    return this.httpclient.get<Challenges[]>(
+      this.url +
+        '/Challenge/user/all/' +
+        localStorage.getItem('current_username')
+    );
+  }
+
+  /** PUT PARA PODER ACTUALIZAR EL ESTADO DE INSCRIPCION
+   * Este metodo permite aceptar la inscripcion de un usuario
+   * @return info del numero de inscripcion
+   */
+  updateInscription(inumber: Inscription): Observable<any> {
+    return this.httpclient.put(this.url + '/Inscription/', inumber);
   }
 }
