@@ -1133,5 +1133,30 @@ namespace StraviaAPI.Data
 
             return result ?? throw new Exception("Not found!!");
         }
+
+        public async Task<IEnumerable<RaceInscripted>> GetUnregisteredRaces(String username)
+        {
+            String queryString =
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Inscription].[no_inscription], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
+                $"FROM [dbo].[Inscription] JOIN [dbo].[Race] ON [dbo].[Inscription].[no_race] = [dbo].[Race].[no_race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
+                $"WHERE [dbo].[Inscription].[u_username] = '{username}' AND [dbo].[Inscription].[is_accepted] = 0";
+
+            List<RaceInscripted> result = new List<RaceInscripted>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRaceInscripted());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
     }
 }
