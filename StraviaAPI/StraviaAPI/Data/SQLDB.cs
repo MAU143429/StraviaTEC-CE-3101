@@ -23,20 +23,64 @@ namespace StraviaAPI.Data
         /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<User>> GetUsers()
         {
-            String queryString = "SELECT * FROM [dbo].[User];";
+            String queryString = 
+                $"SELECT [name], [last_name], [nationality], [birthdate], [category], [u_username], [u_password], [image] " +
+                $"FROM [dbo].[User];";
 
             List<User>? result = new List<User>();
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlDataReader readerUser = command.ExecuteReader())
             {
-                while (reader.Read())
+                while (readerUser.Read())
                 {
-                    result.Add(reader.ToUser());
+                    result.Add(readerUser.ToUser());
                 }
             }
             await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                int activities = 0;
+                int age = 0;
+                int followers = 0;
+                int following = 0;
+                String queryTemp;
+                SqlCommand commandTemp;
+
+                await _Connection.OpenAsync();
+                queryTemp =
+                    $"DECLARE @result INT;" +
+                    $"EXECUTE @result = [dbo].[CountUserActivities] '{result[i].Username}';";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                using (SqlDataReader readerActivities = commandTemp.ExecuteReader())
+                {
+                    while (readerActivities.Read())
+                    {
+                        activities = int.Parse(readerActivities[0].ToString());
+                    }
+                }
+
+                result[i].Activities = activities;
+                await _Connection.CloseAsync();
+
+                await _Connection.OpenAsync();
+                queryTemp =
+                    $"DECLARE @result INT;" +
+                    $"EXECUTE @result = [dbo].[GetAge] '{result[i].Username}';";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                using (SqlDataReader readerAge = commandTemp.ExecuteReader())
+                {
+                    while (readerAge.Read())
+                    {
+                        age = int.Parse(readerAge[0].ToString());
+                    }
+                }
+
+                result[i].Age = age;
+                await _Connection.CloseAsync();
+            }
 
             if (result.Count.Equals(0)) result = null;
 
@@ -51,27 +95,65 @@ namespace StraviaAPI.Data
         /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<User>> GetUser(String username)
         {
-            String queryString = $"SELECT * FROM [dbo].[User] WHERE u_username = '{username}';";
+            String queryString =
+                $"SELECT [name], [last_name], [nationality], [birthdate], [category], [u_username], [u_password], [image] " +
+                $"FROM [dbo].[User];" +
+                $"WHERE '{username}'";
 
             List<User>? result = new List<User>();
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (SqlDataReader readerUser = command.ExecuteReader())
             {
-                while (reader.Read())
+                while (readerUser.Read())
                 {
-                    try
-                    {
-                        result.Add(reader.ToUser());
-                    }
-                    catch (Exception e)
-                    {
-                        result = null;
-                    }
+                    result.Add(readerUser.ToUser());
                 }
             }
             await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                int activities = 0;
+                int age = 0;
+                int followers = 0;
+                int following = 0;
+                String queryTemp;
+                SqlCommand commandTemp;
+
+                await _Connection.OpenAsync();
+                queryTemp =
+                    $"DECLARE @result INT;" +
+                    $"EXECUTE @result = [dbo].[CountUserActivities] '{result[i].Username}';";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                using (SqlDataReader readerActivities = commandTemp.ExecuteReader())
+                {
+                    while (readerActivities.Read())
+                    {
+                        activities = int.Parse(readerActivities[0].ToString());
+                    }
+                }
+
+                result[i].Activities = activities;
+                await _Connection.CloseAsync();
+
+                await _Connection.OpenAsync();
+                queryTemp =
+                    $"DECLARE @result INT;" +
+                    $"EXECUTE @result = [dbo].[GetAge] '{result[i].Username}';";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                using (SqlDataReader readerAge = commandTemp.ExecuteReader())
+                {
+                    while (readerAge.Read())
+                    {
+                        age = int.Parse(readerAge[0].ToString());
+                    }
+                }
+
+                result[i].Age = age;
+                await _Connection.CloseAsync();
+            }
 
             if (result.Count.Equals(0)) result = null;
 
