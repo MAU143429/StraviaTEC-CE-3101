@@ -104,13 +104,22 @@ namespace StraviaAPI.Loaders
         {
             return new Challenge
             {
-                Cname = reader[2].ToString(),
-                NoChallenge = int.Parse(reader[0].ToString()),
-                Activities = int.Parse(reader[1].ToString()),
-                FinalDate = reader[3].ToString(),
+                Cname = reader[0].ToString(),
+                NoChallenge = int.Parse(reader[1].ToString()),
+                FinalDate = reader[2].ToString().Split(" ").ToList()[0],
             };
         }
-        
+
+        public static ChallengeUser ToChallengeUser(this SqlDataReader reader)
+        {
+            return new ChallengeUser
+            {
+                Cname = reader[0].ToString(),
+                NoChallenge = int.Parse(reader[1].ToString()),
+                FinalDate = reader[2].ToString().Split(" ").ToList()[0],
+            };
+        }
+
         public static Group ToGroup(this SqlDataReader reader)
         {
             return new Group
