@@ -897,6 +897,49 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        public async Task<IEnumerable<Group>> GetGroupsOrganizer(String username)
+        {
+            String queryString =
+                $"SELECT [dbo].[Group].[g_name], [dbo].[Group].[no_group]" +
+                $"FROM [dbo].[Group]" +
+                $"WHERE [dbo].[Group].[o_username] = '{username}';";
+
+            List<Group> result = new List<Group>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToGroup());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                String queryTemp =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[GetMembers] {result[i].NoGroup};";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Members = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+            }
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
         public async Task CreateGroup(GroupInput input)
         {
             String queryString = $"INSERT INTO [dbo].[Group] ([o_username], [g_name]) VALUES ('{input.Username}', '{input.Name}');";
@@ -990,6 +1033,25 @@ namespace StraviaAPI.Data
             await _Connection.CloseAsync();
 
             return result;
+        }
+
+        public async Task AcceptInscription(int inscription)
+        {
+            String queryString =
+                $"UPDATE [dbo].[Inscription]" +
+                $"SET [is_accepted] = 1" +
+                $"WHERE [no_inscription] = {inscription}";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            await _Connection.OpenAsync();
+            try
+            {
+                command.ExecuteNonQuery();
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            await _Connection.CloseAsync();
         }
     }
 }

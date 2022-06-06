@@ -29,15 +29,10 @@ namespace StraviaAPI.Controllers
         }
 
         // PUT api/<InscriptionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{inscription}")]
+        public Task Put(int inscription)
         {
-        }
-
-        // DELETE api/<InscriptionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _SqlDb.AcceptInscription(inscription);
         }
     }
 }
