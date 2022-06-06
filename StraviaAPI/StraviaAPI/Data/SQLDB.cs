@@ -708,7 +708,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Challenge>> GetChallengesOrganizer(String username)
         {
-            String queryString = $"SELECT * FROM [dbo].[Challenge] WHERE [o_username] = '{username}';";
+            String queryString = $"SELECT [c_name], [no_challenge], [final_date] FROM [dbo].[Challenge] WHERE [o_username] = '{username}';";
 
             List<Challenge> result = new List<Challenge>();
 
@@ -723,19 +723,35 @@ namespace StraviaAPI.Data
             }
             await _Connection.CloseAsync();
 
+            for (int i = 0; i < result.Count; i++)
+            {
+                String queryActivities =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[CountChallengeActivities] {result[i].NoChallenge};";
+                SqlCommand commandTemp = new SqlCommand(queryActivities, _Connection);
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Activities = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+            }
             if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
 
-        public async Task<IEnumerable<Challenge>> GetChallengesUser(String username)
+        public async Task<IEnumerable<ChallengeUser>> GetChallengesUser(String username)
         {
             String queryString = 
-                $"SELECT * FROM [dbo].[Challenge]" +
-                $"JOIN [dbo].[Participation] ON [dbo].[Challenge].[no_challenge] = [dbo].[Participation].[no_challenge]" +
-                $"WHERE [u_username] = '{username}';";
+                $"SELECT [dbo].[Challenge].[c_name], [dbo].[Challenge].[no_challenge], [dbo].[Challenge].[final_date] " +
+                $"FROM [dbo].[Participation] JOIN [dbo].[Challenge] ON [dbo].[Participation].[no_challenge] = [dbo].[Challenge].[no_challenge]" +
+                $"WHERE [dbo].[Participation].[u_username] = '{username}';";
 
-            List<Challenge> result = new List<Challenge>();
+            List<ChallengeUser> result = new List<ChallengeUser>();
 
             SqlCommand command = new SqlCommand(queryString, _Connection);
             await _Connection.OpenAsync();
@@ -743,10 +759,51 @@ namespace StraviaAPI.Data
             {
                 while (reader.Read())
                 {
-                    result.Add(reader.ToChallenge());
+                    result.Add(reader.ToChallengeUser());
                 }
             }
             await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                String queryTemp;
+                SqlCommand commandTemp;
+
+                queryTemp =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[CountChallengeActivities] {result[i].NoChallenge};";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Activities = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+
+                queryTemp =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[CompletedChallenge] {username}, {result[i].NoChallenge};";
+                commandTemp = new SqlCommand(queryTemp, _Connection);
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Completed = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+                try
+                {
+                    result[i].Avg = result[i].Completed * 100 / result[i].Activities;
+                } catch
+                {
+                    result[i].Avg = 0;
+                }
+            }
 
             if (result.Count.Equals(0)) result = null;
 
