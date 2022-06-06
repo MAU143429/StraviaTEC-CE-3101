@@ -554,7 +554,7 @@ namespace StraviaAPI.Data
                 await _Connection.CloseAsync();
             }
 
-            for (int i = 0; i < sponsors.Count; i++)
+            for (int i = 0; i < bankAccounts.Count; i++)
             {
                 String queryTemp =
                     $"INSERT INTO [dbo].[Account] ([no_race], [bank_account])" +
