@@ -124,9 +124,8 @@ namespace StraviaAPI.Loaders
         {
             return new Group
             {
-                NoGroup = int.Parse(reader[0].ToString()),
-                Ousername = reader[1].ToString(),
-                Gname = reader[2].ToString(),
+                Gname = reader[0].ToString(),
+                NoGroup = int.Parse(reader[1].ToString()),
             };
         }
 

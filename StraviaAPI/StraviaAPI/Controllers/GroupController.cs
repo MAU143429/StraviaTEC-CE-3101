@@ -22,11 +22,11 @@ namespace StraviaAPI.Controllers
         public Task<IEnumerable<Group>> Get() 
             => _SqlDb.GetAllGroups();
 
-        // GET api/<GroupController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET <GroupController>/user/{username}
+        [HttpGet("user/{username}")]
+        public Task<IEnumerable<Group>> Get(String username)
         {
-            return "value";
+            return _SqlDb.GetGroupsUser(username);
         }
 
         // POST api/<GroupController>
