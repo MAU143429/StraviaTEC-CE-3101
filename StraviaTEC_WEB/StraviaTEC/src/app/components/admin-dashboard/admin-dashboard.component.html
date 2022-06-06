@@ -29,7 +29,7 @@
             </tr>
           <tr *ngFor="let data of races">
             <th>{{data.name}}</th>
-              <td>{{data.norace}}</td>
+              <td>{{data.noRace}}</td>
               <td>{{data.type}}</td>
               <td>{{data.date}}</td>
               <td>{{data.time}}</td>
@@ -55,10 +55,10 @@
                 <th>Details</th>
               </tr>
             <tr *ngFor="let data of challenges">
-              <th>{{data.name}}</th>
-                <td>{{data.nochallenge}}</td>
+              <th>{{data.cname}}</th>
+                <td>{{data.noChallenge}}</td>
                 <td>{{data.activities}}</td>
-                <td>{{data.finaldate}}</td>
+                <td>{{data.finalDate}}</td>
                 <td><button>View Challenge!</button></td>
             </tr>
             </table>
@@ -77,8 +77,8 @@
                 <th>Total Members</th>
               </tr>
             <tr *ngFor="let data of groups">
-                <th>{{data.name}}</th>
-                <td>{{data.nogroup}}</td>
+                <th>{{data.gname}}</th>
+                <td>{{data.noGroup}}</td>
                 <td>{{data.members}}</td>
             </tr>
             </table>

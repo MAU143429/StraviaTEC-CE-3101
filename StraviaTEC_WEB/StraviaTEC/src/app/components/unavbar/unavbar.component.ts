@@ -5,34 +5,29 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-unavbar',
   templateUrl: './unavbar.component.html',
-  styleUrls: ['./unavbar.component.css']
+  styleUrls: ['./unavbar.component.css'],
 })
 export class UnavbarComponent implements OnInit {
+  username: any;
+  constructor(private service: SearchesService, private router: Router) {}
 
-  username:any
-
-  constructor(private service:SearchesService, private router:Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   /**
    * Este metodo permite crear un delay para esperar la respuesta del API
    * @param ms Cantidad de milisegundos que se desea parar la operacion para esperar la respuesta del API
    */
   async delay(ms: number) {
-    await new Promise<void>(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+    await new Promise<void>((resolve) => setTimeout(() => resolve(), ms)).then(
+      () => console.log('fired')
+    );
   }
 
-  newUserSearch(){
+  newUserSearch() {
     this.service.setUserSearchName(this.username);
 
-    this.delay(500).then(()=>{
+    this.delay(500).then(() => {
       this.router.navigate(['/search']);
     });
-
-
   }
-
-
 }

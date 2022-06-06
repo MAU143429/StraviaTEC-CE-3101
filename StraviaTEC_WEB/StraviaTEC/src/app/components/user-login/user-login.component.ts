@@ -12,7 +12,6 @@ import { CredentialsService } from 'src/app/service/credentials.service';
 export class UserLoginComponent implements OnInit {
   newLogin: Login = new Login();
 
-
   constructor(private service: CredentialsService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -32,15 +31,13 @@ export class UserLoginComponent implements OnInit {
    * @param newLogin Este parametro lleva las credenciales que se desean verificar
    *  */
   addNewLogin(newLogin: Login) {
-    this.service.getLoginUser(newLogin).subscribe(
-      (data) => {
-        console.table(data)
-        if (data) {
-          localStorage.clear();
-          localStorage.setItem("current_username" ,data.username)
-          this.router.navigate(['/dashboard']);
-        }
+    this.service.getLoginUser(newLogin).subscribe((data) => {
+      console.table(data);
+      if (data) {
+        localStorage.clear();
+        localStorage.setItem('current_username', data.username);
+        this.router.navigate(['/dashboard']);
       }
-    );
+    });
   }
 }

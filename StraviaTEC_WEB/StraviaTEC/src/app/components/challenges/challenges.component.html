@@ -30,12 +30,12 @@
                 <th>Details</th>
               </tr>
             <tr *ngFor="let data of mychallenges">
-              <th>{{data.c_name}}</th>
-                <td>{{data.no_challenge}}</td>
+                <td>{{data.cname}}</td>
+                <td>{{data.noChallenge}}</td>
                 <td>{{data.activities}}</td>
                 <td>{{data.completed}}</td>
-                <td>{{data.avg}}</td>
-                <td>{{data.final_date}}</td>
+                <td>{{data.avg}} %</td>
+                <td>{{data.finalDate}}</td>
                 <td><button>View Challenge!</button></td>
             </tr>
             </table>
@@ -47,7 +47,7 @@
       <h3 class="maintitle">Search Challenges</h3>
 
       <div class="races">
-        <img style="margin-right:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/4252/4252311.png" width="30    " alt="" >
+        <img style="margin-right:10px;" (click)="getAllChallenges()" type="button" src="https://cdn-icons-png.flaticon.com/512/4252/4252311.png" width="30    " alt="" >
         <input style="text-align:center ;" type="text" placeholder="Enter a challenge name!">
         <img style="margin-left:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
       </div>
@@ -66,10 +66,10 @@
                 <th>Details</th>
               </tr>
             <tr *ngFor="let data of challenges">
-              <th>{{data.c_name}}</th>
-                <td>{{data.no_challenge}}</td>
+                <td>{{data.cname}}</td>
+                <td>{{data.noChallenge}}</td>
                 <td>{{data.activities}}</td>
-                <td>{{data.final_date}}</td>
+                <td>{{data.finalDate}}</td>
                 <td><button>Participate!</button></td>
             </tr>
             </table>

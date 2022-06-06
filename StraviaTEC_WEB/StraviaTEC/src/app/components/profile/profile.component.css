@@ -119,13 +119,20 @@ body{
   font-weight: 600;
   font-size: 25px;
 }
-.map{
-  align-items: center;
+.map {
   justify-content: center;
-  margin-left: 10%;
-  width: 80%;
+  align-items: center;
+  width: 60%;
   height:400px;
-
+  background-image: url("src\assets\images\map.png");
+  background-size: cover;
 }
+
+.popup{
+
+  width: 1000px;
+  height: 400px;
+}
+
 
 

@@ -54,4 +54,13 @@ export class CredentialsService {
     );
   }
 
+  /** GET DE INFORMACION DE UN USUARIO
+   * Este metodo permite traer la informacion de un usuario
+   * @return la informacion del usuario
+   */
+  getUserInfo(): Observable<LoginInterface[]> {
+    return this.httpclient.get<LoginInterface[]>(
+      this.url + '/User/' + localStorage.getItem('current_username')
+    );
+  }
 }

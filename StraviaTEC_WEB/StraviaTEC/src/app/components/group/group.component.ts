@@ -1,32 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { Mygroups } from 'src/app/interface/mygroups';
+import { ActivityService } from 'src/app/service/activity.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  styleUrls: ['./group.component.css'],
 })
 export class GroupComponent implements OnInit {
+  mygroups: Mygroups[] | undefined;
 
-  challenges = [{
-    "c_name":"Reto Fuerta Fit",
-    "no_challenge": "1254334",
-    "activities":"6",
-    "final_date":"12-06-2022",
-  },]
-
-  mychallenges = [{
-    "c_name":"Reto Fuerta Fit",
-    "no_challenge": "1254334",
-    "activities":"6",
-    "completed":"3",
-    "avg":"50%",
-    "final_date":"12-06-2022",
-  },]
-
-  constructor() { }
+  constructor(private service: ActivityService, private router: Router) {}
 
   ngOnInit(): void {
+    this.service
+      .getMyGroups()
+      .subscribe((mygroups) => (this.mygroups = mygroups));
   }
-
 }
-  

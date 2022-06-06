@@ -5,26 +5,26 @@ import { Races } from 'src/app/interface/races';
 @Component({
   selector: 'app-races',
   templateUrl: './races.component.html',
-  styleUrls: ['./races.component.css']
+  styleUrls: ['./races.component.css'],
 })
 export class RacesComponent implements OnInit {
+  myraces: Myraces[] | undefined;
+  pendingraces: Myraces[] | undefined;
+  racesdata: Races[] | undefined;
 
-  myraces:Myraces[]| undefined;
-  racesdata: Races[]| undefined;
+  races = [
+    {
+      r_name: 'Reto Powerade',
+      no_race: '543478',
+      type: 'Running',
+      a_date: 'string',
+      price: '10000',
+      route: 'maphere',
+      bank_account: '873872467',
+    },
+  ];
 
-  races = [{
-    "r_name" :"Reto Powerade",
-    "no_race" : "543478",
-    "type" : "Running",
-    "a_date" : "string",
-    "price" : "10000",
-    "route": "maphere",
-    "bank_account": "873872467"
-  },]
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

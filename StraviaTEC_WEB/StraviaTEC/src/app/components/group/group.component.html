@@ -22,12 +22,14 @@
             <table class="table table-bordered mt-4 mytable">
               <tr class="table-primary mytable">
                 <th>Group Name</th>
-                <th>Admin Name</th>
+                <th>Group Number</th>
+                <th>Total Members</th>
                 <th>Actions</th>
               </tr>
-            <tr *ngFor="let data of mychallenges">
-              <th>{{data.c_name}}</th>
-              <td>{{data.no_challenge}}</td>
+            <tr *ngFor="let data of mygroups">
+              <th>{{data.gname}}</th>
+              <td>{{data.noGroup}}</td>
+              <td>{{data.members}}</td>
               <td><button>Leave Group!</button></td>
             </tr>
             </table>
@@ -55,9 +57,9 @@
                   <th>Admin Name</th>
                   <th>Actions</th>
               </tr>
-              <tr *ngFor="let data of mychallenges">
-                <th>{{data.c_name}}</th>
-                <td>{{data.no_challenge}}</td>
+              <tr *ngFor="let data of mygroups">
+                <th>{{data.gname}}</th>
+                <td>{{data.noGroup}}</td>
                 <td><button>Join!</button></td>
             </tr>
             </table>
