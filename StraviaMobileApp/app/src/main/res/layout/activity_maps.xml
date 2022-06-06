@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF"
     tools:context=".MapsActivity">
 
     <fragment
@@ -49,5 +50,20 @@
         android:background="@drawable/stop"
         app:layout_constraintBottom_toBottomOf="@+id/Toggle"
         app:layout_constraintStart_toEndOf="@+id/Toggle" />
+
+    <TextView
+        android:id="@+id/kmView"
+        android:layout_width="221dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/chronometer"
+        android:paddingTop="5dp"
+        android:text="text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -26,12 +27,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
+    private TextView kmView;
+    private float kmNew;
+    private float kmTotal;
+    private DecimalFormat df;
+    private String kmString = "0.00km";
     private Chronometer chronometer;
     private long PauseOffSet = 0;
     private long raceTime;
@@ -52,6 +59,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        kmView = findViewById(R.id.kmView);
+        kmView.setText(kmString);
+        df = new DecimalFormat("#.##");
         //Chronometer and play, pause, stop buttons
         chronometer = findViewById(R.id.chronometer);
         toggleButton = findViewById(R.id.Toggle);
@@ -112,28 +122,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 18));
                     trackPoints.add(location);
                     if (!points.isEmpty() && points.size() > 1) {
-                        float test = getDistance(points.get(points.size()-2).latitude, points.get(points.size()-2).longitude,
-                                points.get(points.size()-1).latitude, points.get(points.size()-1).longitude);
-                        Toast.makeText(MapsActivity.this, String.valueOf(test), Toast.LENGTH_SHORT).show();
+                        kmNew = getDistance(points.get(points.size()-2).latitude,
+                                points.get(points.size()-2).longitude,
+                                points.get(points.size()-1).latitude,
+                                points.get(points.size()-1).longitude);
+                        kmNew /= 1000;
+                        kmTotal += kmNew;
+                        kmString = df.format(kmTotal) + "km";
+                        kmView.setText(kmString);
                     }
                 } catch (SecurityException e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onProviderEnabled(@NonNull String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(@NonNull String provider) {
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
         };
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
