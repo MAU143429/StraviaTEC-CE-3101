@@ -2,17 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { distance } from 'ol/coordinate';
+import { Activities } from 'src/app/interface/activities';
 
 export interface Options {
   position: number;
   data: string;
-}
-
-export interface Activities {
-  position: number;
-  type: string;
-  distance: number;
-  altitude: number;
 }
 
 @Injectable({

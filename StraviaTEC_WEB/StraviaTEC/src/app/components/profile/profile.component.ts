@@ -26,36 +26,6 @@ export class ProfileComponent implements OnInit {
   activitydata: Activity[] | undefined;
   mapid: number = 0;
 
-  profiledata1 = [
-    {
-      name: 'Ariana',
-      lastname: 'Solano Rodriguez',
-      birthdate: '12-06-1998',
-      nationality: 'Canadian',
-      age: '24',
-      followers: 243,
-      following: 87,
-      activities: 155,
-      image: 'https://m.media-amazon.com/images/I/31LtVzDD8AL._SL500_.jpg',
-    },
-  ];
-
-  activitydata1 = [
-    {
-      name: 'Ariana',
-      lastname: 'Solano',
-      noactivity: '72347634',
-      type: 'Cycling',
-      time: '1:38 PM',
-      date: '24-05-2022',
-      duration: '76',
-      distance: '85.39',
-      altitude: '1.324',
-      image: 'https://m.media-amazon.com/images/I/31LtVzDD8AL._SL500_.jpg',
-      gpx: 17,
-    },
-  ];
-
   constructor(
     private modalService: NgbModal,
     private service: ActivityService,

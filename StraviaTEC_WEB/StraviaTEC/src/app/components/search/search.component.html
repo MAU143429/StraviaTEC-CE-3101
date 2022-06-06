@@ -27,7 +27,7 @@
                         Activities: {{data.activities}}<br>
                         Followers: {{data.followers}}
                    </td>
-                   <td> <button class="fbtn">Follow</button></td>
+                   <td> <button class="fbtn" (click)="addFollower(data.username)">Follow</button></td>
               </tr>
             </table>
           </div>

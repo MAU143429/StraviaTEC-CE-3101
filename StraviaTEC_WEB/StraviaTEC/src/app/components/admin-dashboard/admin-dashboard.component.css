@@ -66,3 +66,15 @@ body{
 table {
   width: 100%;
 }
+
+.map {
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height:400px;
+}
+
+.popup{
+  width: 1000px;
+  height: 400px;
+}
