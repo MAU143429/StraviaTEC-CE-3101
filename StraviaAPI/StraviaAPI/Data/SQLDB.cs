@@ -1087,7 +1087,7 @@ namespace StraviaAPI.Data
         public async Task<IEnumerable<ActivityDB>> GetAllActivitiesUser(String username)
         {
             String queryString = 
-                $"SELECT [dbo].[User].[name], [dbo].[User].[last_name], [dbo].[Activity].[no_activity], [dbo].[Activity].[sport], [dbo].[Activity].[gpx_id], [dbo].[Activity].[distance], [dbo].[Activity].[height], [dbo].[Activity].[date], [dbo].[User].[image]" +
+                $"SELECT [dbo].[User].[name], [dbo].[User].[last_name], [dbo].[Activity].[no_activity], [dbo].[Activity].[sport], [dbo].[Activity].[gpx_id], [dbo].[Activity].[distance], [dbo].[Activity].[height], [dbo].[Activity].[date], [dbo].[User].[image], [dbo].[Result].[duration]" +
                 $"FROM [dbo].[User] JOIN [dbo].[Result] ON [dbo].[User].[u_username] = [dbo].[Result].[u_username] JOIN [dbo].[Activity] ON [dbo].[Result].[no_activity] = [dbo].[Activity].[no_activity]" +
                 $"WHERE [dbo].[User].[u_username] = '{username}' AND [dbo].[Activity].[gpx_id] IS NOT NULL;";
 
@@ -1100,6 +1100,31 @@ namespace StraviaAPI.Data
                 while (reader.Read())
                 {
                     result.Add(reader.ToActivityDB());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<RaceInscripted>> GetInscriptedRaces(String username)
+        {
+            String queryString =
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Inscription].[no_inscription], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
+                $"FROM [dbo].[Inscription] JOIN [dbo].[Race] ON [dbo].[Inscription].[no_race] = [dbo].[Race].[no_race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
+                $"WHERE [dbo].[Inscription].[u_username] = '{username}' AND [dbo].[Inscription].[is_accepted] = 1";
+
+            List<RaceInscripted> result = new List<RaceInscripted>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRaceInscripted());
                 }
             }
             await _Connection.CloseAsync();
