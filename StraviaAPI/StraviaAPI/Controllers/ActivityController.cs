@@ -17,6 +17,11 @@ namespace StraviaAPI.Controllers
             _SqlDb = sqlDb;
         }
 
+        // GET: <ActivityController>/user
+        [HttpGet("user/{username}")]
+        public Task<IEnumerable<ActivityDB>> GetActivities(String username)
+            => _SqlDb.GetAllActivitiesUser(username);
+
         // POST: <ActivityController>/user
         [HttpPost("user")]
         public Task CreateActivity(ActivityUser activity) 

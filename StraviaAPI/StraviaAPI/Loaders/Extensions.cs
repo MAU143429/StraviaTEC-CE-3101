@@ -152,5 +152,22 @@ namespace StraviaAPI.Loaders
                 Altitude = int.Parse(reader[2].ToString()),
             };
         }
+
+        public static ActivityDB ToActivityDB(this SqlDataReader reader)
+        {
+            return new ActivityDB
+            {
+                Name = reader[0].ToString(),
+                Lastname = reader[1].ToString(),
+                noactivity = int.Parse(reader[2].ToString()),
+                Type = reader[3].ToString(),
+                Gpx = int.Parse(reader[4].ToString()),
+                Distance = int.Parse(reader[5].ToString()),
+                Altitude = int.Parse(reader[6].ToString()),
+                Date = reader[7].ToString().Split(" ").ToList()[0],
+                Time = reader[7].ToString().Split(" ").ToList()[1].Remove(5),
+                Image = reader[8].ToString(),
+            };
+        }
     }
 }

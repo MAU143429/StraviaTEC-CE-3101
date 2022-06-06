@@ -2,15 +2,15 @@
 {
     public class ActivityDB
     {
-        public int NoActivity { get; set; }
-        public String Sport { get; set; }
-        public int? NoRace { get; set; }
-        public int? NoChallenge { get; set; }
-        public String? Ousername { get; set; }
-        public String Route { get; set; }
+        public String Name { get; set; }
+        public String Lastname { get; set; }
+        public int noactivity { get; set; }
+        public String Type { get; set; }
+        public int Gpx { get; set; }
         public int Distance { get; set; }
-        public int Height { get; set; }
+        public int Altitude { get; set; }
         public String Date { get; set; }
-        public String? Uusername { get; set; }
+        public String Time { get; set; }
+        public String Image { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace StraviaAPI.Data
         /// <exception cref="Exception"></exception>
         public async Task<IEnumerable<User>> GetUsers()
         {
-            String queryString = 
+            String queryString =
                 $"SELECT [name], [last_name], [nationality], [birthdate], [category], [u_username], [u_password], [image] " +
                 $"FROM [dbo].[User];";
 
@@ -598,7 +598,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Race>> GetRacesOrganizer(String username)
         {
-            String queryString = 
+            String queryString =
                 $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Race].[price], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
                 $"FROM [dbo].[Race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
                 $"WHERE [dbo].[Race].[o_username] = '{username}';";
@@ -623,7 +623,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Race>> GetRacesUser(String username)
         {
-            String queryString = 
+            String queryString =
                 $"SELECT [no_inscription], [dbo].[Inscription].[no_race], [dbo].[Inscription].[u_username], [dbo].[Inscription].[voucher], [dbo].[Inscription].[is_accepted] " +
                 $"FROM [dbo].[Race] JOIN [dbo].[Inscription]" +
                 $"ON [dbo].[Race].[no_race] = [dbo].[Inscription].[no_race]" +
@@ -676,7 +676,8 @@ namespace StraviaAPI.Data
                 try
                 {
                     commandTemp.ExecuteNonQuery();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
@@ -749,7 +750,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<ChallengeUser>> GetChallengesUser(String username)
         {
-            String queryString = 
+            String queryString =
                 $"SELECT [dbo].[Challenge].[c_name], [dbo].[Challenge].[no_challenge], [dbo].[Challenge].[final_date]" +
                 $"FROM [dbo].[Participation] JOIN [dbo].[Challenge] ON [dbo].[Participation].[no_challenge] = [dbo].[Challenge].[no_challenge]" +
                 $"WHERE [dbo].[Participation].[u_username] = '{username}';";
@@ -802,7 +803,8 @@ namespace StraviaAPI.Data
                 try
                 {
                     result[i].Avg = result[i].Completed * 100 / result[i].Activities;
-                } catch
+                }
+                catch
                 {
                     result[i].Avg = 0;
                 }
@@ -859,7 +861,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Group>> GetGroupsUser(String username)
         {
-            String queryString = 
+            String queryString =
                 $"SELECT [dbo].[Group].[g_name], [dbo].[Group].[no_group]" +
                 $"FROM [dbo].[Member] JOIN [dbo].[Group] ON [dbo].[Member].[no_group] = [dbo].[Group].[no_group]" +
                 $"WHERE [dbo].[Member].[u_username] = '{username}';";
@@ -952,7 +954,8 @@ namespace StraviaAPI.Data
             try
             {
                 command.ExecuteNonQuery();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
@@ -1050,7 +1053,8 @@ namespace StraviaAPI.Data
             try
             {
                 command.ExecuteNonQuery();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
@@ -1076,6 +1080,31 @@ namespace StraviaAPI.Data
                 }
             }
             await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+        public async Task<IEnumerable<ActivityDB>> GetAllActivitiesUser(String username)
+        {
+            String queryString = 
+                $"SELECT [dbo].[User].[name], [dbo].[User].[last_name], [dbo].[Activity].[no_activity], [dbo].[Activity].[sport], [dbo].[Activity].[gpx_id], [dbo].[Activity].[distance], [dbo].[Activity].[height], [dbo].[Activity].[date], [dbo].[User].[image]" +
+                $"FROM [dbo].[User] JOIN [dbo].[Result] ON [dbo].[User].[u_username] = [dbo].[Result].[u_username] JOIN [dbo].[Activity] ON [dbo].[Result].[no_activity] = [dbo].[Activity].[no_activity]" +
+                $"WHERE [dbo].[User].[u_username] = '{username}' AND [dbo].[Activity].[gpx_id] IS NOT NULL;";
+
+            List<ActivityDB> result = new List<ActivityDB>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToActivityDB());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
 
             return result ?? throw new Exception("Not found!!");
         }
