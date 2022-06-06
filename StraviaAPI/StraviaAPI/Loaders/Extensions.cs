@@ -33,7 +33,7 @@ namespace StraviaAPI.Loaders
                 Name = reader[0].ToString(),
                 Lastname = reader[1].ToString(),
                 Nationality = reader[2].ToString(),
-                Birthdate = reader[3].ToString(),
+                Birthdate = reader[3].ToString().Split(" ").ToList()[0],
                 Category = reader[4].ToString(),
                 Username = reader[5].ToString(),
                 Password = reader[6].ToString(),
@@ -121,21 +121,18 @@ namespace StraviaAPI.Loaders
             };
         }
 
-        /*
-        public static List<ActivityReply> ToActivityReply(String data)
+        public static Inscription ToInscription(this SqlDataReader reader)
         {
-            List<String> activities = data.Split("/").ToList();
-            for (int i = 0; i < activities.Count; i++)
+            return new Inscription
             {
-                if (activities[i] == "") activities.RemoveAt(i);
-                else
-                {
-                    List<String> atributes = activities[i].Split(";").ToList();
-
-
-                }
-            }
-
-        }*/
+                RaceName = reader[0].ToString(),
+                NoRace = int.Parse(reader[1].ToString()),
+                NoInscription = int.Parse(reader[2].ToString()),
+                User = reader[3].ToString(),
+                Type = reader[4].ToString(),
+                Date = reader[5].ToString().Split(" ").ToList()[0],
+                Voucher = reader[6].ToString(),
+            };
+        }
     }
 }
