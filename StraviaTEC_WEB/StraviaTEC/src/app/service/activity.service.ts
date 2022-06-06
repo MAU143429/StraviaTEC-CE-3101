@@ -179,34 +179,14 @@ export class ActivityService {
     );
   }
 
-  /**-------------------------------------ESPERANDO ENDPOINT---------------------------------------------- */
-
-  /** GET DE LAS ACTIVIDADES DE LOS AMIGOS
-   * Este metodo permite traer todas las actividades de los amigos del usuario
-   * @return la lista actividades
-   */
-  getFriendsActivities(): Observable<Activity[]> {
-    return this.httpclient.get<Activity[]>(
-      this.url + '/User/Friends' + localStorage.getItem('current_username')
-    );
-  }
-
   /** GET DE LAS ACTIVIDADES DEL USUARIO
    * Este metodo permite traer todas las actividades del usuario
    * @return la lista actividades
    */
   getMyActivities(): Observable<Activity[]> {
     return this.httpclient.get<Activity[]>(
-      this.url + '/Activity/' + localStorage.getItem('current_username')
+      this.url + '/activity/user/' + localStorage.getItem('current_username')
     );
-  }
-
-  /** GET DE TODAS LAS CARRERAS DE LA APP
-   * Este metodo permite traer todas las carreras de la app
-   * @return la lista de carreras
-   */
-  getAllRaces(): Observable<Races[]> {
-    return this.httpclient.get<Races[]>(this.url + '/Races/All');
   }
 
   /** GET DE TODAS LAS CARRERAS REGISTRADAS
@@ -215,7 +195,9 @@ export class ActivityService {
    */
   getRegisteredRaces(): Observable<Myraces[]> {
     return this.httpclient.get<Myraces[]>(
-      this.url + '/Races/registered/' + localStorage.getItem('current_username')
+      this.url +
+        '/race/user/inscripted/' +
+        localStorage.getItem('current_username')
     );
   }
 
@@ -225,7 +207,31 @@ export class ActivityService {
    */
   getPendingRaces(): Observable<Myraces[]> {
     return this.httpclient.get<Myraces[]>(
-      this.url + '/Races/pending/' + localStorage.getItem('current_username')
+      this.url +
+        '/race/user/unregistered/' +
+        localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE TODAS LAS CARRERAS DE LA APP
+   * Este metodo permite traer todas las carreras de la app
+   * @return la lista de carreras
+   */
+  getAllRaces(): Observable<Races[]> {
+    return this.httpclient.get<Races[]>(
+      this.url + '/race/user/all/' + localStorage.getItem('current_username')
+    );
+  }
+
+  /**-------------------------------------ESPERANDO ENDPOINT---------------------------------------------- */
+
+  /** GET DE LAS ACTIVIDADES DE LOS AMIGOS
+   * Este metodo permite traer todas las actividades de los amigos del usuario
+   * @return la lista actividades
+   */
+  getFriendsActivities(): Observable<Activity[]> {
+    return this.httpclient.get<Activity[]>(
+      this.url + '/User/Friends' + localStorage.getItem('current_username')
     );
   }
 
@@ -300,7 +306,7 @@ export class ActivityService {
    */
   getChallengesActivities(challengeid: number): Observable<Activities[]> {
     return this.httpclient.get<Activities[]>(
-      this.url + '/Challenge/' + challengeid.toString()
+      this.url + '/Challenge/activities/' + challengeid.toString()
     );
   }
 
