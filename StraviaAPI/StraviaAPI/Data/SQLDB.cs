@@ -713,9 +713,9 @@ namespace StraviaAPI.Data
         public async Task<IEnumerable<Race>> GetAllRacesUser(String username)
         {
             String queryString =
-                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Race].[price], [dbo].[Activity].[gpx_id]" +
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Race].[price], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
                 $"FROM [dbo].[Activity] JOIN [dbo].[Race] ON [dbo].[Activity].[no_race] = [dbo].[Race].[no_race]" +
-                $"WHERE [dbo].[Activity].[u_username] <> '{username}';";
+                $"WHERE [dbo].[Activity].[u_username] IS NULL AND [dbo].[Activity].[no_race] IS NOT NULL;";
 
             List<Race> result = new List<Race>();
 
@@ -843,7 +843,7 @@ namespace StraviaAPI.Data
 
         public async Task<IEnumerable<Group>> GetAllGroups()
         {
-            String queryString = $"SELECT * FROM [dbo].[Group];";
+            String queryString = $"SELECT [g_name], [no_group] FROM [dbo].[Group];";
 
             List<Group> result = new List<Group>();
 
@@ -857,6 +857,24 @@ namespace StraviaAPI.Data
                 }
             }
             await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                String queryTemp =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[GetMembers] {result[i].NoGroup};";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Members = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+            }
 
             if (result.Count.Equals(0)) result = null;
 
