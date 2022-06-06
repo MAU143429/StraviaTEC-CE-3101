@@ -710,6 +710,32 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        public async Task<IEnumerable<Race>> GetAllRacesUser(String username)
+        {
+            String queryString =
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Race].[price], [dbo].[Activity].[gpx_id]" +
+                $"FROM [dbo].[Activity] JOIN [dbo].[Race] ON [dbo].[Activity].[no_race] = [dbo].[Race].[no_race]" +
+                $"WHERE [dbo].[Activity].[u_username] <> '{username}';";
+
+            List<Race> result = new List<Race>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToRace());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
+
         public async Task<IEnumerable<Challenge>> GetChallengesOrganizer(String username)
         {
             String queryString = $"SELECT [c_name], [no_challenge], [final_date] FROM [dbo].[Challenge] WHERE [o_username] = '{username}';";
