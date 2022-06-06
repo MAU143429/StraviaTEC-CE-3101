@@ -854,6 +854,49 @@ namespace StraviaAPI.Data
             return result ?? throw new Exception("Not found!!");
         }
 
+        public async Task<IEnumerable<Group>> GetGroupsUser(String username)
+        {
+            String queryString = 
+                $"SELECT [dbo].[Group].[g_name], [dbo].[Group].[no_group]" +
+                $"FROM [dbo].[Member] JOIN [dbo].[Group] ON [dbo].[Member].[no_group] = [dbo].[Group].[no_group]" +
+                $"WHERE [dbo].[Member].[u_username] = '{username}';";
+
+            List<Group> result = new List<Group>();
+
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToGroup());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            for (int i = 0; i < result.Count; i++)
+            {
+                String queryTemp =
+                    $"DECLARE @Result INT;" +
+                    $"EXECUTE @Result = [dbo].[GetMembers] {result[i].NoGroup};";
+                SqlCommand commandTemp = new SqlCommand(queryTemp, _Connection);
+
+                await _Connection.OpenAsync();
+                using (SqlDataReader reader = commandTemp.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result[i].Members = int.Parse(reader[0].ToString());
+                    }
+                }
+                await _Connection.CloseAsync();
+            }
+
+            if (result.Count.Equals(0)) result = null;
+
+            return result ?? throw new Exception("Not found!!");
+        }
+
         public async Task CreateGroup(GroupInput input)
         {
             String queryString = $"INSERT INTO [dbo].[Group] ([o_username], [g_name]) VALUES ('{input.Username}', '{input.Name}');";
