@@ -1,4 +1,4 @@
-package com.tec.ce.api;
+package com.tec.ce.api.models;
 
 import java.io.Serializable;
 

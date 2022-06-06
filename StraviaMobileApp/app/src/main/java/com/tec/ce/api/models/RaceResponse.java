@@ -1,6 +1,6 @@
 package com.tec.ce.api.models;
 
-public class RaceModel {
+public class RaceResponse {
     private String noRace;
     private String oUsername;
     private String rName;
@@ -37,4 +37,15 @@ public class RaceModel {
     public void setPrice(String price) {
         this.price = price;
     }
+    @Override
+    public String toString() {
+        return "RaceResponse{" +
+                "noRace='" + noRace + '\'' +
+                ", oUsername='" + oUsername + '\'' +
+                ", rName='" + rName + '\'' +
+                ", price='" + price + '\'' +
+                '}';
+    }
+
+
 }

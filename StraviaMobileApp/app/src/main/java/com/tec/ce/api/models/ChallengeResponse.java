@@ -1,6 +1,6 @@
 package com.tec.ce.api.models;
 
-public class ChallengeModel {
+public class ChallengeResponse {
 
     private String noChallenge;
     private String oUsername;
@@ -37,5 +37,15 @@ public class ChallengeModel {
 
     public void setFinalDate(String finalDate) {
         this.finalDate = finalDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ChallengeResponse{" +
+                "noChallenge='" + noChallenge + '\'' +
+                ", oUsername='" + oUsername + '\'' +
+                ", cName='" + cName + '\'' +
+                ", finalDate='" + finalDate + '\'' +
+                '}';
     }
 }

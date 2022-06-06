@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tec.ce.api.ApiClient;
-import com.tec.ce.api.LoginRequest;
-import com.tec.ce.api.LoginResponse;
+import com.tec.ce.api.models.LoginRequest;
+import com.tec.ce.api.models.LoginResponse;
 import com.tec.ce.db.DBHelper;
 
 import retrofit2.Call;
@@ -86,6 +86,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo que se encarga de obtener la respuesta del API para verificar contrasena y nombre de
+     * usuario para hacer login en la aplicacion
+     * @param loginRequest Objeto que guarda el nombre de usuario y contrasena
+     */
     public void loginUser(LoginRequest loginRequest){
         Call<LoginResponse> loginResponseCall = ApiClient.getUserService().loginUser(loginRequest);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {

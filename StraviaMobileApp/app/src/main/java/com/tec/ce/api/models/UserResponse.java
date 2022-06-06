@@ -1,6 +1,6 @@
 package com.tec.ce.api.models;
 
-public class UserModel {
+public class UserResponse {
     private String name;
     private String lastName;
     private String nationality;

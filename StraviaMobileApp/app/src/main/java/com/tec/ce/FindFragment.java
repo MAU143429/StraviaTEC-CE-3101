@@ -3,14 +3,18 @@ package com.tec.ce;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.tec.ce.api.ApiClient;
-import com.tec.ce.api.models.UserModel;
+import com.tec.ce.api.models.UserResponse;
 
 import java.util.List;
 
@@ -26,13 +30,18 @@ import retrofit2.Response;
 public class FindFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // the fragment initialization parameters
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Toolbar toolbar;
+    RecyclerView recyclerView;
+
+    //EventsAdapter eventsAdapter;
 
     public FindFragment() {
         // Required empty public constructor
@@ -70,6 +79,14 @@ public class FindFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_training, container, false);
 
+        toolbar = v.findViewById(R.id.toolbar);
+        recyclerView = v.findViewById(R.id.recyclerview);
+
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+       // recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+
+       // eventsAdapter = new EventsAdapter(this::ClickedUser);
+
         getAllChallenges();
         getAllRaces();
 
@@ -79,11 +96,11 @@ public class FindFragment extends Fragment {
 
     public void getAllChallenges(){
 
-        Call<List<UserModel>> userlist = ApiClient.getChallengeService().getAllChallenges();
+        Call<List<UserResponse>> userlist = ApiClient.getChallengeService().getAllChallenges();
 
-        userlist.enqueue(new Callback<List<UserModel>>() {
+        userlist.enqueue(new Callback<List<UserResponse>>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+            public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
 
                 if(response.isSuccessful()){
                     Log.e("Successful connection", response.body().toString());
@@ -93,7 +110,7 @@ public class FindFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<List<UserResponse>> call, Throwable t) {
                 Log.e("failure",t.getLocalizedMessage());
 
             }
@@ -102,11 +119,11 @@ public class FindFragment extends Fragment {
 
     public void getAllRaces(){
 
-        Call<List<UserModel>> userlist = ApiClient.getRaceService().getAllRaces();
+        Call<List<UserResponse>> userlist = ApiClient.getRaceService().getAllRaces();
 
-        userlist.enqueue(new Callback<List<UserModel>>() {
+        userlist.enqueue(new Callback<List<UserResponse>>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+            public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
 
                 if(response.isSuccessful()){
                     Log.e("Successful connection", response.body().toString());
@@ -116,7 +133,7 @@ public class FindFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<List<UserResponse>> call, Throwable t) {
                 Log.e("failure",t.getLocalizedMessage());
 
             }

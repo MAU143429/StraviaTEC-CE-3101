@@ -1,6 +1,6 @@
 package com.tec.ce.api.services;
 
-import com.tec.ce.api.models.UserModel;
+import com.tec.ce.api.models.UserResponse;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ChallengeService {
-    @GET("User")
-    Call<List<UserModel>> getAllChallenges();
+    @GET("User/{username}")
+    Call<List<UserResponse>> getAllChallenges();
 }

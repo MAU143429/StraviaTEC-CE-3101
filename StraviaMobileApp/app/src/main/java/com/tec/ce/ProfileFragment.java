@@ -3,16 +3,14 @@ package com.tec.ce;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import com.tec.ce.api.ApiClient;
-import com.tec.ce.api.models.UserModel;
+import com.tec.ce.api.models.UserResponse;
 
 import java.util.List;
 
@@ -81,11 +79,11 @@ public class ProfileFragment extends Fragment {
 
     public void getAllUsers(){
 
-        Call<List<UserModel>> userlist = ApiClient.getUserService().getAllUsers();
+        Call<List<UserResponse>> userlist = ApiClient.getUserService().getAllUsers();
 
-        userlist.enqueue(new Callback<List<UserModel>>() {
+        userlist.enqueue(new Callback<List<UserResponse>>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+            public void onResponse(Call<List<UserResponse>> call, Response<List<UserResponse>> response) {
 
                 if(response.isSuccessful()){
                     Log.e("Successful connection", response.body().toString());
@@ -95,7 +93,7 @@ public class ProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(Call<List<UserResponse>> call, Throwable t) {
                 Log.e("failure",t.getLocalizedMessage());
 
             }
