@@ -17,12 +17,7 @@ import {
 import { ActivityService } from 'src/app/service/activity.service';
 import { InternalServicesService } from 'src/app/service/internal-services.service';
 import { CreateChallenge } from 'src/app/model/create-challenge';
-export interface Activities {
-  position: number;
-  type: string;
-  distance: number;
-  altitude: number;
-}
+import { Activities } from 'src/app/interface/activities';
 
 @Component({
   selector: 'app-create-challenge',

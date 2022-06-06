@@ -34,7 +34,7 @@
               <td>{{data.date}}</td>
               <td>{{data.time}}</td>
               <td>{{data.price}}</td>
-              <td><button>View Map!</button></td>
+              <td><button (click)="open(content, data.route)" >View Map!</button></td>
 
           </tr>
           </table>
@@ -59,7 +59,7 @@
                 <td>{{data.noChallenge}}</td>
                 <td>{{data.activities}}</td>
                 <td>{{data.finalDate}}</td>
-                <td><button>View Challenge!</button></td>
+                <td><button (click)="open2(content2,data.noChallenge)" >View Challenge!</button></td>
             </tr>
             </table>
           </div>
@@ -86,6 +86,39 @@
         </div>
       </div>
 </body>
+
+<ng-template #content let-modal>
+  <div class="popup">
+    <div class="map">
+      <app-map [mapid]="mapid"></app-map>
+    </div>
+    <button class="close cbtn" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+  <div class="popup2">
+    <h3 class="maintitle">Activities in Challenge</h3>
+    <div class="section1">
+      <div class="challenges">
+        <div class="row">
+          <table class="table table-bordered mt-4 mytable">
+            <tr class="table-primary mytable">
+              <th>Type Activity</th>
+              <th>Distance</th>
+              <th>Altitude</th>
+            </tr>
+          <tr *ngFor="let data of activities">
+              <td>{{data.type}}</td>
+              <td>{{data.distance}}</td>
+              <td>{{data.altitude}}</td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 </html>
 

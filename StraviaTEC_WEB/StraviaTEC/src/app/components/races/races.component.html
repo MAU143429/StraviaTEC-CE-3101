@@ -31,13 +31,13 @@
               <th>Route</th>
             </tr>
           <tr *ngFor="let data of myraces">
-            <th>{{data.r_name}}</th>
-              <td>{{data.no_race}}</td>
-              <td>{{data.no_inscription}}</td>
+            <th>{{data.name}}</th>
+              <td>{{data.norace}}</td>
+              <td>{{data.noinscription}}</td>
               <td>{{data.type}}</td>
-              <td>{{data.a_date}}</td>
+              <td>{{data.date}}</td>
               <td>{{data.route}}</td>
-              <td><button >View Map</button></td>
+              <td><button (click)="open(content,data.route)" >View Map</button></td>
           </tr>
           </table>
         </div>
@@ -58,14 +58,14 @@
               <th>Date</th>
               <th>Route</th>
             </tr>
-          <tr *ngFor="let data of myraces">
-            <th>{{data.r_name}}</th>
-              <td>{{data.no_race}}</td>
-              <td>{{data.no_inscription}}</td>
+          <tr *ngFor="let data of pendingraces">
+            <th>{{data.name}}</th>
+              <td>{{data.norace}}</td>
+              <td>{{data.noinscription}}</td>
               <td>{{data.type}}</td>
-              <td>{{data.a_date}}</td>
+              <td>{{data.date}}</td>
               <td>{{data.route}}</td>
-              <td><button >View Map</button></td>
+              <td><button (click)="open(content,data.route)" >View Map</button></td>
           </tr>
           </table>
         </div>
@@ -73,9 +73,8 @@
     </div>
     <br>
     <h3 class="maintitle">Search Races</h3>
-
     <div class="races">
-      <img style="margin-right:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/4252/4252311.png" width="30    " alt="" >
+      <img style="margin-right:10px;" (click)="getAllRaces()" type="button" src="https://cdn-icons-png.flaticon.com/512/4252/4252311.png" width="30    " alt="" >
       <input style="text-align:center ;" type="text" placeholder="Enter a race name!">
       <img style="margin-left:10px;" type="button" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" width="30    " alt="" >
     </div>
@@ -97,14 +96,14 @@
               <th>Details</th>
             </tr>
           <tr *ngFor="let data of races">
-            <th>{{data.r_name}}</th>
-              <td>{{data.no_race}}</td>
+            <th>{{data.name}}</th>
+              <td>{{data.norace}}</td>
               <td>{{data.type}}</td>
-              <td>{{data.a_date}}</td>
-              <td>{{data.price}}</td>
-              <td>{{data.route}}</td>
-              <td><input type="file"></td>
-              <td><button>Check In!</button></td>
+              <td>{{data.date}}</td>
+              <td>{{data.price}}<img src="https://cdn-icons-png.flaticon.com/512/32/32841.png" (click)="open2(content2,data.norace);getBA(data.norace)" width="40" alt="30"> </td>
+              <td><button (click)="open(content,data.route)">View Map!</button></td>
+              <td><input type="input"></td>
+              <td><button (click)="addInscription(data.norace)">Check In!</button></td>
           </tr>
           </table>
         </div>
@@ -118,5 +117,32 @@
 
 
 </body>
+
+<ng-template #content let-modal>
+  <div class="popup">
+    <div class="map">
+      <app-map [mapid]="raceid"></app-map>
+    </div>
+    <button class="close cbtn" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+  <div class="popup2">
+    <h3 class="maintitle">Bank Accounts Available</h3>
+    <div class="section1">
+        <div class="row">
+          <table class="table table-bordered mt-4 mytable">
+            <tr class="table-primary mytable">
+              <th>Bank Accounts</th>
+            </tr>
+          <tr *ngFor="let data of accounts">
+              <td>{{data.b_account}}</td>
+          </tr>
+          </table>
+        </div>
+    </div>
+  </div>
+</ng-template>
 
 </html>

@@ -1,8 +1,8 @@
 export interface Myraces {
-    r_name:string
-    no_race: number
-    no_inscription:number
-    type:string
-    a_date:string
-    route:string
+  name: string;
+  norace: number;
+  noinscription: number;
+  type: string;
+  date: string;
+  route: number;
 }

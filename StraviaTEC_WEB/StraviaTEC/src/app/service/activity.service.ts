@@ -12,9 +12,18 @@ import { Groups } from 'src/app/interface/groups';
 import { Races } from 'src/app/interface/races';
 import { Challenges } from 'src/app/interface/challenges';
 import { Mychallenges } from 'src/app/interface/mychallenges';
+import { BAccounts } from 'src/app/interface/b-accounts';
 import { Mygroups } from 'src/app/interface/mygroups';
 import { Inscription } from 'src/app/model/inscription';
 import { Observable } from 'rxjs';
+import { Myraces } from '../interface/myraces';
+
+export interface Activities {
+  position: number;
+  type: string;
+  distance: number;
+  altitude: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -170,6 +179,8 @@ export class ActivityService {
     );
   }
 
+  /**-------------------------------------ESPERANDO ENDPOINT---------------------------------------------- */
+
   /** GET DE LAS ACTIVIDADES DE LOS AMIGOS
    * Este metodo permite traer todas las actividades de los amigos del usuario
    * @return la lista actividades
@@ -198,13 +209,78 @@ export class ActivityService {
     return this.httpclient.get<Races[]>(this.url + '/Races/All');
   }
 
+  /** GET DE TODAS LAS CARRERAS REGISTRADAS
+   * Este metodo permite traer todas las carreras registradas
+   * @return la lista de carreras
+   */
+  getRegisteredRaces(): Observable<Myraces[]> {
+    return this.httpclient.get<Myraces[]>(
+      this.url + '/Races/registered/' + localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE TODAS LAS CARRERAS PENDIENTES DE ACEPTACION
+   * Este metodo permite traer todas las carreras pendientes de aprobacion
+   * @return la lista de carreras
+   */
+  getPendingRaces(): Observable<Myraces[]> {
+    return this.httpclient.get<Myraces[]>(
+      this.url + '/Races/pending/' + localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE TODAS LAS CUENTAS BANCARIAS DE UNA CARRERA
+   * Este metodo permite traer todas las cuentas de banco
+   * @return la lista de cuentas
+   */
+  getRacesBA(raceid: number): Observable<BAccounts[]> {
+    return this.httpclient.get<BAccounts[]>(
+      this.url + '/Races/pending/' + raceid.toString()
+    );
+  }
+
+  /** POST PARA PODER AGREGAR UNA SOLICITUD DE INSCRIPCION
+   * Este metodo permite aceptar la inscripcion de un usuario
+   * @return info del numero de inscripcion
+   */
+  addInscription(newInscription: Inscription): Observable<any> {
+    return this.httpclient.post(
+      this.url + '/Inscription/' + localStorage.getItem('current_username'),
+      newInscription
+    );
+  }
+
+  /** POST PARA PODER AGREGAR UNA SOLICITUD DE UNION A UN GRUPO
+   * Este metodo permite unirse a un grupo
+   * @return info del numero de grupo
+   */
+  joinGroup(newInscription: Inscription): Observable<any> {
+    return this.httpclient.post(
+      this.url + '/Inscription/' + localStorage.getItem('current_username'),
+      newInscription
+    );
+  }
+
+  /** POST PARA PODER AGREGAR UNA SOLICITUD DE UNION A UN RETO
+   * Este metodo permite unirse a un reto
+   * @return info del numero de reto
+   */
+  joinChallenge(newInscription: Inscription): Observable<any> {
+    return this.httpclient.post(
+      this.url + '/Inscription/' + localStorage.getItem('current_username'),
+      newInscription
+    );
+  }
+
   /** GET DE TODOS LOS GRUPOS DE LA APP
    * Este metodo permite traer todas los grupos de la app
    * @return la lista de grupos
    */
-  getAllGroups(): Observable<Groups[]> {
-    return this.httpclient.get<Groups[]>(this.url + '/Group/All');
+  getAllGroups(): Observable<Mygroups[]> {
+    return this.httpclient.get<Mygroups[]>(this.url + '/Group/user/all');
   }
+
+  /**----------------------------------------------------------------------------------------------------- */
 
   /** GET DE TODOS LOS RETOS DE LA APP
    * Este metodo permite traer todos los retos de la app
@@ -215,6 +291,16 @@ export class ActivityService {
       this.url +
         '/Challenge/user/all/' +
         localStorage.getItem('current_username')
+    );
+  }
+
+  /** GET DE TODAS LAS ACTIVIDADES DE UN RETO
+   * Este metodo permite traer todas las actividades que pertecen a un reto
+   * @return la lista de actividades
+   */
+  getChallengesActivities(challengeid: number): Observable<Activities[]> {
+    return this.httpclient.get<Activities[]>(
+      this.url + '/Challenge/' + challengeid.toString()
     );
   }
 
