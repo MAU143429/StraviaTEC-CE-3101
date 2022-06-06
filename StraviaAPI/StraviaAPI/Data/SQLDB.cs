@@ -1018,7 +1018,7 @@ namespace StraviaAPI.Data
             String queryString =
                 $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Inscription].[no_inscription], [dbo].[Inscription].[u_username], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Inscription].[voucher]" +
                 $"FROM [dbo].[Inscription] JOIN [dbo].[Race] ON [dbo].[Inscription].[no_race] = [dbo].[Race].[no_race] JOIN [dbo].[Activity] ON [dbo].[Race].[no_race] = [dbo].[Activity].[no_race]" +
-                $"WHERE [dbo].[Race].[o_username] = '{username}';";
+                $"WHERE [dbo].[Race].[o_username] = '{username}' AND [dbo].[Inscription].[is_accepted] = 0;";
             SqlCommand command = new SqlCommand(queryString, _Connection);
             List<Inscription> result = new List<Inscription>();
 
@@ -1035,12 +1035,12 @@ namespace StraviaAPI.Data
             return result;
         }
 
-        public async Task AcceptInscription(int inscription)
+        public async Task AcceptInscription(Acceptance inscription)
         {
             String queryString =
                 $"UPDATE [dbo].[Inscription]" +
                 $"SET [is_accepted] = 1" +
-                $"WHERE [no_inscription] = {inscription}";
+                $"WHERE [no_inscription] = {inscription.Id}";
             SqlCommand command = new SqlCommand(queryString, _Connection);
 
             await _Connection.OpenAsync();
@@ -1052,6 +1052,29 @@ namespace StraviaAPI.Data
                 Console.WriteLine(ex);
             }
             await _Connection.CloseAsync();
+        }
+
+        public async Task<IEnumerable<ActivityReply>> GetChallengeActivities(int challenge)
+        {
+            String queryString =
+                $"SELECT [dbo].[Activity].[sport], [dbo].[Activity].[distance], [dbo].[Activity].[height]" +
+                $"FROM [dbo].[Activity]" +
+                $"WHERE [dbo].[Activity].[no_challenge] = {challenge}";
+            SqlCommand command = new SqlCommand(queryString, _Connection);
+
+            List<ActivityReply> result = new List<ActivityReply>();
+
+            await _Connection.OpenAsync();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    result.Add(reader.ToActivityDetails());
+                }
+            }
+            await _Connection.CloseAsync();
+
+            return result ?? throw new Exception("Not found!!");
         }
     }
 }

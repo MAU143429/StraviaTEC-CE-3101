@@ -32,6 +32,11 @@ namespace StraviaAPI.Controllers
         public Task<IEnumerable<ChallengeUser>> GetChallengeUser(String username) 
             => _SqlDb.GetChallengesUser(username);
 
+        // GET: <ChallengeController>/{username}
+        [HttpGet("activities/{challenge}")]
+        public Task<IEnumerable<ActivityReply>> GetChallengeActivities(int challenge)
+            => _SqlDb.GetChallengeActivities(challenge);
+
         // POST <ChallengeController>
         [HttpPost]
         public Task Post(ChallengeInput input)
