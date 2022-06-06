@@ -29,8 +29,8 @@ namespace StraviaAPI.Controllers
         }
 
         // PUT api/<InscriptionController>/5
-        [HttpPut("{inscription}")]
-        public Task Put(int inscription)
+        [HttpPut]
+        public Task Put(Acceptance inscription)
         {
             return _SqlDb.AcceptInscription(inscription);
         }

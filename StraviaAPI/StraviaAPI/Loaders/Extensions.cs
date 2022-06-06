@@ -142,5 +142,15 @@ namespace StraviaAPI.Loaders
                 Voucher = reader[6].ToString(),
             };
         }
+
+        public static ActivityReply ToActivityDetails(this SqlDataReader reader)
+        {
+            return new ActivityReply
+            {
+                Type = reader[0].ToString(),
+                Distance = int.Parse(reader[1].ToString()),
+                Altitude = int.Parse(reader[2].ToString()),
+            };
+        }
     }
 }
