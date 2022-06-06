@@ -29,6 +29,13 @@ namespace StraviaAPI.Controllers
             return _SqlDb.GetGroupsUser(username);
         }
 
+        // GET <GroupController>/organizer/{username}
+        [HttpGet("organizer/{username}")]
+        public Task<IEnumerable<Group>> GetOrganizer(String username)
+        {
+            return _SqlDb.GetGroupsOrganizer(username);
+        }
+
         // POST api/<GroupController>
         [HttpPost]
         public Task Create(GroupInput input)
