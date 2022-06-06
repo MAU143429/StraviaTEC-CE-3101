@@ -18,9 +18,9 @@ namespace StraviaAPI.Controllers
         }
 
         // GET: <ChallengeController>
-        [HttpGet]
-        public Task<IEnumerable<Challenge>> GetAllChallenges() 
-            => _SqlDb.GetAllChallenges();
+        [HttpGet("user/all/{username}")]
+        public Task<IEnumerable<Challenge>> GetAllChallengesUser(String username) 
+            => _SqlDb.GetAllChallengesUser(username);
 
         // GET: <ChallengeController>/{username}
         [HttpGet("organizer/{username}")]

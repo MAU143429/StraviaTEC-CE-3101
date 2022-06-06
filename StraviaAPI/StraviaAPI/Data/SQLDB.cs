@@ -684,9 +684,12 @@ namespace StraviaAPI.Data
             }
         }
 
-        public async Task<IEnumerable<Challenge>> GetAllChallenges()
+        public async Task<IEnumerable<Challenge>> GetAllChallengesUser(String username)
         {
-            String queryString = $"SELECT * FROM [dbo].[Challenge]";
+            String queryString =
+                $"SELECT [dbo].[Challenge].[c_name], [dbo].[Challenge].[no_challenge], [dbo].[Challenge].[final_date]" +
+                $"FROM [dbo].[Participation] JOIN [dbo].[Challenge] ON [dbo].[Participation].[no_challenge] = [dbo].[Challenge].[no_challenge]" +
+                $"WHERE [dbo].[Participation].[u_username] <> '{username}';";
 
             List<Challenge> result = new List<Challenge>();
 
@@ -747,7 +750,7 @@ namespace StraviaAPI.Data
         public async Task<IEnumerable<ChallengeUser>> GetChallengesUser(String username)
         {
             String queryString = 
-                $"SELECT [dbo].[Challenge].[c_name], [dbo].[Challenge].[no_challenge], [dbo].[Challenge].[final_date] " +
+                $"SELECT [dbo].[Challenge].[c_name], [dbo].[Challenge].[no_challenge], [dbo].[Challenge].[final_date]" +
                 $"FROM [dbo].[Participation] JOIN [dbo].[Challenge] ON [dbo].[Participation].[no_challenge] = [dbo].[Challenge].[no_challenge]" +
                 $"WHERE [dbo].[Participation].[u_username] = '{username}';";
 
