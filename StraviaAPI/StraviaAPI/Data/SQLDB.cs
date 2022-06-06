@@ -96,9 +96,9 @@ namespace StraviaAPI.Data
         public async Task<IEnumerable<User>> GetUser(String username)
         {
             String queryString =
-                $"SELECT [name], [last_name], [nationality], [birthdate], [category], [u_username], [u_password], [image] " +
-                $"FROM [dbo].[User];" +
-                $"WHERE '{username}'";
+                $"SELECT [name], [last_name], [nationality], [birthdate], [category], [u_username], [u_password], [image]" +
+                $"FROM [dbo].[User]" +
+                $"WHERE [u_username] = '{username}';";
 
             List<User>? result = new List<User>();
 
