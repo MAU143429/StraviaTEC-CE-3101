@@ -713,9 +713,9 @@ namespace StraviaAPI.Data
         public async Task<IEnumerable<Race>> GetAllRacesUser(String username)
         {
             String queryString =
-                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Activity].[date], [dbo].[Race].[price], [dbo].[Activity].[gpx_id]" +
+                $"SELECT [dbo].[Race].[r_name], [dbo].[Race].[no_race], [dbo].[Activity].[sport], [dbo].[Race].[price], [dbo].[Activity].[date], [dbo].[Activity].[gpx_id]" +
                 $"FROM [dbo].[Activity] JOIN [dbo].[Race] ON [dbo].[Activity].[no_race] = [dbo].[Race].[no_race]" +
-                $"WHERE [dbo].[Activity].[u_username] <> '{username}';";
+                $"WHERE [dbo].[Activity].[u_username] IS NULL AND [dbo].[Activity].[no_race] IS NOT NULL;";
 
             List<Race> result = new List<Race>();
 
