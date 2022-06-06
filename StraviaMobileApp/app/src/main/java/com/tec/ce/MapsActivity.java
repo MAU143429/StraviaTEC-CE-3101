@@ -25,7 +25,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.tec.ce.tools.GPXWriter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -89,7 +88,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             kmNew = 0;
             kmString = "0.00km";
             kmView.setText(kmString);
-            GPXWriter.writePath("test", trackPoints);
+//            Document doc = GPXWriter.writeString("test", trackPoints);
+//            System.out.println(doc.toString());
             displayTraining();
         });
     }
