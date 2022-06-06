@@ -223,6 +223,14 @@ export class ActivityService {
     );
   }
 
+  /** GET DE TODOS LOS GRUPOS DE LA APP
+   * Este metodo permite traer todas los grupos de la app
+   * @return la lista de grupos
+   */
+  getAllGroups(): Observable<Mygroups[]> {
+    return this.httpclient.get<Mygroups[]>(this.url + '/group');
+  }
+
   /**-------------------------------------ESPERANDO ENDPOINT---------------------------------------------- */
 
   /** GET DE LAS ACTIVIDADES DE LOS AMIGOS
@@ -276,14 +284,6 @@ export class ActivityService {
       this.url + '/Inscription/' + localStorage.getItem('current_username'),
       newInscription
     );
-  }
-
-  /** GET DE TODOS LOS GRUPOS DE LA APP
-   * Este metodo permite traer todas los grupos de la app
-   * @return la lista de grupos
-   */
-  getAllGroups(): Observable<Mygroups[]> {
-    return this.httpclient.get<Mygroups[]>(this.url + '/Group/user/all');
   }
 
   /**----------------------------------------------------------------------------------------------------- */
