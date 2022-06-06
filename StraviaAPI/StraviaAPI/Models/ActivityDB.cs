@@ -12,5 +12,6 @@
         public String Date { get; set; }
         public String Time { get; set; }
         public String Image { get; set; }
+        public int Duration { get; set; }
     }
 }

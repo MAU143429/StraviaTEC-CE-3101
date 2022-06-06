@@ -167,6 +167,20 @@ namespace StraviaAPI.Loaders
                 Date = reader[7].ToString().Split(" ").ToList()[0],
                 Time = reader[7].ToString().Split(" ").ToList()[1].Remove(5),
                 Image = reader[8].ToString(),
+                Duration = int.Parse(reader[9].ToString()),
+            };
+        }
+
+        public static RaceInscripted ToRaceInscripted(this SqlDataReader reader)
+        {
+            return new RaceInscripted
+            {
+                name = reader[0].ToString(),
+                norace = int.Parse(reader[1].ToString()),
+                noinscription = int.Parse(reader[2].ToString()),
+                type = reader[3].ToString(),
+                date = reader[4].ToString().Split(" ").ToList()[0],
+                route = int.Parse(reader[5].ToString()),
             };
         }
     }

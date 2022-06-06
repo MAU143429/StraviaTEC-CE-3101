@@ -32,6 +32,11 @@ namespace StraviaAPI.Controllers
         public Task<IEnumerable<Race>> GetRacesU(String username) 
             => _SqlDb.GetRacesUser(username);
 
+        // GET <RaceController>user/{username}
+        [HttpGet("user/inscripted/{username}")]
+        public Task<IEnumerable<RaceInscripted>> GetInscriptedRaces(String username)
+            => _SqlDb.GetInscriptedRaces(username);
+
         // POST <RaceController>
         [HttpPost]
         public Task Post(RaceInput input)
